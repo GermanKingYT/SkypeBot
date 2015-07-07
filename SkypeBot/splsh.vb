@@ -90,7 +90,7 @@
             Application.DoEvents()
             FlatProgressBar1.Value = FlatProgressBar1.Value + x
             Application.DoEvents()
-            Form1.UpdateMe(0)
+            ' Form1.UpdateMe(0)
             Application.DoEvents()
             Label4.Text = "Downloading required libraries..."
             Application.DoEvents()

@@ -28,7 +28,9 @@ Public Class Form1
     Dim adminst As Boolean = 1
     Dim resapi As String = "http://api.c99.nl/skyperesolver.php?key=skypebotje123&username="
     Dim resapi2 As String = "http://skyperesolver.net/api.php?key=48chxIPATBMoJCa&username="
+    Dim resapi3 As String = "http://api.predator.wtf/resolver/?arguments="
     Dim cacheapi As String = "http://api.c99.nl/resolvedb.php?key=skypebotje123&username="
+    Dim cacheapi2 As String = "http://api.predator.wtf/lookup/?arguments="
     Dim lockst As Integer = 0
     Dim Evaluator1 = New Evaluator
     Dim swag As Boolean = 0
@@ -375,7 +377,7 @@ retr:
         Try
             Dim ip As String = w.DownloadString(resapi & skype)
             If ip.Contains("API2") Then
-                Return "IP Not found."
+                Return "IP not found."
             Else
                 Return ip.Replace(vbNewLine, "").Replace(" ", "").Replace(Environment.NewLine, "").Replace(vbCr, "").Replace(vbLf, "")
             End If
@@ -394,6 +396,16 @@ retr:
             Return "error"
         End Try
     End Function
+    Function Resolve3(skype As String)
+        Dim w As New Net.WebClient
+        w.Proxy = Nothing
+        Try
+            Dim ip As String = w.DownloadString(resapi3 & skype)
+            Return ip
+        Catch
+            Return "error"
+        End Try
+    End Function
     Function Cached(skype As String)
         Dim w As New Net.WebClient
         w.Proxy = Nothing
@@ -402,7 +414,23 @@ retr:
             Dim ips() As String = ip.Split(" ")
             If IsIpValid(ips(0)) Then
             Else
-                Return "IP Not found."
+                Return "IP not found."
+                Exit Function
+            End If
+            Return ip
+        Catch
+            Return "error"
+        End Try
+    End Function
+    Function Cached2(skype As String)
+        Dim w As New Net.WebClient
+        w.Proxy = Nothing
+        Try
+            Dim ip As String = w.DownloadString(cacheapi & skype).Replace("&nbsp;", "").Replace("[", "").Replace("]", "").Replace("][", " ").Replace("  ", " ").Replace(" - ", " ").Replace(",", "")
+            Dim ips() As String = ip.Split(" ")
+            If IsIpValid(ips(0)) Then
+            Else
+                Return "IP not found."
                 Exit Function
             End If
             Return ip
@@ -1694,7 +1722,7 @@ exitt:
                 Dim endresult As String = ""
                 Dim rez As String = ""
 
-                resolver.Body = "Resolver 1: " & "Resolving..." & vbNewLine & "Resolver 2: " & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..."
+                resolver.Body = "Resolver 1: " & "Resolving..." & vbNewLine & "Resolver 2: " & "Resolving..." & vbNewLine & "Resolver 3: " & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
                 endresult = Resolve1(usernametoresolve)
 
                 If IsIpValid(endresult) Or endresult = "error" Then  Else endresult = "IP not found!"
@@ -1704,9 +1732,8 @@ exitt:
 
                 If endresult = "error" Then endresult = "Failed!"
 
-
                 rez = "Resolver 1: " & endresult & vbNewLine & "Resolver 2: "
-                resolver.Body = rez & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..."
+                resolver.Body = rez & "Resolving..." & vbNewLine & "Resolver 3: " & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
                 endresult = Resolve2(usernametoresolve)
 
                 If IsIpValid(endresult) Or endresult = "error" Then  Else endresult = "IP not found!"
@@ -1716,9 +1743,17 @@ exitt:
 
                 If endresult = "error" Then endresult = "Failed!"
 
+                rez = rez & endresult & vbNewLine & "Resolver 3: "
+                resolver.Body = rez & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
+                endresult = Resolve3(usernametoresolve)
+
+                If IsIpValid(endresult) Then  Else endresult = "IP not found!"
+                If My.Settings.whitelist.Contains(endresult) Then
+                    endresult = "IP has been whitelisted!"
+                End If
 
                 rez = rez & endresult & vbNewLine & "Cached IPs: "
-                resolver.Body = rez & "Resolving..."
+                resolver.Body = rez & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
                 endresult = Cached(usernametoresolve)
 
                 If My.Settings.whitelist.Contains(endresult) Then
@@ -1726,6 +1761,17 @@ exitt:
                 End If
 
                 If endresult = "error" Then endresult = "Failed!"
+                resolver.Body = rez & endresult
+
+                rez = rez & endresult & vbNewLine & "Cached IPs 2: "
+                resolver.Body = rez & "Resolving..."
+                endresult = Cached2(usernametoresolve)
+
+                If My.Settings.whitelist.Contains(endresult) Then
+                    endresult = "IP has been whitelisted!"
+                End If
+
+                If endresult = "Athena Found No Results!" Then endresult = "Failed!"
                 resolver.Body = rez & endresult
                 Exit Sub
             End If
