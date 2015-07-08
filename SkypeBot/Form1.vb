@@ -1357,6 +1357,23 @@ raa:
                 AddSwagToMSG(crawl, res)
             End If
             'CRAWL END
+            'DARKNESS START
+            If command = "darkness" Then
+                Dim darkness1 As ChatMessage = msg.Chat.SendMessage("Hello darkness, my old friend")
+                Threading.Thread.Sleep(1000)
+                Dim darkness2 As ChatMessage = msg.Chat.SendMessage("I've come to sleep with you again")
+                Threading.Thread.Sleep(1000)
+                Dim darkness3 As ChatMessage = msg.Chat.SendMessage("Because a vision softly creeping")
+                Threading.Thread.Sleep(1000)
+                Dim darkness4 As ChatMessage = msg.Chat.SendMessage("Left its seeds while I was sleeping ")
+                Threading.Thread.Sleep(1000)
+                Dim darkness5 As ChatMessage = msg.Chat.SendMessage("And the vision that was planted in my brain ")
+                Threading.Thread.Sleep(1000)
+                Dim darkness6 As ChatMessage = msg.Chat.SendMessage("Still remains")
+                Threading.Thread.Sleep(1000)
+                Dim darkness7 As ChatMessage = msg.Chat.SendMessage("Within the sound of silence")
+            End If
+            'DARKNESS END
             'GEO START
             If command = "geo" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "geo <ip>")
             If command.StartsWith("geo ") Then
