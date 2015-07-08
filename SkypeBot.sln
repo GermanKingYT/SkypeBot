@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SkypeBot", "SkypeBot\SkypeBot.vbproj", "{2E154A55-677A-4CCA-B846-327A19405C39}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SBUpdater", "sbupdater\SBUpdater.vbproj", "{11746DE5-0271-49C7-902C-17EBCF3AA9B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2E154A55-677A-4CCA-B846-327A19405C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E154A55-677A-4CCA-B846-327A19405C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E154A55-677A-4CCA-B846-327A19405C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11746DE5-0271-49C7-902C-17EBCF3AA9B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11746DE5-0271-49C7-902C-17EBCF3AA9B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11746DE5-0271-49C7-902C-17EBCF3AA9B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11746DE5-0271-49C7-902C-17EBCF3AA9B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
