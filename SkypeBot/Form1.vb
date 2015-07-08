@@ -1789,6 +1789,20 @@ exitt:
                 AddSwagToMSG(dict, result)
             End If
             'DICT END
+            'WEATHER START
+            If command = "weather" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "weather <city/country>")
+            If command.StartsWith("weather ") Then
+                Dim location = command.Replace("weather ", "").Replace(" ", "")
+                Dim weather As ChatMessage = msg.Chat.SendMessage("Initializing...")
+                Dim w As New WebClient
+                w.Proxy = Nothing
+                Dim res As String = w.DownloadString("http://api.predator.wtf/weather/?arguments=" & location)
+                'Dim linearr() As String
+                res = res.Replace("<br>", vbNewLine)
+                AddSwagToMSG(weather, res)
+                Exit Sub
+            End If
+            'WEATHER END
             'DON START
             If command = "don" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "don <website>")
             If command.StartsWith("don ") Then

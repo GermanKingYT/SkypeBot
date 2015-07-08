@@ -4579,6 +4579,7 @@ Buying is unavaiable at this time.
 !check &lt;help/arguments&gt; -- Check accounts
 !crawl &lt;page&gt; -- Gives all links of a webpage (crawls a site)
 !currency &lt;from&gt; &lt;to&gt; &lt;amount&gt; -- Converts currency
+!weather &lt;city/country&gt; -- Gives the weather of a city/country
 !ddos &lt;ip&gt; &lt;port&gt; &lt;time&gt; -- Ddosses the ip
 !deadfly &lt;adfly uri or similar&gt; -- unshortens adfly and similar
 !dice/!rtd -- Rolls the dice and says something :D
