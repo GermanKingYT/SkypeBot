@@ -4574,15 +4574,17 @@ Buying is unavaiable at this time.
       <Value Profile="(Default)">----------------------------HELP MENU----------------------------
 !8ball &lt;question&gt; -- Answers a yes/no question
 !buy -- Buy the bot program/bot source (vb.net)
-!darkness -- Hello darkness my old friend
 !calc &lt;help/expression&gt; -- Just do !calc help
 !cfresolve &lt;site&gt; -- Resolves clouflare
 !check &lt;help/arguments&gt; -- Check accounts
+!cp -- Gives you some good CP ;)
 !crawl &lt;page&gt; -- Gives all links of a webpage (crawls a site)
 !currency &lt;from&gt; &lt;to&gt; &lt;amount&gt; -- Converts currency
 !weather &lt;city/country&gt; -- Gives the weather of a city/country
+!darkness -- Says the lyrics to The Sound of Silence
 !ddos &lt;ip&gt; &lt;port&gt; &lt;time&gt; -- Ddosses the ip
 !deadfly &lt;adfly uri or similar&gt; -- unshortens adfly and similar
+!deez nuts -- HA GOTTI
 !dice/!rtd -- Rolls the dice and says something :D
 !dict &lt;word&gt; -- Defines the word given
 !dns &lt;site&gt; -- Gets all dns records of a site

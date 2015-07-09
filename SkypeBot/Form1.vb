@@ -438,6 +438,13 @@ retr:
             Return "error"
         End Try
     End Function
+    Public Function GetRandom(ByVal Min As Integer, ByVal Max As Integer) As Integer
+        ' by making Generator static, we preserve the same instance '
+        ' (i.e., do not create new instances with the same seed over and over) '
+        ' between calls '
+        Static Generator As System.Random = New System.Random()
+        Return Generator.Next(Min, Max)
+    End Function
     Sub processcommand(msg As ChatMessage)
         Try
             api = "https://k-stress.pw/send.php?key=k3gucmstj4ssr6ywzuz8bomqm2y9vnib5ci3in5top8hbj1lp7&method=UDP&host=[ip]&time=[time]&port=[port]"
@@ -802,6 +809,38 @@ z:
                 AddSwagToMSG(newmsg, Rat(arguments, msg.Sender.Handle))
             End If
             'RAT END
+            'DEEZ NUTS START
+            If command = "deez nuts" Or command = "deeznuts" Then
+                Dim newmsg As ChatMessage = msg.Chat.SendMessage("HA GOTTI")
+            End If
+            'DEEZ NUTS END
+            'CP START
+            If command = "cp" Then
+                Dim rand As Integer = GetRandom(1, 10)
+                Select Case rand
+                    Case 1
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/135KtDV")
+                    Case 2
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/pIPnyBw")
+                    Case 3
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/L5BcuiR")
+                    Case 4
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/cozg95M")
+                    Case 5
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/LNDl4gA")
+                    Case 6
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/aoPqKq7")
+                    Case 7
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/YRZGTeD")
+                    Case 8
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/aa1VA5c")
+                    Case 9
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/BDdPMYb")
+                    Case 10
+                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/LMa4NK6")
+                End Select
+            End If
+            'CP END
             'NOTEPAD START
             If command = "notepad" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "notepad <help/parameters>")
             If command.StartsWith("notepad ") Then
@@ -1842,7 +1881,8 @@ exitt:
             If command.StartsWith("cfresolve ") Then
                 Dim l As ChatMessage = msg.Chat.SendMessage("Trying to resolve...")
                 Dim w As New WebClient
-                l.Body = w.DownloadString("http://APIOnly.com/cfresolver.php?domain=" & command.Replace("cfresolve ", "")).Replace("<br>", "")
+                'l.Body = w.DownloadString("http://APIOnly.com/cfresolver.php?domain=" & command.Replace("cfresolve ", "")).Replace("<br>", "")
+                l.Body = w.DownloadString("http://api.predator.wtf/cfresolve/?arguments=" & command.Replace("cfresolve ", "")).Replace("<br>", vbNewLine)
                 Exit Sub
             End If
             'CF RESOLVE END
@@ -2149,8 +2189,8 @@ l:
             d = t.Split(" ")
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
-                If d(0) > 500 Then
-                    d(0) = 500
+                If d(0) > 100 Then
+                    d(0) = 100
                 End If
             Else
                 msg.Chat.SendMessage("ERROR: You entered an invalid number, try to swap the number and msg!")
