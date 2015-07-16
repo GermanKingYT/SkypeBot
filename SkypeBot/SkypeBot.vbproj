@@ -61,10 +61,10 @@
     </Reference>
     <Reference Include="ChatterBotAPI, Version=1.1.5654.24768, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ChatterBotAPI.dll</HintPath>
+      <HintPath>lib\ChatterBotAPI.dll</HintPath>
     </Reference>
     <Reference Include="Interop.SKYPE4COMLib">
-      <HintPath>..\..\..\..\..\..\Administrator\Downloads\skype bot1\skype bot1\bin\release\Interop.SKYPE4COMLib.dll</HintPath>
+      <HintPath>lib\Interop.SKYPE4COMLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
