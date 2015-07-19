@@ -1575,19 +1575,40 @@ En:
                 Exit Sub
             End If
             'GEO END
+
             'PORTOPEN START
             If command = "portopen" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "portopen <ip> <port>")
             If command.StartsWith("portopen ") Then
                 Dim portopen As ChatMessage = msg.Chat.SendMessage("Checking the port...")
-                Dim info() As String = command.Replace("portopen", "").Split(" ")
+                Dim info() As String = command.Replace("portopen ", "").Split(" ")
                 Dim ip As String = info(0)
                 Dim port As String = info(1)
-                If isportopen(ip, port) = True Then
+                Dim w As New WebClient
+                w.Proxy = Nothing
+                Dim portopenapi As String = "http://apionly.com/portchecker.php?host=[ip]&port=[port]"
+                Dim res As String = w.DownloadString(portopenapi.Replace("[ip]", ip).Replace("[port]", port))
+
+                If res = "ONLINE" Then
                     portopen.Body = "Port on " & ip & ":" & port & " is open!"
+                ElseIf res = 
                 Else
                     portopen.Body = "Port on " & ip & ":" & port & " is closed!"
                 End If
             End If
+
+            'If command = "portopen" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "portopen <ip> <port>")
+            'If command.StartsWith("portopen ") Then
+            '    Dim portopen As ChatMessage = msg.Chat.SendMessage("Checking the port...")
+            '    Dim info() As String = command.Replace("portopen ", "").Split(" ")
+            '    Dim ip As String = info(0)
+            '    Dim port As String = info(1)
+            '    If isportopen(ip, port) = True Then
+            '        portopen.Body = "Port on " & ip & ":" & port & " is open!"
+            '    Else
+            '        portopen.Body = "Port on " & ip & ":" & port & " is closed!"
+            '    End If
+            'End If
+
             'PORTOPEN END
             'GAME START
             If command = "game" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "game <help/parameters>")

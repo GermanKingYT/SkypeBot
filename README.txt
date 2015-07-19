@@ -1,1 +1,0 @@
-If you need a more updated source, add lesleydk@hotmail.com on skype, if you bought the source, you wont get charged more!
