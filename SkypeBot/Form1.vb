@@ -1590,7 +1590,8 @@ En:
 
                 If res = "ONLINE" Then
                     portopen.Body = "Port on " & ip & ":" & port & " is open!"
-                ElseIf res = 
+                ElseIf res = "Invalid IP" Then
+                    portopen.Body = ip & " is an invalid IP"
                 Else
                     portopen.Body = "Port on " & ip & ":" & port & " is closed!"
                 End If
