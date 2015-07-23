@@ -36,8 +36,17 @@
             Application.DoEvents()
             Label3.Text = My.Application.Info.Copyright
             Application.DoEvents()
-            Label4.Text = "Cleaning up & loading..."
+            Label4.Text = "Cleaning up & loading & downloading required libraries..."
             Application.DoEvents()
+            Dim wa As New Net.WebClient
+            If IO.File.Exists(Windows.Forms.Application.StartupPath & "\ChatterBotAPI.dll") Then
+            Else
+                wa.DownloadFile("https://www.dropbox.com/s/nwenvgqkrh8xzg3/ChatterBotAPI.dll?dl=1", Windows.Forms.Application.StartupPath & "\ChatterBotAPI.dll")
+            End If
+            If IO.File.Exists(Windows.Forms.Application.StartupPath & "\Interop.SKYPE4COMLib.dll") Then
+            Else
+                wa.DownloadFile("https://www.dropbox.com/s/xr7e6g5dgy99uiw/Interop.SKYPE4COMLib.dll?dl=1", Windows.Forms.Application.StartupPath & "\Interop.SKYPE4COMLib.dll")
+            End If
             FlatProgressBar1.Value = FlatProgressBar1.Value + x
             Application.DoEvents()
             TopMost = False
@@ -90,19 +99,7 @@
             Application.DoEvents()
             FlatProgressBar1.Value = FlatProgressBar1.Value + x
             Application.DoEvents()
-            ' Form1.UpdateMe(0)
-            Application.DoEvents()
-            Label4.Text = "Downloading required libraries..."
-            Application.DoEvents()
-            If IO.File.Exists(Windows.Forms.Application.StartupPath & "\ChatterBotAPI.dll") Then
-            Else
-                w.DownloadFile("https://www.dropbox.com/s/nwenvgqkrh8xzg3/ChatterBotAPI.dll?dl=1", Windows.Forms.Application.StartupPath & "\ChatterBotAPI.dll")
-            End If
-            If IO.File.Exists(Windows.Forms.Application.StartupPath & "\Interop.SKYPE4COMLib.dll") Then
-            Else
-                w.DownloadFile("https://www.dropbox.com/s/xr7e6g5dgy99uiw/Interop.SKYPE4COMLib.dll?dl=1", Windows.Forms.Application.StartupPath & "\Interop.SKYPE4COMLib.dll")
-            End If
-            FlatProgressBar1.Value = FlatProgressBar1.Value + x
+            Form1.UpdateMe(0)
             Application.DoEvents()
             If Form1.state = 1 Then
                 Form1.FlatToggle2.Checked = True
