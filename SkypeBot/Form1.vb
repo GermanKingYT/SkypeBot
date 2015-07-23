@@ -943,8 +943,8 @@ z:
                     If IsUltimate(msg.Sender.Handle) Then
                         GoTo r
                     End If
-                    If q(1) > 60 And IsPremium(msg.Sender.Handle) Then
-                        q(1) = 60
+                    If q(1) > 50 And IsPremium(msg.Sender.Handle) Then
+                        q(1) = 50
                         GoTo r
                     End If
                     If q(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
@@ -1316,11 +1316,12 @@ fq:
                 End If
                 AddSwagToMSG(mb, "Making MSG...")
                 If IsNumeric(d(0)) = True Then
-                    If IsUltimate(msg.Sender.Handle) Then
+                    If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
+                        d(0) = 50
                         GoTo raa
                     End If
-                    If d(0) > 60 And IsPremium(msg.Sender.Handle) Then
-                        d(0) = 60
+                    If d(0) > 25 And IsPremium(msg.Sender.Handle) Then
+                        d(0) = 25
                         GoTo raa
                     End If
                     If d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
@@ -1937,8 +1938,14 @@ exitt:
                 End Try
                 Dim tosend As String = d(2)
                 If IsNumeric(d(1)) = True Then
-                    If d(1) > 500 Then
-                        d(1) = 500
+                    If d(1) > 50 And IsUltimate(msg.Sender.Handle) Then
+                        d(1) = 50
+                    End If
+                    If d(1) > 25 And IsPremium(msg.Sender.Handle) Then
+                        d(1) = 25
+                    End If
+                    If d(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
+                        d(1) = 10
                     End If
                 Else
                     AddSwagToMSG(mesg, "ERROR: You entered an invalid number, try to swap the number and msg!")
@@ -2194,7 +2201,13 @@ l:
             d = t.Split(" ")
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
-                If d(0) > 10 Then
+                If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
+                    d(0) = 50
+                End If
+                If d(0) > 25 And IsPremium(msg.Sender.Handle) Then
+                    d(0) = 25
+                End If
+                If d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
                     d(0) = 10
                 End If
             Else
