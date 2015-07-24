@@ -4591,6 +4591,7 @@ Buying is unavaiable at this time.
 !dns &lt;site&gt; -- Gets all dns records of a site
 !domain &lt;site&gt; -- Resolves site ip
 !don &lt;site&gt; -- Says if &lt;site&gt; is online or not
+!dox &lt;name&gt; -- Gives usefull links about name
 !fact -- Will give you a nice fact
 !game &lt;help/arguments&gt; -- Gives help about an inbuild game!
 !geo &lt;ip&gt; -- Will give as much info 'bout &lt;ip&gt;
