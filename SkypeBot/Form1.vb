@@ -2180,6 +2180,45 @@ exitt:
             End If
             'COPYPASTA END
 
+            'BITCOIN START
+            If command = "bitcoin" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "bitcoin <price/convert> <amount> <to (usd/btc)>")
+            If command.StartsWith("bitcoin ") Then
+
+                Dim values() As String = command.Replace("bitcoin ", "").Split(" ")
+
+                Dim bitcoin As ChatMessage = msg.Chat.SendMessage("Initializing...")
+                Dim w As New WebClient
+                w.Proxy = Nothing
+                Dim price As String = w.DownloadString("http://api.bitcoinaverage.com/ticker/USD/last")
+                Dim result As String = ""
+
+                If values(0) = "price" Then
+                    result = "$" & price
+                Else
+
+                    Dim amount As Double
+                    Dim currency As String
+
+                    Try
+                        amount = values(1)
+                        currency = values(2)
+                    Catch
+                        AddSwagToMSG(bitcoin, "Invalid currency or amount + Recheck your syntax (!help bitcoin)")
+                        Exit Sub
+                    End Try
+
+                    If values(2) = "usd" Then
+                        result = "$" & Math.Round(amount * price, 2)
+                    Else
+                        result = Math.Round(amount / price, 8) & " BTC"
+                    End If
+                End If
+
+                AddSwagToMSG(bitcoin, result)
+
+            End If
+            'BITCOIN END
+
 l:
         Catch ex As Exception
             If ex.ToString.Contains("IndexOutOfRangeException") Or ex.ToString.ToLower.Contains("index") Then

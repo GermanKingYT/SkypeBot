@@ -4573,6 +4573,7 @@ Buying is unavaiable at this time.
     <Setting Name="helpmsg" Type="System.String" Scope="User">
       <Value Profile="(Default)">----------------------------HELP MENU----------------------------
 !8ball &lt;question&gt; -- Answers a yes/no question
+!bitcoin &lt;price/convert&gt; &lt;amount&gt; &lt;to (usd/btc)&gt; -- Checks the current BTC price, or converts to/from USD
 !buy -- Buy premium
 !calc &lt;help/expression&gt; -- Just do !calc help
 !cfresolve &lt;site&gt; -- Resolves clouflare
