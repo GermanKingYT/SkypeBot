@@ -99,7 +99,7 @@
             Application.DoEvents()
             FlatProgressBar1.Value = FlatProgressBar1.Value + x
             Application.DoEvents()
-            'Form1.UpdateMe(0)
+            Form1.UpdateMe(0)
             Application.DoEvents()
             If Form1.state = 1 Then
                 Form1.FlatToggle2.Checked = True

