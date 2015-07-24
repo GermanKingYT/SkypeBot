@@ -91,7 +91,7 @@ Partial Class splsh
         Me.FlatProgressBar1.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer))
         Me.FlatProgressBar1.DarkerProgress = System.Drawing.Color.Firebrick
         Me.FlatProgressBar1.Location = New System.Drawing.Point(1, 105)
-        Me.FlatProgressBar1.Maximum = 14
+        Me.FlatProgressBar1.Maximum = 13
         Me.FlatProgressBar1.Name = "FlatProgressBar1"
         Me.FlatProgressBar1.ProgressColor = System.Drawing.Color.Firebrick
         Me.FlatProgressBar1.Size = New System.Drawing.Size(461, 42)
