@@ -569,7 +569,8 @@ bypass:
                     Dim w As New WebClient
                     w.Proxy = Nothing
                     w.DownloadString("http://apis.skypebot.ga/apis/submit.php?idea=" & cmd.Replace("suggest ", "") & "&skp=" & msg.Sender.Handle & " w/skypebot o/ " & Skypattach.CurrentUserHandle & "&auth=True")
-                    AddSwagToMSG(admin, "We will maybe contact you later, thanks!")
+                    'AddSwagToMSG(admin, "We will maybe contact you later, thanks!")
+                    AddSwagToMSG(admin, "Please contact me here: skype:jeteroll83?chat")
                 End If
                 If cmd = "restart" Then
                     Dim admin As ChatMessage = msg.Chat.SendMessage("...")
@@ -649,6 +650,14 @@ bypass:
                     End If
                     AddSwagToMSG(msg, "Bot is already enabled!")
                 End If
+
+                If cmd = "changemood" Then
+                    Dim mood As ChatMessage = msg.Chat.SendMessage("Changing mood...")
+                    Dim moodText As String = cmd.Replace("changemood ", "")
+                    Skypattach.CurrentUserProfile.MoodText = moodText;
+                    AddSwagToMSG(mood, "Mood changed!")
+                End If
+
             End If
             'ADMINPANEL END
             If adminst = 0 Then
