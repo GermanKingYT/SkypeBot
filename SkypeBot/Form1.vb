@@ -661,7 +661,7 @@ bypass:
             End If
 
             'Owner protection
-            If command.Contains("jeteroll") Then
+            If command.Contains("jet") Then
                 Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
                 Exit Sub
             End If
