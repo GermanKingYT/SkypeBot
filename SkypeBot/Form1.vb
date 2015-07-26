@@ -351,7 +351,7 @@ retr:
             End If
 
             'Respond to deez nuts
-            If msg.Body.Contains("deez") And msg.Body.Contains("nuts") Then
+            If msg.Body.Contains("deez") And msg.Body.Contains("nuts") And msg.Sender.Handle <> Skypattach.CurrentUserHandle Then
                 Dim deeznuts As ChatMessage = msg.Chat.SendMessage("HA GOTTI")
             End If
 
@@ -1904,14 +1904,11 @@ exitt:
                 Dim tosend As String = d(2)
                 If IsNumeric(d(1)) = True Then
                     If IsAdmin(msg.Sender.Handle) Then
-                    End If
-                    If d(1) > 50 And IsUltimate(msg.Sender.Handle) Then
+                    ElseIf d(1) > 50 And IsUltimate(msg.Sender.Handle) Then
                         d(1) = 50
-                    End If
-                    If d(1) > 25 And IsPremium(msg.Sender.Handle) Then
+                    ElseIf d(1) > 25 And IsPremium(msg.Sender.Handle) Then
                         d(1) = 25
-                    End If
-                    If d(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
+                    ElseIf d(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
                         d(1) = 10
                     End If
                 Else
@@ -2316,14 +2313,11 @@ l:
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
                 If IsAdmin(msg.Sender.Handle) Then
-                End If
-                If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
+                ElseIf d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
                     d(0) = 50
-                End If
-                If d(0) > 25 And IsPremium(msg.Sender.Handle) Then
+                ElseIf d(0) > 25 And IsPremium(msg.Sender.Handle) Then
                     d(0) = 25
-                End If
-                If d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
+                ElseIf d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
                     d(0) = 10
                 End If
             Else

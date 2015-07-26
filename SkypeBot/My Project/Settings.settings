@@ -4586,13 +4586,13 @@ Buying is unavaiable at this time.
 !darkness -- Says the lyrics to The Sound of Silence
 !ddos &lt;ip&gt; &lt;port&gt; &lt;time&gt; -- Ddosses the ip
 !deadfly &lt;adfly uri or similar&gt; -- unshortens adfly and similar
-!deez nuts -- HA GOTTI
 !dice/!rtd -- Rolls the dice and says something :D
 !dict &lt;word&gt; -- Defines the word given
 !dns &lt;site&gt; -- Gets all dns records of a site
 !domain &lt;site&gt; -- Resolves site ip
 !don &lt;site&gt; -- Says if &lt;site&gt; is online or not
 !dox &lt;name&gt; -- Gives usefull links about name
+!dubsroll -- Rolls a post number like 4chan
 !fact -- Will give you a nice fact
 !game &lt;help/arguments&gt; -- Gives help about an inbuild game!
 !geo &lt;ip&gt; -- Will give as much info 'bout &lt;ip&gt;

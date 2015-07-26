@@ -12,9 +12,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("SkypeBot")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("SkypeBot INC Operated By Lesley")> 
+<Assembly: AssemblyCompany("Jeteroll")> 
 <Assembly: AssemblyProduct("SkypeBot")> 
-<Assembly: AssemblyCopyright("Copyright © Lesley De Keyser 2014")> 
+<Assembly: AssemblyCopyright("Copyright © Jeteroll 2015")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
