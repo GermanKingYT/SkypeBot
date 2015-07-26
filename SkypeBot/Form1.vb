@@ -333,6 +333,8 @@ retr:
         Try
 
             If status = TChatMessageStatus.cmsSending Or status = TChatMessageStatus.cmsReceived Then  Else Exit Sub
+
+            'Display title of YouTube links
             If msg.Body.Contains("youtube.com/watch?v=") OrElse msg.Body.Contains("youtu.be/") Then
                 Dim a As String = msg.Body.Replace("www.", "")
                 Try
@@ -347,6 +349,12 @@ retr:
                     msg.Chat.SendMessage(ex.ToString)
                 End Try
             End If
+
+            'Respond to deez nuts
+            If msg.Body.Contains("deez") And msg.Body.Contains("nuts") Then
+                Dim deeznuts As ChatMessage = msg.Chat.SendMessage("HA GOTTI")
+            End If
+
             If msg.Body.IndexOf("@") = 0 Then
                 Dim pcmd = New Threading.Thread(Sub() AI1(msg))
                 pcmd.SetApartmentState(ApartmentState.STA)
@@ -651,6 +659,13 @@ bypass:
                 msg.Chat.SendMessage(banmsg)
                 Exit Sub
             End If
+
+            'Owner protection
+            If command.Contains("jeteroll") Then
+                Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
+                Exit Sub
+            End If
+
             'HELP START
             If command = "help" Then msg.Chat.SendMessage(My.Settings.helpmsg)
             If command.StartsWith("help ") Then
@@ -904,11 +919,15 @@ z:
                 Dim myProcess As New Process()
                 Dim myProcessStartInfo As New ProcessStartInfo("ping")
                 If IsNumeric(q(1)) = True Then
-                    If IsUltimate(msg.Sender.Handle) Then
+                    If IsAdmin(msg.Sender.Handle) Then
                         GoTo r
                     End If
-                    If q(1) > 50 And IsPremium(msg.Sender.Handle) Then
+                    If q(1) > 50 And IsUltimate(msg.Sender.Handle) Then
                         q(1) = 50
+                        GoTo r
+                    End If
+                    If q(1) > 25 And IsPremium(msg.Sender.Handle) Then
+                        q(1) = 25
                         GoTo r
                     End If
                     If q(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
@@ -1280,16 +1299,20 @@ fq:
                 End If
                 AddSwagToMSG(mb, "Making MSG...")
                 If IsNumeric(d(0)) = True Then
-                    If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
-                        d(0) = 50
+                    If IsAdmin(msg.Sender.Handle) Then
                         GoTo raa
                     End If
-                    If d(0) > 25 And IsPremium(msg.Sender.Handle) Then
+                    If d(0) > 25 And IsUltimate(msg.Sender.Handle) Then
                         d(0) = 25
                         GoTo raa
                     End If
-                    If d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
+                    If d(0) > 10 And IsPremium(msg.Sender.Handle) Then
                         d(0) = 10
+                        GoTo raa
+                    End If
+                    If IsNormalUser(msg.Sender.Handle) Then
+                        AddSwagToMSG(mb, "Non upgraded users are not able to use this, see !buy or contact the owner.")
+                        Exit Sub
                     End If
                 Else
                     AddSwagToMSG(mb, "ERROR: You entered an invalid number, try to swap the number and msg!")
@@ -1880,6 +1903,8 @@ exitt:
                 End Try
                 Dim tosend As String = d(2)
                 If IsNumeric(d(1)) = True Then
+                    If IsAdmin(msg.Sender.Handle) Then
+                    End If
                     If d(1) > 50 And IsUltimate(msg.Sender.Handle) Then
                         d(1) = 50
                     End If
@@ -2117,12 +2142,6 @@ exitt:
             End If
             'WEATHER END
 
-            'DEEZ NUTS START
-            If command = "deez nuts" Or command = "deeznuts" Then
-                Dim newmsg As ChatMessage = msg.Chat.SendMessage("HA GOTTI")
-            End If
-            'DEEZ NUTS END
-
             'DARKNESS START
             If command = "darkness" Then
                 Dim darkness1 As ChatMessage = msg.Chat.SendMessage("Hello darkness, my old friend")
@@ -2219,6 +2238,42 @@ exitt:
             End If
             'BITCOIN END
 
+            'DUBSROLL START
+            If command = "dubsroll" Then
+                Dim rand As Integer = GetRandom(1, 99999999)
+                Dim rStr As String = rand.ToString("D8")
+                Dim dubsArr() As Char = rStr.ToCharArray
+                Dim count As Integer = 0
+                Dim lastNum As Char = dubsArr(7)
+                Dim i As Integer = dubsArr.Length - 1
+
+                While dubsArr(i) = lastNum
+                    count += 1
+                    lastNum = dubsArr(i)
+                    i -= 1
+                End While
+
+                Dim res As String = ""
+                Select Case count
+                    Case 2
+                        res = vbNewLine & "Dubs!"
+                    Case 3
+                        res = vbNewLine & "Trips!"
+                    Case 4
+                        res = vbNewLine & "Quads!"
+                    Case 5
+                        res = vbNewLine & "Quints!"
+                    Case 6
+                        res = vbNewLine & "Sexts!"
+                    Case 7
+                        res = vbNewLine & "Septs!"
+                    Case 8
+                        res = vbNewLine & "Octs! Holy fuck!"
+                End Select
+                Dim dubsroll As ChatMessage = msg.Chat.SendMessage("You rolled: " & rStr & res)
+            End If
+            'DUBSROLL END
+
 l:
         Catch ex As Exception
             If ex.ToString.Contains("IndexOutOfRangeException") Or ex.ToString.ToLower.Contains("index") Then
@@ -2260,6 +2315,8 @@ l:
             d = t.Split(" ")
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
+                If IsAdmin(msg.Sender.Handle) Then
+                End If
                 If d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
                     d(0) = 50
                 End If
