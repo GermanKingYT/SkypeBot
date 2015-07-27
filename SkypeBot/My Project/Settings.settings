@@ -4593,7 +4593,6 @@ Buying is unavaiable at this time.
 !domain &lt;site&gt; -- Resolves site ip
 !don &lt;site&gt; -- Says if &lt;site&gt; is online or not
 !dox &lt;name&gt; -- Gives usefull links about name
-!dubsroll -- Rolls a post number like 4chan
 !fact -- Will give you a nice fact
 !game &lt;help/arguments&gt; -- Gives help about an inbuild game!
 !geo &lt;ip&gt; -- Will give as much info 'bout &lt;ip&gt;
@@ -4623,6 +4622,7 @@ Buying is unavaiable at this time.
 !rdns &lt;ip&gt; -- Gives reverse dns' of ip
 !resolve &lt;skypename&gt; -- gives ip of &lt;skypename&gt;
 !reverse &lt;text&gt; -- Reverse the given text
+!roll -- Rolls a post number like 4chan
 !say &lt;msg&gt; -- Returns &lt;msg&gt;
 !scan &lt;ip&gt; -- Gives all open ports of the IP
 !shorten &lt;url&gt;-- Will shorten an url

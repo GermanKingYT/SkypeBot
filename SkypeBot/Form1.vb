@@ -651,10 +651,10 @@ bypass:
                     AddSwagToMSG(msg, "Bot is already enabled!")
                 End If
 
-                If cmd = "changemood" Then
+                If cmd.StartsWith("changemood") Then
                     Dim mood As ChatMessage = msg.Chat.SendMessage("Changing mood...")
                     Dim moodText As String = cmd.Replace("changemood ", "")
-                    Skypattach.CurrentUserProfile.MoodText = moodText;
+                    Skypattach.CurrentUserProfile.MoodText = moodText
                     AddSwagToMSG(mood, "Mood changed!")
                 End If
 
@@ -2242,41 +2242,108 @@ exitt:
             End If
             'BITCOIN END
 
-            'DUBSROLL START
-            If command = "dubsroll" Then
+            'ROLL START
+            If command = "roll" Then
+                Dim roll As ChatMessage = msg.Chat.SendMessage("Rolling...")
                 Dim rand As Integer = GetRandom(1, 99999999)
                 Dim rStr As String = rand.ToString("D8")
-                Dim dubsArr() As Char = rStr.ToCharArray
+                Dim rollArr() As Char = rStr.ToCharArray
                 Dim count As Integer = 0
-                Dim lastNum As Char = dubsArr(7)
-                Dim i As Integer = dubsArr.Length - 1
+                Dim lastNum As Char = rollArr(7)
+                Dim i As Integer = rollArr.Length - 1
 
-                While dubsArr(i) = lastNum
+                While rollArr(i) = lastNum
                     count += 1
-                    lastNum = dubsArr(i)
+                    lastNum = rollArr(i)
                     i -= 1
                 End While
 
                 Dim res As String = ""
                 Select Case count
                     Case 2
-                        res = vbNewLine & "Dubs!"
+                        res = vbNewLine & "Dubs! Nice!"
                     Case 3
-                        res = vbNewLine & "Trips!"
+                        res = vbNewLine & "Trips! Wow!"
                     Case 4
-                        res = vbNewLine & "Quads!"
+                        res = vbNewLine & "Quads! Oh shit!"
                     Case 5
-                        res = vbNewLine & "Quints!"
+                        res = vbNewLine & "Quints! Holy fuck!"
                     Case 6
-                        res = vbNewLine & "Sexts!"
+                        res = vbNewLine & "Sexts! Motherfucker!"
                     Case 7
-                        res = vbNewLine & "Septs!"
+                        res = vbNewLine & "Septs! What the fuck dude?"
                     Case 8
-                        res = vbNewLine & "Octs! Holy fuck!"
+                        res = vbNewLine & "Octs! Holy fuck can are you a fucking genie?"
                 End Select
-                Dim dubsroll As ChatMessage = msg.Chat.SendMessage("You rolled: " & rStr & res)
+                res = "You rolled: " & rStr & res
+                AddSwagToMSG(roll, res)
             End If
-            'DUBSROLL END
+            'ROLL END
+
+            'SMALLCAPS START
+            If command.StartsWith("smallcaps") Then
+
+                Dim smallcaps As ChatMessage = msg.Chat.SendMessage("Shrinking...")
+                Dim smallStr As String = command.Replace("smallcaps ", "")
+
+                smallStr = smallStr.Replace("a", "ᴀ")
+                smallStr = smallStr.Replace("b", "ʙ")
+                smallStr = smallStr.Replace("c", "ᴄ")
+                smallStr = smallStr.Replace("d", "ᴅ")
+                smallStr = smallStr.Replace("e", "ᴇ")
+                smallStr = smallStr.Replace("f", "ғ")
+                smallStr = smallStr.Replace("g", "ɢ")
+                smallStr = smallStr.Replace("h", "ʜ")
+                smallStr = smallStr.Replace("i", "ɪ")
+                smallStr = smallStr.Replace("j", "ᴊ")
+                smallStr = smallStr.Replace("k", "ᴋ")
+                smallStr = smallStr.Replace("l", "ʟ")
+                smallStr = smallStr.Replace("m", "ᴍ")
+                smallStr = smallStr.Replace("n", "ɴ")
+                smallStr = smallStr.Replace("o", "ᴏ")
+                smallStr = smallStr.Replace("p", "ᴘ")
+                smallStr = smallStr.Replace("q", "ǫ")
+                smallStr = smallStr.Replace("r", "ʀ")
+                smallStr = smallStr.Replace("s", "s")
+                smallStr = smallStr.Replace("t", "ᴛ")
+                smallStr = smallStr.Replace("u", "ᴜ")
+                smallStr = smallStr.Replace("v", "ᴠ")
+                smallStr = smallStr.Replace("w", "ᴡ")
+                smallStr = smallStr.Replace("x", "x")
+                smallStr = smallStr.Replace("y", "ʏ")
+                smallStr = smallStr.Replace("z", "ᴢ")
+
+                smallStr = smallStr.Replace("A", "ᴀ")
+                smallStr = smallStr.Replace("B", "ʙ")
+                smallStr = smallStr.Replace("C", "ᴄ")
+                smallStr = smallStr.Replace("D", "ᴅ")
+                smallStr = smallStr.Replace("E", "ᴇ")
+                smallStr = smallStr.Replace("F", "ғ")
+                smallStr = smallStr.Replace("G", "ɢ")
+                smallStr = smallStr.Replace("H", "ʜ")
+                smallStr = smallStr.Replace("I", "ɪ")
+                smallStr = smallStr.Replace("J", "ᴊ")
+                smallStr = smallStr.Replace("K", "ᴋ")
+                smallStr = smallStr.Replace("L", "ʟ")
+                smallStr = smallStr.Replace("M", "ᴍ")
+                smallStr = smallStr.Replace("N", "ɴ")
+                smallStr = smallStr.Replace("O", "ᴏ")
+                smallStr = smallStr.Replace("P", "ᴘ")
+                smallStr = smallStr.Replace("Q", "ǫ")
+                smallStr = smallStr.Replace("R", "ʀ")
+                smallStr = smallStr.Replace("S", "s")
+                smallStr = smallStr.Replace("T", "ᴛ")
+                smallStr = smallStr.Replace("U", "ᴜ")
+                smallStr = smallStr.Replace("V", "ᴠ")
+                smallStr = smallStr.Replace("W", "ᴡ")
+                smallStr = smallStr.Replace("X", "x")
+                smallStr = smallStr.Replace("Y", "ʏ")
+                smallStr = smallStr.Replace("Z", "ᴢ")
+
+                AddSwagToMSG(smallcaps, smallStr)
+            End If
+
+            'SMALLCAPS END
 
 l:
         Catch ex As Exception
