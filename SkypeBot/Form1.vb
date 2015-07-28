@@ -2282,7 +2282,7 @@ exitt:
 
             'SMALLCAPS START
             If command = "smallcaps" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "smallcaps <text>")
-            If command.StartsWith("smallcaps") Then
+            If command.StartsWith("smallcaps ") Then
 
                 Dim smallcaps As ChatMessage = msg.Chat.SendMessage("Shrinking...")
                 Dim smallStr As String = command.Replace("smallcaps ", "")
@@ -2347,7 +2347,7 @@ exitt:
 
             'BUBBLE START
             If command = "bubble" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "bubble <text>")
-            If command.StartsWith("bubble") Then
+            If command.StartsWith("bubble ") Then
 
                 Dim bubble As ChatMessage = msg.Chat.SendMessage("Bubbling...")
                 Dim bubbleStr As String = command.Replace("bubble ", "")
