@@ -670,7 +670,7 @@ bypass:
             End If
 
             'Owner protection
-            If command.Contains("jet") And command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Then
+            If command.Contains("jet") Or command.Contains("Jet") And command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Then
                 Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
                 Exit Sub
             End If
@@ -1835,7 +1835,12 @@ exitt:
 
                 Dim dox As ChatMessage = msg.Chat.SendMessage("Initializing...")
 
-                AddSwagToMSG(dox, paste(POST(api, "auth=sb&u=" & command.Remove(0, 4))))
+                Dim res As String = POST(api, "auth=sb&u=" & command.Remove(0, 4))
+                If res = "" Then
+                    AddSwagToMSG(dox, "No information could be found about the specified user.")
+                Else
+                    AddSwagToMSG(dox, paste(res))
+                End If
             End If
             'DOX END
             'DON START
