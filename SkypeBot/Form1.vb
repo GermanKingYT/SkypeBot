@@ -670,7 +670,7 @@ bypass:
             End If
 
             'Owner protection
-            If command.Contains("jet") And command.StartsWith("resolve") = False Then
+            If command.Contains("jet") And command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Then
                 Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
                 Exit Sub
             End If
@@ -2281,6 +2281,7 @@ exitt:
             'ROLL END
 
             'SMALLCAPS START
+            If command = "smallcaps" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "smallcaps <text>")
             If command.StartsWith("smallcaps") Then
 
                 Dim smallcaps As ChatMessage = msg.Chat.SendMessage("Shrinking...")
@@ -2342,8 +2343,83 @@ exitt:
 
                 AddSwagToMSG(smallcaps, smallStr)
             End If
-
             'SMALLCAPS END
+
+            'BUBBLE START
+            If command = "bubble" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "bubble <text>")
+            If command.StartsWith("bubble") Then
+
+                Dim bubble As ChatMessage = msg.Chat.SendMessage("Bubbling...")
+                Dim bubbleStr As String = command.Replace("bubble ", "")
+
+                bubbleStr = bubbleStr.Replace("a", "ⓐ")
+                bubbleStr = bubbleStr.Replace("b", "ⓑ")
+                bubbleStr = bubbleStr.Replace("c", "ⓒ")
+                bubbleStr = bubbleStr.Replace("d", "ⓓ")
+                bubbleStr = bubbleStr.Replace("e", "ⓔ")
+                bubbleStr = bubbleStr.Replace("f", "ⓕ")
+                bubbleStr = bubbleStr.Replace("g", "ⓖ")
+                bubbleStr = bubbleStr.Replace("h", "ⓗ")
+                bubbleStr = bubbleStr.Replace("i", "ⓘ")
+                bubbleStr = bubbleStr.Replace("j", "ⓙ")
+                bubbleStr = bubbleStr.Replace("k", "ⓚ")
+                bubbleStr = bubbleStr.Replace("l", "ⓛ")
+                bubbleStr = bubbleStr.Replace("m", "ⓜ")
+                bubbleStr = bubbleStr.Replace("n", "ⓝ")
+                bubbleStr = bubbleStr.Replace("o", "ⓞ")
+                bubbleStr = bubbleStr.Replace("p", "ⓟ")
+                bubbleStr = bubbleStr.Replace("q", "ⓠ")
+                bubbleStr = bubbleStr.Replace("r", "ⓡ")
+                bubbleStr = bubbleStr.Replace("s", "ⓢ")
+                bubbleStr = bubbleStr.Replace("t", "ⓣ")
+                bubbleStr = bubbleStr.Replace("u", "ⓤ")
+                bubbleStr = bubbleStr.Replace("v", "ⓤ")
+                bubbleStr = bubbleStr.Replace("w", "ⓦ")
+                bubbleStr = bubbleStr.Replace("x", "ⓧ")
+                bubbleStr = bubbleStr.Replace("y", "ⓨ")
+                bubbleStr = bubbleStr.Replace("z", "ⓩ")
+
+                bubbleStr = bubbleStr.Replace("A", "Ⓐ")
+                bubbleStr = bubbleStr.Replace("B", "Ⓑ")
+                bubbleStr = bubbleStr.Replace("C", "Ⓒ")
+                bubbleStr = bubbleStr.Replace("D", "Ⓓ")
+                bubbleStr = bubbleStr.Replace("E", "Ⓔ")
+                bubbleStr = bubbleStr.Replace("F", "Ⓕ")
+                bubbleStr = bubbleStr.Replace("G", "Ⓖ")
+                bubbleStr = bubbleStr.Replace("H", "Ⓗ")
+                bubbleStr = bubbleStr.Replace("I", "Ⓘ")
+                bubbleStr = bubbleStr.Replace("J", "Ⓙ")
+                bubbleStr = bubbleStr.Replace("K", "Ⓚ")
+                bubbleStr = bubbleStr.Replace("L", "Ⓛ")
+                bubbleStr = bubbleStr.Replace("M", "Ⓜ")
+                bubbleStr = bubbleStr.Replace("N", "Ⓝ")
+                bubbleStr = bubbleStr.Replace("O", "Ⓞ")
+                bubbleStr = bubbleStr.Replace("P", "Ⓟ")
+                bubbleStr = bubbleStr.Replace("Q", "Ⓠ")
+                bubbleStr = bubbleStr.Replace("R", "Ⓡ")
+                bubbleStr = bubbleStr.Replace("S", "Ⓢ")
+                bubbleStr = bubbleStr.Replace("T", "Ⓣ")
+                bubbleStr = bubbleStr.Replace("U", "Ⓤ")
+                bubbleStr = bubbleStr.Replace("V", "Ⓥ")
+                bubbleStr = bubbleStr.Replace("W", "Ⓦ")
+                bubbleStr = bubbleStr.Replace("X", "Ⓧ")
+                bubbleStr = bubbleStr.Replace("Y", "Ⓨ")
+                bubbleStr = bubbleStr.Replace("Z", "Ⓩ")
+
+                bubbleStr = bubbleStr.Replace("\10", "➓")
+                bubbleStr = bubbleStr.Replace("1", "➊")
+                bubbleStr = bubbleStr.Replace("2", "➋")
+                bubbleStr = bubbleStr.Replace("3", "➌")
+                bubbleStr = bubbleStr.Replace("4", "➍")
+                bubbleStr = bubbleStr.Replace("5", "➎")
+                bubbleStr = bubbleStr.Replace("6", "➏")
+                bubbleStr = bubbleStr.Replace("7", "➐")
+                bubbleStr = bubbleStr.Replace("8", "➑")
+                bubbleStr = bubbleStr.Replace("9", "➒")
+
+                AddSwagToMSG(bubble, bubbleStr)
+            End If
+            'BUBBLE END
 
 l:
         Catch ex As Exception
