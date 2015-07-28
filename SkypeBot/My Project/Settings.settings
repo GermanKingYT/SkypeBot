@@ -4604,6 +4604,7 @@ To buy contact Jeteroll: skype:jeteroll83?chat
 !don &lt;site&gt; -- Says if &lt;site&gt; is online or not
 !dox &lt;name&gt; -- Gives usefull links about name
 !fact -- Will give you a nice fact
+!flip &lt;text&gt; -- Flips your text upside down
 !game &lt;help/arguments&gt; -- Gives help about an inbuilt game!
 !geo &lt;ip&gt; -- Will give as much info 'bout &lt;ip&gt;
 !help -- Shows all available cmds
