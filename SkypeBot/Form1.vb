@@ -670,7 +670,7 @@ bypass:
             End If
 
             'Owner protection
-            If command.Contains("jet") Or command.Contains("Jet") And command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Then
+            If command.Contains("jet") And command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Or command.Contains("Jet") Then
                 Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
                 Exit Sub
             End If
@@ -2425,6 +2425,82 @@ exitt:
                 AddSwagToMSG(bubble, bubbleStr)
             End If
             'BUBBLE END
+
+            'FLIP START
+            If command = "flip" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "flip <text>")
+            If command.StartsWith("flip ") Then
+
+                Dim flip As ChatMessage = msg.Chat.SendMessage("Flipping...")
+                Dim flipStr As String = command.Replace("flip ", "")
+
+                flipStr = flipStr.Replace("a", "ɐ")
+                flipStr = flipStr.Replace("b", "q")
+                flipStr = flipStr.Replace("c", "ɔ")
+                flipStr = flipStr.Replace("d", "p")
+                flipStr = flipStr.Replace("e", "ǝ")
+                flipStr = flipStr.Replace("f", "ɟ")
+                flipStr = flipStr.Replace("g", "ƃ")
+                flipStr = flipStr.Replace("h", "ɥ")
+                flipStr = flipStr.Replace("i", "ı")
+                flipStr = flipStr.Replace("j", "ɾ")
+                flipStr = flipStr.Replace("k", "ʞ")
+                flipStr = flipStr.Replace("l", "l")
+                flipStr = flipStr.Replace("m", "ɯ")
+                flipStr = flipStr.Replace("n", "u")
+                flipStr = flipStr.Replace("o", "o")
+                flipStr = flipStr.Replace("p", "d")
+                flipStr = flipStr.Replace("q", "b")
+                flipStr = flipStr.Replace("r", "ɹ")
+                flipStr = flipStr.Replace("s", "s")
+                flipStr = flipStr.Replace("t", "ʇ")
+                flipStr = flipStr.Replace("u", "n")
+                flipStr = flipStr.Replace("v", "ʌ")
+                flipStr = flipStr.Replace("w", "ʍ")
+                flipStr = flipStr.Replace("x", "x")
+                flipStr = flipStr.Replace("y", "ʎ")
+                flipStr = flipStr.Replace("z", "z")
+
+                flipStr = flipStr.Replace("A", "∀")
+                flipStr = flipStr.Replace("B", "q")
+                flipStr = flipStr.Replace("C", "Ͻ")
+                flipStr = flipStr.Replace("D", "ᗡ")
+                flipStr = flipStr.Replace("E", "Ǝ")
+                flipStr = flipStr.Replace("F", "Ⅎ")
+                flipStr = flipStr.Replace("G", "⅁")
+                flipStr = flipStr.Replace("H", "H")
+                flipStr = flipStr.Replace("I", "I")
+                flipStr = flipStr.Replace("J", "ſ")
+                flipStr = flipStr.Replace("K", "ʞ")
+                flipStr = flipStr.Replace("L", "⅂")
+                flipStr = flipStr.Replace("M", "W")
+                flipStr = flipStr.Replace("N", "N")
+                flipStr = flipStr.Replace("O", "O")
+                flipStr = flipStr.Replace("P", "Ԁ")
+                flipStr = flipStr.Replace("Q", "Ὁ")
+                flipStr = flipStr.Replace("R", "ᴚ")
+                flipStr = flipStr.Replace("S", "S")
+                flipStr = flipStr.Replace("T", "⊥")
+                flipStr = flipStr.Replace("U", "∩")
+                flipStr = flipStr.Replace("V", "Λ")
+                flipStr = flipStr.Replace("W", "M")
+                flipStr = flipStr.Replace("X", "X")
+                flipStr = flipStr.Replace("Y", "ʎ")
+                flipStr = flipStr.Replace("Z", "Z")
+
+                flipStr = flipStr.Replace("0", "0")
+                flipStr = flipStr.Replace("1", "⇂")
+                flipStr = flipStr.Replace("2", "ᄅ")
+                flipStr = flipStr.Replace("3", "Ɛ")
+                flipStr = flipStr.Replace("4", "ᔭ")
+                flipStr = flipStr.Replace("5", "ㄣ")
+                flipStr = flipStr.Replace("6", "9")
+                flipStr = flipStr.Replace("7", "Ɫ")
+                flipStr = flipStr.Replace("8", "8")
+                flipStr = flipStr.Replace("9", "6")
+
+                AddSwagToMSG(flip, flipStr)
+            End If
+            'FLIP END
 
 l:
         Catch ex As Exception
