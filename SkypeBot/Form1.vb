@@ -670,7 +670,7 @@ bypass:
             End If
 
             'Owner protection
-            If command.Contains("jet") Then
+            If command.Contains("jet") And command.StartsWith("resolve") = False Then
                 Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
                 Exit Sub
             End If
@@ -2388,11 +2388,11 @@ l:
             If IsNumeric(d(0)) = True Then
                 If IsAdmin(msg.Sender.Handle) Then
                 ElseIf d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
-                    d(0) = 50
-                ElseIf d(0) > 25 And IsPremium(msg.Sender.Handle) Then
-                    d(0) = 25
-                ElseIf d(0) > 10 And IsNormalUser(msg.Sender.Handle) Then
-                    d(0) = 10
+                    d(0) = 20
+                ElseIf d(0) > 0 And IsPremium(msg.Sender.Handle) Then
+                    d(0) = 0
+                ElseIf d(0) > 0 And IsNormalUser(msg.Sender.Handle) Then
+                    d(0) = 0
                 End If
             Else
                 msg.Chat.SendMessage("ERROR: You entered an invalid number, try to swap the number and msg!")
