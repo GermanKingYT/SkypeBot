@@ -4589,6 +4589,7 @@ To buy contact Jeteroll: skype:jeteroll83?chat
 !calc &lt;help/expression&gt; -- Just do !calc help
 !cfresolve &lt;site&gt; -- Resolves clouflare
 !check &lt;help/arguments&gt; -- Check accounts
+!coolify &lt;text&gt; -- Coolifies your text
 !copypasta -- Pastes some dank pasta
 !cp -- Gives you some good CP ;)
 !crawl &lt;page&gt; -- Gives all links of a webpage (crawls a site)
