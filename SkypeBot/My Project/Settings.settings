@@ -4563,11 +4563,13 @@ For ex: !rat build -name=Legit%20Program -persistance
     <Setting Name="buy" Type="System.String" Scope="User">
       <Value Profile="(Default)">----------------------------------------------------------------
 Premium: $5
--Access to !ddos
+-Access to !ddos (not always available)
 -Increased !tspam limit
 -Access to !mailbomb
+-Whitelisted IP
 
 Ultimate: $7
+-Includes everything from premium
 -Access to !spam
 -Even further increased !tspam &amp; !mailmomb limits
 
@@ -4578,7 +4580,7 @@ To buy contact Jeteroll: skype:jeteroll83?chat
       <Value Profile="(Default)">jeteroll83</Value>
     </Setting>
     <Setting Name="cht" Type="System.String" Scope="User">
-      <Value Profile="(Default)">skype:?chat&amp;blob=cOlS8bM7CwKlTpJeX8vluIprhzExnXURXz_Vejlg_ezpLTPs7yym1KURf8U5-ti5A-XnJ64lQjaa-7HT7LAvVxTsaGr7kv681HTzde2Su5xtc_6vCKXZpQ-ewzdMuT8wppH17WkowV20HSJ-QjzbtFjetDTPpmrrS06fafqdB9UPWQJmiEcQkcIXSnRpC4IUunC-yvka28sTWz3f2GPHY-cSrME_6O0AXG8</Value>
+      <Value Profile="(Default)">skype:?chat&amp;blob=bzwRC2UHdZMhj4PwB8RRibWvV63uF3yMrGBSwEGKyzMoKAN3fdr92EvJzJMS_iAkayR-eohL-lKddmmzM_QRJDUfzZJecNxR21omEmu7JYbKf2wYNr9e3g</Value>
     </Setting>
     <Setting Name="helpmsg" Type="System.String" Scope="User">
       <Value Profile="(Default)">----------------------------HELP MENU----------------------------
