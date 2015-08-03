@@ -72,10 +72,8 @@ Public Class Form1
 
         Dim w As New WebClient
         w.Proxy = Nothing
-        Dim res As String = w.DownloadString("http://www.isup.me/" & api)
-        Dim res2 As String = w.DownloadString("http://www.isup.me/" & ddosapi2)
-        Dim offline As Boolean = res.ToLower.Contains("down")
-        Dim offline2 As Boolean = res2.ToLower.Contains("down")
+        Dim offline As Boolean = pong(api)
+        Dim offline2 As Boolean = pong(ddosapi2)
         If offline And offline Then
             Return "API offline"
             Exit Function
@@ -1853,8 +1851,12 @@ exitt:
                 Dim api As String = "http://skypebot.ga/apis/apis/dict.php"
 
                 Dim dict As ChatMessage = msg.Chat.SendMessage("Initializing...")
-
-                AddSwagToMSG(dict, POST(api, "auth=sb&def=" & command.Remove(0, 5)))
+                Dim res As String = POST(api, "auth=sb&def=" & command.Remove(0, 5))
+                If res = "" Then
+                    AddSwagToMSG(dict, "That word was not found!")
+                Else
+                    AddSwagToMSG(dict, res)
+                End If
             End If
             'DICT END
             'DOX START
@@ -2054,6 +2056,11 @@ exitt:
                 Dim ww As New WebClient
                 ww.Proxy = Nothing
                 AddSwagToMSG(msgr, "Checking for proxy...")
+                Dim up As Boolean = pong(cmd)
+                If Not up Then
+                    AddSwagToMSG(msg, "Specified IP is currently offline.")
+                    Exit Sub
+                End If
                 Dim lolyo As String = proxycheck(cmd)
                 If lolyo = True Then AddSwagToMSG(msgr, "Proxy Detected") Else AddSwagToMSG(msgr, "Proxy Not Detected")
             End If
@@ -2208,28 +2215,9 @@ exitt:
             'CP START
             If command = "cp" Then
                 Dim rand As Integer = GetRandom(1, 10)
-                Select Case rand
-                    Case 1
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/135KtDV")
-                    Case 2
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/pIPnyBw")
-                    Case 3
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/L5BcuiR")
-                    Case 4
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/cozg95M")
-                    Case 5
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/LNDl4gA")
-                    Case 6
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/aoPqKq7")
-                    Case 7
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/YRZGTeD")
-                    Case 8
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/aa1VA5c")
-                    Case 9
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/BDdPMYb")
-                    Case 10
-                        Dim newmsg As ChatMessage = msg.Chat.SendMessage("http://imgur.com/LMa4NK6")
-                End Select
+                Dim pics As String = "http://imgur.com/135KtDV,http://imgur.com/pIPnyBw,http://imgur.com/L5BcuiR,http://imgur.com/cozg95M,http://imgur.com/LNDl4gA,http://imgur.com/aoPqKq7,http://imgur.com/YRZGTeD,http://imgur.com/aa1VA5c,http://imgur.com/BDdPMYb,http://imgur.com/LMa4NK6"
+                Dim picArr() As String = pics.Split(","c)
+                Dim cp As ChatMessage = msg.Chat.SendMessage(picArr(rand))
             End If
             'CP END
 
@@ -2602,6 +2590,12 @@ exitt:
                 AddSwagToMSG(coolify, coolStr)
             End If
             'COOLIFY END
+
+            'ENCOURAGE START
+            If command = "encourage" Then
+                Dim encourage As ChatMessage = msg.Chat.SendMessage("https://www.youtube.com/watch?v=nuHfVn_cfHU")
+            End If
+            'ENCOURAGE END
 
 l:
         Catch ex As Exception
@@ -3266,6 +3260,56 @@ l:
         Dim w As New WebClient
         w.Proxy = Nothing
         Return w.DownloadString("http://api.hackertarget.com/pagelinks/?q=" & Page).Replace(" ", "%20").Replace("  ", "%20%20")
+    End Function
+    Function pong(IP As String)
+        Dim int As Integer
+        Dim ipCheck As Boolean = True
+        Dim IPArr() As String = IP.Split("."c)
+        For Each str As String In IPArr
+            Try
+                int = Convert.ToInt32(str)
+            Catch InvalidCastException As Exception
+                ipCheck = False
+            End Try
+        Next
+
+        If countChars(IP, "."c) > 2 And ipCheck Then
+            Dim myProcess As New Process()
+            Dim myProcessStartInfo As New ProcessStartInfo("ping")
+
+            myProcessStartInfo.Arguments = IP & " -l 1 -n 1"
+            myProcessStartInfo.UseShellExecute = False
+            myProcessStartInfo.RedirectStandardOutput = True
+            myProcessStartInfo.CreateNoWindow = True
+            myProcess.StartInfo = myProcessStartInfo
+            myProcess.Start()
+            Dim myStreamReader As StreamReader = myProcess.StandardOutput
+
+            Dim output As String = myStreamReader.ReadLine.ToString.Replace(": bytes=1 time=", " with ").Replace(" TTL=", " and TLL = ").Replace("Reply from ", "")
+            If output.Contains("timed") Then
+                Return False
+            ElseIf output.Contains("Minimum") Then
+                Return True
+            Else
+                Return False
+            End If
+        Else
+            Dim w As New WebClient
+            w.Proxy = Nothing
+            Dim res As String = w.DownloadString("http://www.isup.me/" & IP)
+            Dim offline As Boolean = res.ToLower.Contains("down")
+            If offline Then
+                Return False
+            Else : Return True
+            End If
+        End If
+    End Function
+    Function countChars(ByVal value As String, ByVal ch As Char) As Integer
+        Dim cnt As Integer = 0
+        For Each c As Char In value
+            If c = ch Then cnt += 1
+        Next
+        Return cnt
     End Function
 
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged

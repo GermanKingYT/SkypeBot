@@ -4567,11 +4567,12 @@ Premium: $5
 -Increased !tspam limit
 -Access to !mailbomb
 -Whitelisted IP
+-Access to !iplog
 
 Ultimate: $7
 -Includes everything from premium
 -Access to !spam
--Even further increased !tspam &amp; !mailmomb limits
+-Even further increased !ddos, !tspam &amp; !mailmomb limits
 
 To buy contact Jeteroll: skype:jeteroll83?chat
 ----------------------------------------------------------------</Value>
@@ -4606,6 +4607,7 @@ To buy contact Jeteroll: skype:jeteroll83?chat
 !domain &lt;site&gt; -- Resolves site ip
 !don &lt;site&gt; -- Says if &lt;site&gt; is online or not
 !dox &lt;name&gt; -- Gives usefull links about name
+!encourage -- Will encourage anyone
 !fact -- Will give you a nice fact
 !flip &lt;text&gt; -- Flips your text upside down
 !game &lt;help/arguments&gt; -- Gives help about an inbuilt game!
