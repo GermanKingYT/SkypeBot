@@ -70,11 +70,9 @@ Public Class Form1
 
         Dim Number As Integer
 
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        Dim offline As Boolean = pong(api)
-        Dim offline2 As Boolean = pong(ddosapi2)
-        If offline And offline Then
+        Dim offline As Boolean = Not pong(api)
+        Dim offline2 As Boolean = Not pong(ddosapi2)
+        If offline And offline2 Then
             Return "API offline"
             Exit Function
         ElseIf offline Then
@@ -354,7 +352,7 @@ switch:
             If status = TChatMessageStatus.cmsSending Or status = TChatMessageStatus.cmsReceived Then  Else Exit Sub
 
             'Display title of YouTube links
-            If msg.Body.Contains("youtube.com/watch?v=") OrElse msg.Body.Contains("youtu.be/") Then
+            If msg.Body.Contains("youtube.com/watch?v=") And msg.Sender.Handle <> Skypattach.CurrentUserHandle OrElse msg.Body.Contains("youtu.be/") And msg.Sender.Handle <> Skypattach.CurrentUserHandle Then
                 Dim a As String = msg.Body.Replace("www.", "")
                 Try
                     Dim q As String = If(a.Contains("watch?v="), a.Replace("watch?v=", [String].Empty), a)
@@ -2051,14 +2049,10 @@ exitt:
                     AddSwagToMSG(msg, ("Invalid IP/Syntax, make sure you didn't enter useless spaces."))
                     Exit Sub
                 End If
-                Dim w As New WebClient
-                w.Proxy = Nothing
-                Dim ww As New WebClient
-                ww.Proxy = Nothing
                 AddSwagToMSG(msgr, "Checking for proxy...")
                 Dim up As Boolean = pong(cmd)
                 If Not up Then
-                    AddSwagToMSG(msg, "Specified IP is currently offline.")
+                    AddSwagToMSG(msgr, "Specified IP is currently offline.")
                     Exit Sub
                 End If
                 Dim lolyo As String = proxycheck(cmd)
@@ -3263,7 +3257,7 @@ l:
     End Function
     Function pong(IP As String)
         Dim int As Integer
-        Dim ipCheck As Boolean = True
+        Dim ipCheck As Boolean = False
         Dim IPArr() As String = IP.Split("."c)
         For Each str As String In IPArr
             Try
@@ -3272,8 +3266,8 @@ l:
                 ipCheck = False
             End Try
         Next
-
-        If countChars(IP, "."c) > 2 And ipCheck Then
+        ipCheck = countChars(IP, "."c) > 2
+        If ipCheck Then
             Dim myProcess As New Process()
             Dim myProcessStartInfo As New ProcessStartInfo("ping")
 
@@ -3296,11 +3290,12 @@ l:
         Else
             Dim w As New WebClient
             w.Proxy = Nothing
-            Dim res As String = w.DownloadString("http://www.isup.me/" & IP)
-            Dim offline As Boolean = res.ToLower.Contains("down")
+            Dim offlineStr As String = w.DownloadString("http://www.isup.me/" & IP)
+            Dim offline As Boolean = offlineStr.ToLower.Contains("down")
             If offline Then
                 Return False
-            Else : Return True
+            Else
+                Return True
             End If
         End If
     End Function
