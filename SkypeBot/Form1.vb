@@ -373,14 +373,22 @@ switch:
             End If
 
             If msg.Body.IndexOf("@") = 0 Then
-                Dim pcmd = New Threading.Thread(Sub() AI1(msg))
-                pcmd.SetApartmentState(ApartmentState.STA)
-                pcmd.Start()
+                If IsPremium(msg.Sender.Handle) Then
+                    Dim pcmd = New Threading.Thread(Sub() AI1(msg))
+                    pcmd.SetApartmentState(ApartmentState.STA)
+                    pcmd.Start()
+                Else
+                    Dim notPrem As ChatMessage = msg.Chat.SendMessage("Command is only for premium members!")
+                End If
             End If
             If msg.Body.IndexOf("#") = 0 Then
-                Dim pcmd = New Threading.Thread(Sub() AI2(msg))
-                pcmd.SetApartmentState(ApartmentState.STA)
-                pcmd.Start()
+                If IsPremium(msg.Sender.Handle) Then
+                    Dim pcmd = New Threading.Thread(Sub() AI2(msg))
+                    pcmd.SetApartmentState(ApartmentState.STA)
+                    pcmd.Start()
+                Else
+                    Dim notPrem As ChatMessage = msg.Chat.SendMessage("Command is only for premium members!")
+                End If
             End If
             If msg.Body.IndexOf(trigger) = 0 Then
                 Dim pcmd = New Threading.Thread(Sub() processcommand(msg))

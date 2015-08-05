@@ -4568,6 +4568,7 @@ Premium: $5
 -Access to !mailbomb
 -Whitelisted IP
 -Access to !iplog
+-Access to chat with both AIs ("@" and "#")
 
 Ultimate: $7
 -Includes everything from premium
@@ -4575,6 +4576,8 @@ Ultimate: $7
 -Even further increased !ddos, !tspam &amp; !mailmomb limits
 
 To buy contact Jeteroll: skype:jeteroll83?chat
+
+Not all features are garaunteed to work 100% of the time.
 ----------------------------------------------------------------</Value>
     </Setting>
     <Setting Name="whitelist" Type="System.String" Scope="User">
