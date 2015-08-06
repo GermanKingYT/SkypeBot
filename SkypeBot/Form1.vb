@@ -1,12 +1,12 @@
-﻿Imports SKYPE4COMLib
-Imports System.IO
-Imports System.Net.Mail
-Imports System.Web
+﻿Imports System.Web
+Imports System.Threading
 Imports System.Net.Sockets
 Imports System.Text
 Imports System.Configuration
 Imports System.Text.RegularExpressions
-Imports System.Threading
+Imports SKYPE4COMLib
+Imports System.IO
+Imports System.Net.Mail
 Imports System.Windows.Forms.Application
 Imports System.Security.Cryptography
 Imports ChatterBotAPI
