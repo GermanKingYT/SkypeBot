@@ -371,6 +371,11 @@ switch:
                 Dim deeznuts As ChatMessage = msg.Chat.SendMessage("HA GOTTI")
             End If
 
+            'Custom Lenny face emote
+            If msg.Body.Contains("(lenny)") And msg.Sender.Handle <> Skypattach.CurrentUserHandle Then
+                Dim deeznuts As ChatMessage = msg.Chat.SendMessage("( ͡° ͜ʖ ͡°)")
+            End If
+
             If msg.Body.IndexOf("@") = 0 Then
                 If IsPremium(msg.Sender.Handle) Then
                     Dim pcmd = New Threading.Thread(Sub() AI1(msg))
@@ -2748,6 +2753,11 @@ cont:
             End If
             'ENCOURAGE END
 
+            'TOS START
+            If command = "tos" Then
+                Dim encourage As ChatMessage = msg.Chat.SendMessage(My.Settings.tos)
+            End If
+            'TOS END
 l:
         Catch ex As Exception
             If ex.ToString.Contains("IndexOutOfRangeException") Or ex.ToString.ToLower.Contains("index") Then

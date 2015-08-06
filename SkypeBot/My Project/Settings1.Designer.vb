@@ -1537,13 +1537,13 @@ Namespace My
             "eamnr> -- gets the steam id out of a steam uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!skype -- Generates a skype acco"& _ 
             "unt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!smallcaps <text> -- Converts your text to small caps"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!spam <times> <msg> "& _ 
             "-- will spam your friend"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!translate <from/detect> <to> <message> -- translates "& _ 
-            "messages"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!troll <somename> -- Gives a link to a joke, not a screamer"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ts <name"& _ 
-            "> <times> <msg> -- spams <name>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!unshorten <url> -- Gives the link behind a sho"& _ 
-            "rtened uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!whois <url> -- Gives whois info"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!year <int> -- Gives info about th"& _ 
-            "e year giving"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!vpncheck <ip> -- Checks if ip is vpn/proxy"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!yt2mp3 <url> -- Giv"& _ 
-            "es a direct link to download mp3 out of yt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"@<msg> -- Talks to AI Bot 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#<msg> "& _ 
-            "-- Talks to AI Bot 2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"----------------------------HELP MENU---------------------"& _ 
-            "-------")>  _
+            "messages"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!troll <somename> -- Gives a link to a joke, not a screamer"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!tos -- D"& _ 
+            "isplays the terms of service"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ts <name> <times> <msg> -- spams <name>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!unshort"& _ 
+            "en <url> -- Gives the link behind a shortened uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!whois <url> -- Gives whois i"& _ 
+            "nfo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!year <int> -- Gives info about the year giving"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!vpncheck <ip> -- Checks i"& _ 
+            "f ip is vpn/proxy"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!yt2mp3 <url> -- Gives a direct link to download mp3 out of y"& _ 
+            "t"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"@<msg> -- Talks to AI Bot 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#<msg> -- Talks to AI Bot 2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-------------------"& _ 
+            "---------HELP MENU----------------------------")>  _
         Public Property helpmsg() As String
             Get
                 Return CType(Me("helpmsg"),String)
@@ -1556,14 +1556,14 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("-------------------ᴊᴇᴛBot Terms of Service----------------------"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Not all featur"& _ 
-            "es are garanteed to work"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Some features may experience downtime independently o"& _ 
-            "f others"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Bot downtime is to be expected"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Expect some bugs, but know they are "& _ 
-            "being worked on"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Absolutely no refunds"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-No chargebacks on PayPal"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-I reserve t"& _ 
-            "he right to discontinue any user's access to the bot"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"at my descretion."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-If !ne"& _ 
-            "tflix and !minecraft do not work, please keep trying"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"them. Some accounts are al"& _ 
-            "ready take."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Developed by: Jeteroll and Lesley"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Site: http://sweg.io/"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Twitter"& _ 
-            ": http://twitter.com/jeteroll_"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"------------------------------------------------"& _ 
-            "----------------")>  _
+            "es are guaranteed to work"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Some features may experience downtime independently "& _ 
+            "of others"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Bot downtime is to be expected"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Expect some bugs, but know they are"& _ 
+            " being worked on"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-Absolutely no refunds"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-No chargebacks on PayPal"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-I reserve "& _ 
+            "the right to discontinue any user's access to the bot"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"at my descretion."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-If !n"& _ 
+            "etflix and !minecraft do not work, please keep trying"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"them. Some accounts are a"& _ 
+            "lready take."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Developed by: Jeteroll (skype:jeteroll83?chat) and Lesley"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Site:"& _ 
+            " http://sweg.io/"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Twitter: http://twitter.com/jeteroll_"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"-----------------------"& _ 
+            "-----------------------------------------")>  _
         Public Property tos() As String
             Get
                 Return CType(Me("tos"),String)
