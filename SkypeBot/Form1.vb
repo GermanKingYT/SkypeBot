@@ -2461,209 +2461,209 @@ exitt:
                 Dim loc As Integer = 0
 
                 For Each c As Char In flipArr
-                    If c = "a" Then
+                    If c.ToString().Contains("a") Then
                         c = "ɐ"
                         GoTo cont
                     End If
-                    If c = "b" Then
+                    If c.ToString().Contains("b") Then
                         c = "q"
                         GoTo cont
                     End If
-                    If c = "c" Then
+                    If c.ToString().Contains("c") Then
                         c = "ɔ"
                         GoTo cont
                     End If
-                    If c = "d" Then
+                    If c.ToString().Contains("d") Then
                         c = "p"
                         GoTo cont
                     End If
-                    If c = "e" Then
+                    If c.ToString().Contains("e") Then
                         c = "ǝ"
                         GoTo cont
                     End If
-                    If c = "f" Then
+                    If c.ToString().Contains("f") Then
                         c = "ɟ"
                         GoTo cont
                     End If
-                    If c = "g" Then
+                    If c.ToString().Contains("g") Then
                         c = "ƃ"
                         GoTo cont
                     End If
-                    If c = "h" Then
+                    If c.ToString().Contains("h") Then
                         c = "ɥ"
                         GoTo cont
                     End If
-                    If c = "i" Then
+                    If c.ToString().Contains("i") Then
                         c = "ı"
                         GoTo cont
                     End If
-                    If c = "j" Then
+                    If c.ToString().Contains("j") Then
                         c = "ɾ"
                         GoTo cont
                     End If
-                    If c = "k" Then
+                    If c.ToString().Contains("k") Then
                         c = "ʞ"
                         GoTo cont
                     End If
-                    If c = "k" Then
+                    If c.ToString().Contains("k") Then
                         c = "ʞ"
                         GoTo cont
                     End If
-                    If c = "m" Then
+                    If c.ToString().Contains("m") Then
                         c = "ɯ"
                         GoTo cont
                     End If
-                    If c = "m" Then
+                    If c.ToString().Contains("m") Then
                         c = "ɯ"
                         GoTo cont
                     End If
-                    If c = "n" Then
+                    If c.ToString().Contains("n") Then
                         c = "u"
                         GoTo cont
                     End If
-                    If c = "p" Then
+                    If c.ToString().Contains("p") Then
                         c = "d"
                         GoTo cont
                     End If
-                    If c = "q" Then
+                    If c.ToString().Contains("q") Then
                         c = "b"
                         GoTo cont
                     End If
-                    If c = "r" Then
+                    If c.ToString().Contains("r") Then
                         c = "ɹ"
                         GoTo cont
                     End If
-                    If c = "t" Then
+                    If c.ToString().Contains("t") Then
                         c = "ʇ"
                         GoTo cont
                     End If
-                    If c = "u" Then
+                    If c.ToString().Contains("u") Then
                         c = "n"
                         GoTo cont
                     End If
-                    If c = "v" Then
+                    If c.ToString().Contains("v") Then
                         c = "ʌ"
                         GoTo cont
                     End If
-                    If c = "w" Then
+                    If c.ToString().Contains("w") Then
                         c = "ʍ"
                         GoTo cont
                     End If
-                    If c = "y" Then
+                    If c.ToString().Contains("y") Then
                         c = "ʎ"
                         GoTo cont
                     End If
 
-                    If c = "A" Then
+                    If c.ToString().Contains("A") Then
                         c = "∀"
                         GoTo cont
                     End If
-                    If c = "B" Then
+                    If c.ToString().Contains("B") Then
                         c = "q"
                         GoTo cont
                     End If
-                    If c = "C" Then
+                    If c.ToString().Contains("C") Then
                         c = "Ͻ"
                         GoTo cont
                     End If
-                    If c = "D" Then
+                    If c.ToString().Contains("D") Then
                         c = "ᗡ"
                         GoTo cont
                     End If
-                    If c = "E" Then
+                    If c.ToString().Contains("E") Then
                         c = "Ǝ"
                         GoTo cont
                     End If
-                    If c = "F" Then
+                    If c.ToString().Contains("F") Then
                         c = "Ⅎ"
                         GoTo cont
                     End If
-                    If c = "G" Then
+                    If c.ToString().Contains("G") Then
                         c = "⅁"
                         GoTo cont
                     End If
-                    If c = "J" Then
+                    If c.ToString().Contains("J") Then
                         c = "ſ"
                         GoTo cont
                     End If
-                    If c = "K" Then
+                    If c.ToString().Contains("K") Then
                         c = "ʞ"
                         GoTo cont
                     End If
-                    If c = "F" Then
+                    If c.ToString().Contains("F") Then
                         c = "Ⅎ"
                         GoTo cont
                     End If
-                    If c = "L" Then
+                    If c.ToString().Contains("L") Then
                         c = "⅂"
                         GoTo cont
                     End If
-                    If c = "M" Then
+                    If c.ToString().Contains("M") Then
                         c = "W"
                         GoTo cont
                     End If
-                    If c = "P" Then
+                    If c.ToString().Contains("P") Then
                         c = "Ԁ"
                         GoTo cont
                     End If
-                    If c = "Q" Then
+                    If c.ToString().Contains("Q") Then
                         c = "O"
                         GoTo cont
                     End If
-                    If c = "R" Then
+                    If c.ToString().Contains("R") Then
                         c = "ᴚ"
                         GoTo cont
                     End If
-                    If c = "T" Then
+                    If c.ToString().Contains("T") Then
                         c = "⊥"
                         GoTo cont
                     End If
-                    If c = "U" Then
+                    If c.ToString().Contains("U") Then
                         c = "∩"
                         GoTo cont
                     End If
-                    If c = "V" Then
+                    If c.ToString().Contains("V") Then
                         c = "Λ"
                         GoTo cont
                     End If
-                    If c = "W" Then
+                    If c.ToString().Contains("W") Then
                         c = "M"
                         GoTo cont
                     End If
-                    If c = "W" Then
+                    If c.ToString().Contains("y") Then
                         c = "ʎ"
                         GoTo cont
                     End If
 
-                    If c = "1" Then
+                    If c.ToString().Contains("1") Then
                         c = "⇂"
                         GoTo cont
                     End If
-                    If c = "2" Then
+                    If c.ToString().Contains("2") Then
                         c = "ᄅ"
                         GoTo cont
                     End If
-                    If c = "3" Then
+                    If c.ToString().Contains("3") Then
                         c = "Ɛ"
                         GoTo cont
                     End If
-                    If c = "4" Then
+                    If c.ToString().Contains("4") Then
                         c = "ᔭ"
                         GoTo cont
                     End If
-                    If c = "5" Then
+                    If c.ToString().Contains("5") Then
                         c = "ㄣ"
                         GoTo cont
                     End If
-                    If c = "6" Then
+                    If c.ToString().Contains("6") Then
                         c = "9"
                         GoTo cont
                     End If
-                    If c = "7" Then
+                    If c.ToString().Contains("7") Then
                         c = "Ɫ"
                         GoTo cont
                     End If
-                    If c = "9" Then
+                    If c.ToString().Contains("9") Then
                         c = "6"
                         GoTo cont
                     End If
