@@ -2458,72 +2458,222 @@ exitt:
 
                 Dim flip As ChatMessage = msg.Chat.SendMessage("Flipping...")
                 Dim flipStr As String = command.Replace("flip ", "")
+                Dim flipArr() As Char = flipStr.ToCharArray
+                Dim loc As Integer = 0
 
-                flipStr = flipStr.Replace("a", "ɐ")
-                flipStr = flipStr.Replace("b", "q")
-                flipStr = flipStr.Replace("c", "ɔ")
-                flipStr = flipStr.Replace("d", "p")
-                flipStr = flipStr.Replace("e", "ǝ")
-                flipStr = flipStr.Replace("f", "ɟ")
-                flipStr = flipStr.Replace("g", "ƃ")
-                flipStr = flipStr.Replace("h", "ɥ")
-                flipStr = flipStr.Replace("i", "ı")
-                flipStr = flipStr.Replace("j", "ɾ")
-                flipStr = flipStr.Replace("k", "ʞ")
-                flipStr = flipStr.Replace("l", "l")
-                flipStr = flipStr.Replace("m", "ɯ")
-                flipStr = flipStr.Replace("n", "u")
-                flipStr = flipStr.Replace("o", "o")
-                flipStr = flipStr.Replace("p", "d")
-                flipStr = flipStr.Replace("q", "b")
-                flipStr = flipStr.Replace("r", "ɹ")
-                flipStr = flipStr.Replace("s", "s")
-                flipStr = flipStr.Replace("t", "ʇ")
-                flipStr = flipStr.Replace("u", "n")
-                flipStr = flipStr.Replace("v", "ʌ")
-                flipStr = flipStr.Replace("w", "ʍ")
-                flipStr = flipStr.Replace("x", "x")
-                flipStr = flipStr.Replace("y", "ʎ")
-                flipStr = flipStr.Replace("z", "z")
+                For Each c As Char In flipArr
+                    If c = "a" Then
+                        c = "ɐ"
+                        GoTo cont
+                    End If
+                    If c = "b" Then
+                        c = "q"
+                        GoTo cont
+                    End If
+                    If c = "c" Then
+                        c = "ɔ"
+                        GoTo cont
+                    End If
+                    If c = "d" Then
+                        c = "p"
+                        GoTo cont
+                    End If
+                    If c = "e" Then
+                        c = "ǝ"
+                        GoTo cont
+                    End If
+                    If c = "f" Then
+                        c = "ɟ"
+                        GoTo cont
+                    End If
+                    If c = "g" Then
+                        c = "ƃ"
+                        GoTo cont
+                    End If
+                    If c = "h" Then
+                        c = "ɥ"
+                        GoTo cont
+                    End If
+                    If c = "i" Then
+                        c = "ı"
+                        GoTo cont
+                    End If
+                    If c = "j" Then
+                        c = "ɾ"
+                        GoTo cont
+                    End If
+                    If c = "k" Then
+                        c = "ʞ"
+                        GoTo cont
+                    End If
+                    If c = "k" Then
+                        c = "ʞ"
+                        GoTo cont
+                    End If
+                    If c = "m" Then
+                        c = "ɯ"
+                        GoTo cont
+                    End If
+                    If c = "m" Then
+                        c = "ɯ"
+                        GoTo cont
+                    End If
+                    If c = "n" Then
+                        c = "u"
+                        GoTo cont
+                    End If
+                    If c = "p" Then
+                        c = "d"
+                        GoTo cont
+                    End If
+                    If c = "q" Then
+                        c = "b"
+                        GoTo cont
+                    End If
+                    If c = "r" Then
+                        c = "ɹ"
+                        GoTo cont
+                    End If
+                    If c = "t" Then
+                        c = "ʇ"
+                        GoTo cont
+                    End If
+                    If c = "u" Then
+                        c = "n"
+                        GoTo cont
+                    End If
+                    If c = "v" Then
+                        c = "ʌ"
+                        GoTo cont
+                    End If
+                    If c = "w" Then
+                        c = "ʍ"
+                        GoTo cont
+                    End If
+                    If c = "y" Then
+                        c = "ʎ"
+                        GoTo cont
+                    End If
 
-                flipStr = flipStr.Replace("A", "∀")
-                flipStr = flipStr.Replace("B", "q")
-                flipStr = flipStr.Replace("C", "Ͻ")
-                flipStr = flipStr.Replace("D", "ᗡ")
-                flipStr = flipStr.Replace("E", "Ǝ")
-                flipStr = flipStr.Replace("F", "Ⅎ")
-                flipStr = flipStr.Replace("G", "⅁")
-                flipStr = flipStr.Replace("H", "H")
-                flipStr = flipStr.Replace("I", "I")
-                flipStr = flipStr.Replace("J", "ſ")
-                flipStr = flipStr.Replace("K", "ʞ")
-                flipStr = flipStr.Replace("L", "⅂")
-                flipStr = flipStr.Replace("M", "W")
-                flipStr = flipStr.Replace("N", "N")
-                flipStr = flipStr.Replace("O", "O")
-                flipStr = flipStr.Replace("P", "Ԁ")
-                flipStr = flipStr.Replace("Q", "Ὁ")
-                flipStr = flipStr.Replace("R", "ᴚ")
-                flipStr = flipStr.Replace("S", "S")
-                flipStr = flipStr.Replace("T", "⊥")
-                flipStr = flipStr.Replace("U", "∩")
-                flipStr = flipStr.Replace("V", "Λ")
-                flipStr = flipStr.Replace("W", "M")
-                flipStr = flipStr.Replace("X", "X")
-                flipStr = flipStr.Replace("Y", "ʎ")
-                flipStr = flipStr.Replace("Z", "Z")
+                    If c = "A" Then
+                        c = "∀"
+                        GoTo cont
+                    End If
+                    If c = "B" Then
+                        c = "q"
+                        GoTo cont
+                    End If
+                    If c = "C" Then
+                        c = "Ͻ"
+                        GoTo cont
+                    End If
+                    If c = "D" Then
+                        c = "ᗡ"
+                        GoTo cont
+                    End If
+                    If c = "E" Then
+                        c = "Ǝ"
+                        GoTo cont
+                    End If
+                    If c = "F" Then
+                        c = "Ⅎ"
+                        GoTo cont
+                    End If
+                    If c = "G" Then
+                        c = "⅁"
+                        GoTo cont
+                    End If
+                    If c = "J" Then
+                        c = "ſ"
+                        GoTo cont
+                    End If
+                    If c = "K" Then
+                        c = "ʞ"
+                        GoTo cont
+                    End If
+                    If c = "F" Then
+                        c = "Ⅎ"
+                        GoTo cont
+                    End If
+                    If c = "L" Then
+                        c = "⅂"
+                        GoTo cont
+                    End If
+                    If c = "M" Then
+                        c = "W"
+                        GoTo cont
+                    End If
+                    If c = "P" Then
+                        c = "Ԁ"
+                        GoTo cont
+                    End If
+                    If c = "Q" Then
+                        c = "O"
+                        GoTo cont
+                    End If
+                    If c = "R" Then
+                        c = "ᴚ"
+                        GoTo cont
+                    End If
+                    If c = "T" Then
+                        c = "⊥"
+                        GoTo cont
+                    End If
+                    If c = "U" Then
+                        c = "∩"
+                        GoTo cont
+                    End If
+                    If c = "V" Then
+                        c = "Λ"
+                        GoTo cont
+                    End If
+                    If c = "W" Then
+                        c = "M"
+                        GoTo cont
+                    End If
+                    If c = "W" Then
+                        c = "ʎ"
+                        GoTo cont
+                    End If
 
-                flipStr = flipStr.Replace("0", "0")
-                flipStr = flipStr.Replace("1", "⇂")
-                flipStr = flipStr.Replace("2", "ᄅ")
-                flipStr = flipStr.Replace("3", "Ɛ")
-                flipStr = flipStr.Replace("4", "ᔭ")
-                flipStr = flipStr.Replace("5", "ㄣ")
-                flipStr = flipStr.Replace("6", "9")
-                flipStr = flipStr.Replace("7", "Ɫ")
-                flipStr = flipStr.Replace("8", "8")
-                flipStr = flipStr.Replace("9", "6")
-
+                    If c = "1" Then
+                        c = "⇂"
+                        GoTo cont
+                    End If
+                    If c = "2" Then
+                        c = "ᄅ"
+                        GoTo cont
+                    End If
+                    If c = "3" Then
+                        c = "Ɛ"
+                        GoTo cont
+                    End If
+                    If c = "4" Then
+                        c = "ᔭ"
+                        GoTo cont
+                    End If
+                    If c = "5" Then
+                        c = "ㄣ"
+                        GoTo cont
+                    End If
+                    If c = "6" Then
+                        c = "9"
+                        GoTo cont
+                    End If
+                    If c = "7" Then
+                        c = "Ɫ"
+                        GoTo cont
+                    End If
+                    If c = "9" Then
+                        c = "6"
+                        GoTo cont
+                    End If
+cont:
+                    flipArr(loc) = c
+                    loc += 1
+                    Continue For
+                Next
+                flipStr = New String(flipArr)
                 AddSwagToMSG(flip, flipStr)
             End If
             'FLIP END
