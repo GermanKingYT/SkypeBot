@@ -2403,7 +2403,7 @@ exitt:
                 bubbleStr = bubbleStr.Replace("s", "ⓢ")
                 bubbleStr = bubbleStr.Replace("t", "ⓣ")
                 bubbleStr = bubbleStr.Replace("u", "ⓤ")
-                bubbleStr = bubbleStr.Replace("v", "ⓤ")
+                bubbleStr = bubbleStr.Replace("v", "ⓥ")
                 bubbleStr = bubbleStr.Replace("w", "ⓦ")
                 bubbleStr = bubbleStr.Replace("x", "ⓧ")
                 bubbleStr = bubbleStr.Replace("y", "ⓨ")
