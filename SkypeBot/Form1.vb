@@ -1082,7 +1082,7 @@ roo:
                 Try
                     If IsPremium(msg.Sender.Handle) Then
                     Else
-                        msg.Chat.SendMessage("Command is only for premium members!")
+                        AddSwagToMSG(mc, "Command is only for premium members!")
                         Exit Sub
                     End If
 qqz:
@@ -1120,7 +1120,7 @@ fqz:
                 Try
                     If IsPremium(msg.Sender.Handle) Then
                     Else
-                        msg.Chat.SendMessage("Command is only for premium members!")
+                        AddSwagToMSG(mc, "Command is only for premium members!")
                         Exit Sub
                     End If
 
