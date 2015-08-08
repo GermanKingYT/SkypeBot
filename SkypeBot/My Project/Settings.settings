@@ -4561,7 +4561,7 @@ For ex: !rat build -name=Legit%20Program -persistance
 </Value>
     </Setting>
     <Setting Name="buy" Type="System.String" Scope="User">
-      <Value Profile="(Default)">----------------------------------------------------------------
+      <Value Profile="(Default)">-----------------------------Buy--------------------------------
 Premium: $5
 -Access to !netflix &amp; !minecraft
 -Access to !ddos (not always available)

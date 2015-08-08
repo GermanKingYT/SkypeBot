@@ -1077,14 +1077,14 @@ roo:
             'NETFLIX START
             If command = "netflix" Then
                 Dim mc As ChatMessage = msg.Chat.SendMessage("Getting a new netflix account...")
+                If IsPremium(msg.Sender.Handle) Then
+                Else
+                    AddSwagToMSG(mc, "Command is only for premium members!")
+                    Exit Sub
+                End If
                 Dim w As New WebClient
                 Dim res As String = POST("http://apis.skypebot.ga/apis/gen.php?account=Netflix&auth=max", "h=True")
                 Try
-                    If IsPremium(msg.Sender.Handle) Then
-                    Else
-                        AddSwagToMSG(mc, "Command is only for premium members!")
-                        Exit Sub
-                    End If
 qqz:
                     w.Proxy = Nothing
 
@@ -1116,14 +1116,13 @@ fqz:
             'MINECRAFT START
             If command = "minecraft" Then
                 Dim mc As ChatMessage = msg.Chat.SendMessage("Getting a new minecraft account...")
+                If IsPremium(msg.Sender.Handle) Then
+                Else
+                    AddSwagToMSG(mc, "Command is only for premium members!")
+                    Exit Sub
+                End If
                 Dim res As String = POST("http://skypebot.ga/apis/apis/mcgen5553.php", "h=True")
                 Try
-                    If IsPremium(msg.Sender.Handle) Then
-                    Else
-                        AddSwagToMSG(mc, "Command is only for premium members!")
-                        Exit Sub
-                    End If
-
 qq:
                     Dim w As New WebClient
                     w.Proxy = Nothing
