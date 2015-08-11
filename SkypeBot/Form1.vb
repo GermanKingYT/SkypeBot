@@ -871,13 +871,12 @@ bypass:
                 If cmd = "toggleantispam" Then
                     commandList.Clear()
                     userList.Clear()
-                    Dim toggle As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset.")
                     If antiSpamCheck Then
                         antiSpamCheck = False
-                        Dim toggle2 As ChatMessage = msg.Chat.SendMessage("Anti-spam disabled!")
+                        Dim toggle As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset." & vbNewLine & "Anti-spam disabled!")
                     Else
                         antiSpamCheck = True
-                        Dim toggle2 As ChatMessage = msg.Chat.SendMessage("Anti-spam disabled!")
+                        Dim toggle As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset." & vbNewLine & "Anti-spam enabled!")
                     End If
                 End If
 
