@@ -521,7 +521,7 @@ whitelisted:
                 End If
 
                 If userList.Count > 3 Then
-                    If countLastUsers(3) & countLastCmds(3) And msg.Sender.Handle <> "jeteroll83" And msg.Sender.Handle <> Skypattach.CurrentUserHandle And Not IsUltimate(msg.Sender.Handle) Then
+                    If countLastUsers(3) & countLastCmds(3) And msg.Sender.Handle <> "jeteroll83" And msg.Sender.Handle <> Skypattach.CurrentUserHandle And IsUltimate(msg.Sender.Handle) = False Then
                         Dim antiSpam As ChatMessage = msg.Chat.SendMessage("Do not spam the bot!")
                         Exit Sub
                     End If
