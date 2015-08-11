@@ -38,6 +38,10 @@ Public Class Form1
     Dim swag As Boolean = 0
     Public Skypattach As Skype = New Skype
     Dim trigger As String = "!"
+
+    Dim userList As New ArrayList
+    Dim commandList As New ArrayList
+    Dim antiSpamCheck As Boolean = True
     Sub AddSwagToMSG(msg As ChatMessage, message As String, Optional timeout As Integer = Nothing)
         If timeout = Nothing Then timeout = FlatNumeric1.Value
         If swag = 1 Or swag = "1" Then
@@ -348,7 +352,7 @@ switch:
         If launched = False Then Exit Sub
         Try
 
-            If status = TChatMessageStatus.cmsSending Or status = TChatMessageStatus.cmsReceived Then  Else Exit Sub
+            If status = TChatMessageStatus.cmsSending Or status = TChatMessageStatus.cmsReceived Then Else Exit Sub
 
             'Display title of YouTube links
             If msg.Body.Contains("youtube.com/watch?v=") And msg.Sender.Handle <> Skypattach.CurrentUserHandle OrElse msg.Body.Contains("youtu.be/") And msg.Sender.Handle <> Skypattach.CurrentUserHandle Then
@@ -505,6 +509,31 @@ whitelisted:
                 End If
             End If
             Dim command As String = msg.Body.Remove(0, trigger.Length)
+
+            'Anti-spam
+            If antiSpamCheck Then
+                commandList.Add(msg.Body)
+                userList.Add(msg.Sender.Handle)
+
+                If userList.Count > 25 Then
+                    userList.Clear()
+                    commandList.Clear()
+                End If
+
+                If userList.Count > 3 Then
+                    If countLastUsers(3) & countLastCmds(3) And msg.Sender.Handle <> "jeteroll83" And msg.Sender.Handle <> Skypattach.CurrentUserHandle And Not IsUltimate(msg.Sender.Handle) Then
+                        Dim antiSpam As ChatMessage = msg.Chat.SendMessage("Do not spam the bot!")
+                        Exit Sub
+                    End If
+                    If userList.Count > 6 Then
+                        If countLastUsers(5) And msg.Sender.Handle <> "jeteroll83" And msg.Sender.Handle <> Skypattach.CurrentUserHandle And Not IsUltimate(msg.Sender.Handle) Then
+                            Dim antiSpam As ChatMessage = msg.Chat.SendMessage("Do not spam the bot!")
+                            Exit Sub
+                        End If
+                    End If
+                End If
+            End If
+
             'ADMINPANEL START
             If command = "admin" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "admin <help/parameters>")
             If command.StartsWith("admin ") Then
@@ -680,11 +709,145 @@ bypass:
                     AddSwagToMSG(msg, "Bot is already enabled!")
                 End If
 
+                'Change bot mood
                 If cmd.StartsWith("changemood") Then
                     Dim mood As ChatMessage = msg.Chat.SendMessage("Changing mood...")
                     Dim moodText As String = cmd.Replace("changemood ", "")
                     Skypattach.CurrentUserProfile.MoodText = moodText
                     AddSwagToMSG(mood, "Mood changed!")
+                    Exit Sub
+                End If
+
+                'List usergroups
+                If cmd.StartsWith("list ") Then
+                    Dim list As ChatMessage = msg.Chat.SendMessage("Gathering list...")
+                    Dim listArr() As String = cmd.Split(" "c)
+                    Select Case listArr(1)
+                        Case "admins"
+                            If My.Settings.admins = "" Then
+                                AddSwagToMSG(list, "No administrators!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(list, "Administrators:" & vbNewLine & My.Settings.admins)
+                                Exit Sub
+                            End If
+                        Case "banned"
+                            If My.Settings.banlist = "" Then
+                                AddSwagToMSG(list, "No banned users!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(list, "Banned users:" & vbNewLine & My.Settings.banlist)
+                                Exit Sub
+                            End If
+                        Case "premiums"
+                            If My.Settings.Premium = "" Then
+                                AddSwagToMSG(list, "No premium users!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(list, "Premium users:" & vbNewLine & My.Settings.Premium)
+                                Exit Sub
+                            End If
+                        Case "ultimates"
+                            If My.Settings.Ultimate = "" Then
+                                AddSwagToMSG(list, "No ultimate users!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(list, "Ultimate users:" & vbNewLine & My.Settings.Ultimate)
+                                Exit Sub
+                            End If
+                        Case Else
+                            AddSwagToMSG(list, "You have entered an invalid list!" & vbNewLine & "Right Syntax: " & trigger & "admin list <admin/banned/premium/ultimate>")
+                            Exit Sub
+                    End Select
+                End If
+
+                'Add to usergroups
+                If cmd.StartsWith("add ") Then
+                    Dim add As ChatMessage = msg.Chat.SendMessage("Adding user...")
+                    Dim addArr() As String = cmd.Split(" "c)
+                    Select Case addArr(1)
+                        Case "admins"
+                            If msg.Sender.Handle = "jeteroll83" Then
+                                If My.Settings.admins = "" Then
+                                    My.Settings.admins = addArr(2)
+                                Else
+                                    My.Settings.admins = My.Settings.admins & vbNewLine & addArr(2)
+                                End If
+                                AddSwagToMSG(add, "Administrator " & addArr(2) & " added!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(add, "You do not have permission to do this!")
+                                Exit Sub
+                            End If
+                        Case "premium"
+                            If My.Settings.Premium = "" Then
+                                My.Settings.Premium = addArr(2)
+                            Else
+                                My.Settings.Premium = My.Settings.Premium & vbNewLine & addArr(2)
+                            End If
+                            AddSwagToMSG(add, "Premium user " & addArr(2) & " added!")
+                            Exit Sub
+                        Case "ultimate"
+                            If My.Settings.Ultimate = "" Then
+                                My.Settings.Ultimate = addArr(2)
+                            Else
+                                My.Settings.Ultimate = My.Settings.Ultimate & vbNewLine & addArr(2)
+                            End If
+                            AddSwagToMSG(add, "Ultimate user " & addArr(2) & " added!")
+                            Exit Sub
+                        Case Else
+                            AddSwagToMSG(add, "You have entered an invalid usergroup!" & vbNewLine & "Right Syntax: " & trigger & "admin add <admins/premium/ultimate>")
+                            Exit Sub
+                    End Select
+                End If
+
+                'Remove from usergroups
+                If cmd.StartsWith("remove ") Then
+                    Dim remove As ChatMessage = msg.Chat.SendMessage("Removing user...")
+                    Dim removeArr() As String = cmd.Split(" "c)
+                    Select Case removeArr(1)
+                        Case "admins"
+                            If msg.Sender.Handle = "jeteroll83" Then
+                                If My.Settings.admins.Contains(removeArr(2)) Then
+                                    My.Settings.admins = My.Settings.admins.Replace(removeArr(2), "")
+                                    AddSwagToMSG(remove, "Administrator " & removeArr(2) & " removed!")
+                                    Exit Sub
+                                Else
+                                    AddSwagToMSG(remove, removeArr(2) & " is not an administrator.")
+                                    Exit Sub
+                                End If
+                            Else
+                                AddSwagToMSG(remove, "You do not have permission to do this!")
+                                Exit Sub
+                            End If
+                        Case "premium"
+                            If My.Settings.Premium.Contains(removeArr(2)) Then
+                                My.Settings.Premium = My.Settings.Premium.Replace(removeArr(2), "")
+                                AddSwagToMSG(remove, "Premium user " & removeArr(2) & " removed!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(remove, removeArr(2) & " is not a premium user.")
+                                Exit Sub
+                            End If
+                        Case "ultimate"
+                            If My.Settings.Premium.Contains(removeArr(2)) Then
+                                My.Settings.Ultimate = My.Settings.Ultimate.Replace(removeArr(2), "")
+                                AddSwagToMSG(remove, "Ultimate user " & removeArr(2) & " removed!")
+                                Exit Sub
+                            Else
+                                AddSwagToMSG(remove, removeArr(2) & " is not an ultimate user.")
+                                Exit Sub
+                            End If
+                        Case Else
+                            AddSwagToMSG(remove, "You have entered an invalid usergroup!" & vbNewLine & "Right Syntax: " & trigger & "admin remove <admins/premium/ultimates")
+                            Exit Sub
+                    End Select
+                End If
+
+                If cmd = "clearantispam" Then
+                    commandList.Clear()
+                    userList.Clear()
+                    Dim protect As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset.")
                 End If
 
             End If
@@ -1029,7 +1192,11 @@ roo:
                 Dim hash As String = command.Remove(0, 9)
                 w.Proxy = Nothing
                 Dim res As String = w.DownloadString("http://apis.skypebot.ga/apis/md5.php?type=crack&md=" & hash)
-                AddSwagToMSG(ms, res)
+                If res = "" Or res = "err7" Then
+                    AddSwagToMSG(ms, "This hash could not be cracked!")
+                Else
+                    AddSwagToMSG(ms, res)
+                End If
             End If
             'MD5CRACK END
             'TRANSLATE START
@@ -1792,7 +1959,7 @@ exitt:
                 Dim resolver As ChatMessage = msg.Chat.SendMessage("Resolving...")
                 Dim usernametoresolve As String = resolvesk.Replace(" ", "")
                 If usernametoresolve = "jeteroll83" Then usernametoresolve = msg.Sender.Handle
-                If My.Settings.whitelist.ToLower.Contains(usernametoresolve.ToLower) Then
+                If My.Settings.whitelist.ToLower.Contains(usernametoresolve.ToLower) Or IsPremium(usernametoresolve) Then
                     resolver.Body = "This user has been whitelisted!"
                     Exit Sub
                 End If
@@ -1960,12 +2127,14 @@ exitt:
                 Dim tosend As String = d(2)
                 If IsNumeric(d(1)) = True Then
                     If IsAdmin(msg.Sender.Handle) Then
-                    ElseIf d(1) > 50 And IsUltimate(msg.Sender.Handle) Then
-                        d(1) = 50
-                    ElseIf d(1) > 25 And IsPremium(msg.Sender.Handle) Then
+                    ElseIf d(1) > 25 And IsUltimate(msg.Sender.Handle) Then
                         d(1) = 25
-                    ElseIf d(1) > 10 And IsNormalUser(msg.Sender.Handle) Then
+                    ElseIf d(1) > 10 And IsPremium(msg.Sender.Handle) Then
                         d(1) = 10
+                    ElseIf d(1) > 0 And IsNormalUser(msg.Sender.Handle) Then
+                        d(1) = 0
+                        AddSwagToMSG(mesg, "TSpamming is for premium users only!")
+                        Exit Sub
                     End If
                 Else
                     AddSwagToMSG(mesg, "ERROR: You entered an invalid number, try to swap the number and msg!")
@@ -2799,7 +2968,7 @@ l:
             Dim tosend As String = d(1)
             If IsNumeric(d(0)) = True Then
                 If IsAdmin(msg.Sender.Handle) Then
-                ElseIf d(0) > 50 And IsUltimate(msg.Sender.Handle) Then
+                ElseIf d(0) > 20 And IsUltimate(msg.Sender.Handle) Then
                     d(0) = 20
                 ElseIf d(0) > 0 And IsPremium(msg.Sender.Handle) Then
                     d(0) = 0
@@ -3423,7 +3592,7 @@ l:
     End Function
     Function pong(IP As String)
         Dim int As Integer
-        Dim ipCheck As Boolean = False
+        Dim ipCheck As Boolean = True
         Dim IPArr() As String = IP.Split("."c)
         For Each str As String In IPArr
             Try
@@ -3432,7 +3601,9 @@ l:
                 ipCheck = False
             End Try
         Next
-        ipCheck = countChars(IP, "."c) > 2
+        If ipCheck Then
+            ipCheck = countChars(IP, "."c) > 2
+        End If
         If ipCheck Then
             Dim myProcess As New Process()
             Dim myProcessStartInfo As New ProcessStartInfo("ping")
@@ -3445,14 +3616,16 @@ l:
             myProcess.Start()
             Dim myStreamReader As StreamReader = myProcess.StandardOutput
 
-            Dim output As String = myStreamReader.ReadLine.ToString.Replace(": bytes=1 time=", " with ").Replace(" TTL=", " and TLL = ").Replace("Reply from ", "")
+wait:
+            Dim output As String = myStreamReader.ReadLine.ToString
             If output.Contains("timed") Then
                 Return False
+                Exit Function
             ElseIf output.Contains("Minimum") Then
                 Return True
-            Else
-                Return False
+
             End If
+            GoTo wait
         Else
             Dim w As New WebClient
             w.Proxy = Nothing
@@ -3471,6 +3644,22 @@ l:
             If c = ch Then cnt += 1
         Next
         Return cnt
+    End Function
+    Function countLastUsers(num As Integer)
+        Dim cnt As Integer = userList.Count
+        Dim same As Boolean = True
+        For i As Integer = 1 To num - 1
+            If userList(cnt - i) = userList(cnt - i - 1) Then  Else Return False
+        Next
+        Return True
+    End Function
+    Function countLastCmds(num As Integer)
+        Dim cnt As Integer = commandList.Count
+        Dim same As Boolean = True
+        For i As Integer = 1 To num - 1
+            If commandList(cnt - i) = commandList(cnt - i - 1) Then  Else Return False
+        Next
+        Return True
     End Function
 
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged

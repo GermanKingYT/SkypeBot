@@ -1126,7 +1126,7 @@ Partial Class Form1
         Me.FlatLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
         Me.FlatLabel13.Location = New System.Drawing.Point(6, 3)
         Me.FlatLabel13.Name = "FlatLabel13"
-        Me.FlatLabel13.Size = New System.Drawing.Size(200, 13)
+        Me.FlatLabel13.Size = New System.Drawing.Size(199, 13)
         Me.FlatLabel13.TabIndex = 1
         Me.FlatLabel13.Text = "Typ ""0"" to use the default inbuild APIs"
         '

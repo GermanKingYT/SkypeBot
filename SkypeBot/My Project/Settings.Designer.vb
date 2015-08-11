@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("newbaneachline")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property banlist() As String
             Get
                 Return CType(Me("banlist"),String)

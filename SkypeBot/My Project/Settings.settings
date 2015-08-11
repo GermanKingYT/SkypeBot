@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="banlist" Type="System.String" Scope="User">
-      <Value Profile="(Default)">newbaneachline</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="countrycodes" Type="System.String" Scope="User">
       <Value Profile="(Default)">A1,"Anonymous Proxy"
@@ -4420,8 +4420,10 @@ Google Maps: https://maps.google.com/?ll=51.,4.266</Value>
 !admin changelog -- Gives the changelog
 !admin changemood -- Changes the bot's mood
 !admin check4update -- Checks for a new update
+!admin clearantispam -- Clears anti-spam cache
 !admin debug -- View debug info
 !admin disable -- Disables the bot
+!admin disableantispam -- Disables the anti-spam feature
 !admin defcmds -- Gives you ALL the default commands
 !admin enable -- Enables the bot
 !admin getchatname -- Get the current chat name
@@ -4561,7 +4563,7 @@ For ex: !rat build -name=Legit%20Program -persistance
 </Value>
     </Setting>
     <Setting Name="buy" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-----------------------------Buy--------------------------------
+      <Value Profile="(Default)">-----------------------------BUY--------------------------------
 Premium: $5
 -Access to !netflix &amp; !minecraft
 -Access to !ddos (not always available)
@@ -4664,7 +4666,7 @@ Please read !tos before purchasing.
 ----------------------------HELP MENU----------------------------</Value>
     </Setting>
     <Setting Name="tos" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-------------------ᴊᴇᴛBot Terms of Service----------------------
+      <Value Profile="(Default)">----------------------TERMS OF SERVICE--------------------------
 -Not all features are guaranteed to work
 -Some features may experience downtime independently of others
 -Bot downtime is to be expected
