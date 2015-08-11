@@ -521,12 +521,12 @@ whitelisted:
                 End If
 
                 If userList.Count > 3 Then
-                    If countLastUsers(3) & countLastCmds(3) And msg.Sender.Handle <> "jeteroll83" And msg.Sender.Handle <> Skypattach.CurrentUserHandle And IsUltimate(msg.Sender.Handle) = False Then
+                    If countLastUsers(3) AndAlso countLastCmds(3) And msg.Sender.Handle <> "jeteroll83" AndAlso msg.Sender.Handle <> Skypattach.CurrentUserHandle AndAlso Not IsUltimate(msg.Sender.Handle) Then
                         Dim antiSpam As ChatMessage = msg.Chat.SendMessage("Do not spam the bot!")
                         Exit Sub
                     End If
                     If userList.Count > 6 Then
-                        If countLastUsers(5) And msg.Sender.Handle <> "jeteroll83" And msg.Sender.Handle <> Skypattach.CurrentUserHandle And Not IsUltimate(msg.Sender.Handle) Then
+                        If countLastUsers(5) AndAlso msg.Sender.Handle <> "jeteroll83" AndAlso msg.Sender.Handle <> Skypattach.CurrentUserHandle AndAlso Not IsUltimate(msg.Sender.Handle) Then
                             Dim antiSpam As ChatMessage = msg.Chat.SendMessage("Do not spam the bot!")
                             Exit Sub
                         End If
@@ -610,16 +610,28 @@ bypass:
                     End If
                 End If
                 If cmd.StartsWith("ban ") Then
-                    My.Settings.banlist = My.Settings.banlist & vbNewLine & cmd.Replace("ban ", "")
-                    Dim ban As ChatMessage = msg.Chat.SendMessage("Banning...")
-                    AddSwagToMSG(ban, "The ban hammer has been spoken!")
+                    Dim usr As String = cmd.Replace("ban ", "")
+                    If My.Settings.banlist.Contains(usr) Then
+                        Dim ban As ChatMessage = msg.Chat.SendMessage(usr & " is already banned!")
+                    Else
+                        My.Settings.banlist = My.Settings.banlist & vbNewLine & usr
+                        Dim ban As ChatMessage = msg.Chat.SendMessage("Banning...")
+                        My.Settings.banlist = clearLines(My.Settings.banlist)
+                        AddSwagToMSG(ban, "The ban hammer has been spoken!")
+                    End If
                     Exit Sub
                 End If
                 If cmd.StartsWith("unban ") Then
                     Dim usr As String = cmd.Replace("unban ", "")
-                    My.Settings.banlist = My.Settings.banlist.Replace(vbNewLine & usr, "").Replace(usr, "")
-                    Dim ban As ChatMessage = msg.Chat.SendMessage("Unbanning...")
-                    AddSwagToMSG(ban, "Unbanned!")
+                    If My.Settings.banlist.Contains(usr) Then
+                        My.Settings.banlist = My.Settings.banlist.Replace(vbNewLine & usr, "").Replace(usr, "")
+                        Dim ban As ChatMessage = msg.Chat.SendMessage("Unbanning...")
+                        My.Settings.banlist = clearLines(My.Settings.banlist)
+                        AddSwagToMSG(ban, "Unbanned!")
+                        Exit Sub
+                    Else
+                        Dim ban As ChatMessage = msg.Chat.SendMessage(usr & " is not banned!")
+                    End If
                     Exit Sub
                 End If
                 If cmd.StartsWith("suggest ") Then
@@ -739,7 +751,7 @@ bypass:
                                 AddSwagToMSG(list, "Banned users:" & vbNewLine & My.Settings.banlist)
                                 Exit Sub
                             End If
-                        Case "premiums"
+                        Case "premium"
                             If My.Settings.Premium = "" Then
                                 AddSwagToMSG(list, "No premium users!")
                                 Exit Sub
@@ -747,7 +759,7 @@ bypass:
                                 AddSwagToMSG(list, "Premium users:" & vbNewLine & My.Settings.Premium)
                                 Exit Sub
                             End If
-                        Case "ultimates"
+                        Case "ultimate"
                             If My.Settings.Ultimate = "" Then
                                 AddSwagToMSG(list, "No ultimate users!")
                                 Exit Sub
@@ -774,6 +786,7 @@ bypass:
                                     My.Settings.admins = My.Settings.admins & vbNewLine & addArr(2)
                                 End If
                                 AddSwagToMSG(add, "Administrator " & addArr(2) & " added!")
+                                My.Settings.admins = clearLines(My.Settings.admins)
                                 Exit Sub
                             Else
                                 AddSwagToMSG(add, "You do not have permission to do this!")
@@ -786,6 +799,7 @@ bypass:
                                 My.Settings.Premium = My.Settings.Premium & vbNewLine & addArr(2)
                             End If
                             AddSwagToMSG(add, "Premium user " & addArr(2) & " added!")
+                            My.Settings.Premium = clearLines(My.Settings.Premium)
                             Exit Sub
                         Case "ultimate"
                             If My.Settings.Ultimate = "" Then
@@ -794,6 +808,7 @@ bypass:
                                 My.Settings.Ultimate = My.Settings.Ultimate & vbNewLine & addArr(2)
                             End If
                             AddSwagToMSG(add, "Ultimate user " & addArr(2) & " added!")
+                            My.Settings.Ultimate = clearLines(My.Settings.Ultimate)
                             Exit Sub
                         Case Else
                             AddSwagToMSG(add, "You have entered an invalid usergroup!" & vbNewLine & "Right Syntax: " & trigger & "admin add <admins/premium/ultimate>")
@@ -810,6 +825,7 @@ bypass:
                             If msg.Sender.Handle = "jeteroll83" Then
                                 If My.Settings.admins.Contains(removeArr(2)) Then
                                     My.Settings.admins = My.Settings.admins.Replace(removeArr(2), "")
+                                    My.Settings.admins = clearLines(My.Settings.admins)
                                     AddSwagToMSG(remove, "Administrator " & removeArr(2) & " removed!")
                                     Exit Sub
                                 Else
@@ -823,6 +839,7 @@ bypass:
                         Case "premium"
                             If My.Settings.Premium.Contains(removeArr(2)) Then
                                 My.Settings.Premium = My.Settings.Premium.Replace(removeArr(2), "")
+                                My.Settings.Premium = clearLines(My.Settings.Premium)
                                 AddSwagToMSG(remove, "Premium user " & removeArr(2) & " removed!")
                                 Exit Sub
                             Else
@@ -830,8 +847,9 @@ bypass:
                                 Exit Sub
                             End If
                         Case "ultimate"
-                            If My.Settings.Premium.Contains(removeArr(2)) Then
+                            If My.Settings.Ultimate.Contains(removeArr(2)) Then
                                 My.Settings.Ultimate = My.Settings.Ultimate.Replace(removeArr(2), "")
+                                My.Settings.Ultimate = clearLines(My.Settings.Ultimate)
                                 AddSwagToMSG(remove, "Ultimate user " & removeArr(2) & " removed!")
                                 Exit Sub
                             Else
@@ -839,7 +857,7 @@ bypass:
                                 Exit Sub
                             End If
                         Case Else
-                            AddSwagToMSG(remove, "You have entered an invalid usergroup!" & vbNewLine & "Right Syntax: " & trigger & "admin remove <admins/premium/ultimates")
+                            AddSwagToMSG(remove, "You have entered an invalid usergroup!" & vbNewLine & "Right Syntax: " & trigger & "admin remove <admins/premium/ultimate")
                             Exit Sub
                     End Select
                 End If
@@ -847,7 +865,13 @@ bypass:
                 If cmd = "clearantispam" Then
                     commandList.Clear()
                     userList.Clear()
-                    Dim protect As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset.")
+                    Dim clear As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset.")
+                End If
+
+                If cmd = "clearantispam" Then Dim name As ChatMessage = msg.Chat.SendMessage("Right Syntax: " & trigger & "admin changename <name>")
+                If cmd.StartsWith("changename ") Then
+                    Skypattach.CurrentUserProfile.FullName = cmd.Replace("changename ", "")
+                    Dim name As ChatMessage = msg.Chat.SendMessage("Name changed!")
                 End If
 
             End If
@@ -3660,6 +3684,20 @@ wait:
             If commandList(cnt - i) = commandList(cnt - i - 1) Then  Else Return False
         Next
         Return True
+    End Function
+
+    Function clearLines(setting As String)
+        Dim lineList As New List(Of String)
+        lineList.AddRange(setting.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries))
+        setting = ""
+        For Each line As String In lineList
+            If line = lineList(lineList.Count - 1) Then
+                setting += line
+            Else
+                setting += line & vbNewLine
+            End If
+        Next
+        Return setting
     End Function
 
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
