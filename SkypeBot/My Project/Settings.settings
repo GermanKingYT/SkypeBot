@@ -4419,6 +4419,7 @@ Google Maps: https://maps.google.com/?ll=51.,4.266</Value>
 !admin broadcast &lt;msg&gt; -- Broadcasts a msg to all users
 !admin changelog -- Gives the changelog
 !admin changemood -- Changes the bot's mood
+!admin changename -- Changes the bot's display name
 !admin check4update -- Checks for a new update
 !admin clearantispam -- Clears anti-spam cache
 !admin debug -- View debug info
@@ -4436,6 +4437,7 @@ Google Maps: https://maps.google.com/?ll=51.,4.266</Value>
 !admin stopallcmds -- Stops all running cmds
 !admin sudo &lt;command&gt; -- Force a command to be ran
 !admin suggest &lt;suggestion&gt; -- Suggest/Report stuff!
+!admin toggleantispam -- Toggles anti-spam on/off
 !admin unban &lt;user&gt; -- Unbans a user!
 !admin update -- Forces an update
 ----------ADMIN PANEL----------</Value>

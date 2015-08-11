@@ -868,7 +868,20 @@ bypass:
                     Dim clear As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset.")
                 End If
 
-                If cmd = "clearantispam" Then Dim name As ChatMessage = msg.Chat.SendMessage("Right Syntax: " & trigger & "admin changename <name>")
+                If cmd = "toggleantispam" Then
+                    commandList.Clear()
+                    userList.Clear()
+                    Dim toggle As ChatMessage = msg.Chat.SendMessage("Anti-spam guards reset.")
+                    If antiSpamCheck Then
+                        antiSpamCheck = False
+                        Dim toggle2 As ChatMessage = msg.Chat.SendMessage("Anti-spam disabled!")
+                    Else
+                        antiSpamCheck = True
+                        Dim toggle2 As ChatMessage = msg.Chat.SendMessage("Anti-spam disabled!")
+                    End If
+                End If
+
+                If cmd = "changename" Then Dim name As ChatMessage = msg.Chat.SendMessage("Right Syntax: " & trigger & "admin changename <name>")
                 If cmd.StartsWith("changename ") Then
                     Skypattach.CurrentUserProfile.FullName = cmd.Replace("changename ", "")
                     Dim name As ChatMessage = msg.Chat.SendMessage("Name changed!")
