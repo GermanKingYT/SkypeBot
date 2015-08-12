@@ -3010,7 +3010,7 @@ l:
                     d(0) = 0
                 ElseIf d(0) > 0 And IsNormalUser(msg.Sender.Handle) Then
                     d(0) = 0
-                    msg.Chat.SendMessage("Sorry, spamming is currently for premium users only!")
+                    msg.Chat.SendMessage("Sorry, spamming is currently for ultimate users only!")
                     Exit Sub
                 End If
             Else
