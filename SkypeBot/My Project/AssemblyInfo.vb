@@ -12,15 +12,15 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("SkypeBot")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("SkypeBot INC Operated By Lesley")> 
+<Assembly: AssemblyCompany("SkypeBot By Lesley")> 
 <Assembly: AssemblyProduct("SkypeBot")> 
-<Assembly: AssemblyCopyright("Copyright © Lesley De Keyser 2014")> 
+<Assembly: AssemblyCopyright("Copyright © Lesley 2014-2015")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("550F6F4D-4624-4611-A1D5-F3AE5D12ACC1")> 
+<Assembly: Guid("43F0BB7A-DEF7-4BDF-8C97-F069081801B9")> 
 
 ' Version information for an assembly consists of the following four values:
 '

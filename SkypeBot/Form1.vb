@@ -36,6 +36,42 @@ Public Class Form1
     Dim swag As Boolean = 0
     Public Skypattach As Skype = New Skype
     Dim trigger As String = "!"
+ 
+    Public Sub UpdateMe(state As String)
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        If CheckForInternetConnection() = True Then
+        Else
+            MsgBox("Fix your internet connection before moving on!")
+            Close()
+            Windows.Forms.Application.Exit()
+            Windows.Forms.Application.ExitThread()
+        End If
+        Dim latest As String = w.DownloadString("https://www.dropbox.com/s/nc07ajdkck5lwdl/update.txt?dl=1")
+        If latest = version Then
+            If state = 1 Then
+                MsgBox("No update needed!")
+            End If
+        Else
+            If w.DownloadString("https://www.dropbox.com/s/fz39p2eqwrccid3/force.txt?dl=1") = "1" Then
+                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
+                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                System.Windows.Forms.Application.Exit()
+                Exit Sub
+            End If
+            Dim l As MsgBoxResult = MsgBox("New update is ready to download, download it now?", MsgBoxStyle.YesNo)
+            If l = MsgBoxResult.Yes Then
+                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
+                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                System.Windows.Forms.Application.Exit()
+            Else
+                Exit Sub
+            End If
+
+        End If
+    End Sub
     Sub AddSwagToMSG(msg As ChatMessage, message As String, Optional timeout As Integer = Nothing)
         If timeout = Nothing Then timeout = FlatNumeric1.Value
         If swag = 1 Or swag = "1" Then
@@ -117,41 +153,6 @@ retr:
         Dim regexed As String = Regex.Match(res, "(.+)string\(", RegexOptions.IgnoreCase).Value.ToString.Replace("string(", "")
 
         ai.Body = regexed
-    End Sub
-    Public Sub UpdateMe(state As String)
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        If CheckForInternetConnection() = True Then
-        Else
-            MsgBox("Fix your internet connection before moving on!")
-            Close()
-            Windows.Forms.Application.Exit()
-            Windows.Forms.Application.ExitThread()
-        End If
-        Dim latest As String = w.DownloadString("https://www.dropbox.com/s/nc07ajdkck5lwdl/update.txt?dl=1")
-        If latest = version Then
-            If state = 1 Then
-                MsgBox("No update needed!")
-            End If
-        Else
-            If w.DownloadString("https://www.dropbox.com/s/fz39p2eqwrccid3/force.txt?dl=1") = "1" Then
-                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
-                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                System.Windows.Forms.Application.Exit()
-                Exit Sub
-            End If
-            Dim l As MsgBoxResult = MsgBox("New update is ready to download, download it now?", MsgBoxStyle.YesNo)
-            If l = MsgBoxResult.Yes Then
-                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
-                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                System.Windows.Forms.Application.Exit()
-            Else
-                Exit Sub
-            End If
-
-        End If
     End Sub
     Function shorten(urltoshrt As String)
         If Not urltoshrt.StartsWith("http") Then urltoshrt = "http://" & urltoshrt
