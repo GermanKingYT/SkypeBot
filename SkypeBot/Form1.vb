@@ -1987,14 +1987,15 @@ exitt:
             'RESOLVE START
             If command = "resolve" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "resolve <skypename>")
             If command.StartsWith("resolve ") Then
-                Dim resolvesk As String = command.Replace("resolve ", "")
+                Dim resolveArr() As String = command.Replace("resolve ", "").Split(" "c)
+                Dim resolvesk As String = resolveArr(0)
                 If resolvesk.Contains(Skypattach.CurrentUserHandle) Then
                     msg.Chat.SendMessage("Nope! Not me!")
                     Exit Sub
                 End If
                 Dim resolver As ChatMessage = msg.Chat.SendMessage("Resolving...")
                 Dim usernametoresolve As String = resolvesk.Replace(" ", "")
-                If usernametoresolve = "jeteroll83" Then usernametoresolve = msg.Sender.Handle
+                If usernametoresolve.Contains("jeteroll83") Then usernametoresolve = msg.Sender.Handle
                 If My.Settings.whitelist.ToLower.Contains(usernametoresolve.ToLower) Or IsPremium(usernametoresolve) Then
                     resolver.Body = "This user has been whitelisted!"
                     Exit Sub
@@ -2286,7 +2287,12 @@ exitt:
             If command = "scan" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "scan <ip>")
             If command.StartsWith("scan ") Then
                 Dim l As ChatMessage = msg.Chat.SendMessage("Initializing...")
-                AddSwagToMSG(l, "Open Ports:" & vbNewLine & portscan(command.Replace("!", "").Replace("scan ", "")))
+                Dim ip As String = command.Replace(trigger, "").Replace("scan ", "")
+                If portscan(ip) = "IP offline" Then
+                    AddSwagToMSG(l, "Specified IP is currently offline.")
+                Else
+                    AddSwagToMSG(l, "Open Ports:" & vbNewLine & portscan(command.Replace("!", "").Replace("scan ", "")))
+                End If
             End If
             'SCAN END
             'NUMBER START
@@ -3410,7 +3416,12 @@ noargs:
     Function portscan(ip As String)
         Dim w As New WebClient
         w.Proxy = Nothing
-        Return w.DownloadString("http://api.abrasivecraft.com/?tool=portscanner&ip=" & ip)
+        Dim up As Boolean = pong(ip)
+        If Not up Then
+            Return "IP offline"
+        Else
+            Return w.DownloadString("http://api.abrasivecraft.com/?tool=portscanner&ip=" & ip)
+        End If
     End Function
     Function StripTags(ByVal html As String) As String
         ' Remove HTML tags.
