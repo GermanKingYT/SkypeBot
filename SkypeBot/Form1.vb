@@ -42,6 +42,43 @@ Public Class Form1
     Dim userList As New ArrayList
     Dim commandList As New ArrayList
     Dim antiSpamCheck As Boolean = True
+
+    Public Sub UpdateMe(state As String)
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        If CheckForInternetConnection() = True Then
+        Else
+            MsgBox("Fix your internet connection before moving on!")
+            Close()
+            Windows.Forms.Application.Exit()
+            Windows.Forms.Application.ExitThread()
+        End If
+        Dim latest As String = w.DownloadString("https://www.dropbox.com/s/nc07ajdkck5lwdl/update.txt?dl=1")
+        If latest = version Then
+            If state = 1 Then
+                MsgBox("No update needed!")
+            End If
+        Else
+            If w.DownloadString("https://www.dropbox.com/s/fz39p2eqwrccid3/force.txt?dl=1") = "1" Then
+                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
+                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                System.Windows.Forms.Application.Exit()
+                Exit Sub
+            End If
+            Dim l As MsgBoxResult = MsgBox("New update is ready to download, download it now?", MsgBoxStyle.YesNo)
+            If l = MsgBoxResult.Yes Then
+                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
+                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
+                System.Windows.Forms.Application.Exit()
+            Else
+                Exit Sub
+            End If
+
+        End If
+    End Sub
+
     Sub AddSwagToMSG(msg As ChatMessage, message As String, Optional timeout As Integer = Nothing)
         If timeout = Nothing Then timeout = FlatNumeric1.Value
         If swag = 1 Or swag = "1" Then
@@ -139,41 +176,6 @@ switch:
         Dim regexed As String = Regex.Match(res, "(.+)string\(", RegexOptions.IgnoreCase).Value.ToString.Replace("string(", "")
 
         ai.Body = regexed
-    End Sub
-    Public Sub UpdateMe(state As String)
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        If CheckForInternetConnection() = True Then
-        Else
-            MsgBox("Fix your internet connection before moving on!")
-            Close()
-            Windows.Forms.Application.Exit()
-            Windows.Forms.Application.ExitThread()
-        End If
-        Dim latest As String = w.DownloadString("https://www.dropbox.com/s/nc07ajdkck5lwdl/update.txt?dl=1")
-        If latest = version Then
-            If state = 1 Then
-                MsgBox("No update needed!")
-            End If
-        Else
-            If w.DownloadString("https://www.dropbox.com/s/fz39p2eqwrccid3/force.txt?dl=1") = "1" Then
-                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
-                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                System.Windows.Forms.Application.Exit()
-                Exit Sub
-            End If
-            Dim l As MsgBoxResult = MsgBox("New update is ready to download, download it now?", MsgBoxStyle.YesNo)
-            If l = MsgBoxResult.Yes Then
-                w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
-                w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
-                System.Windows.Forms.Application.Exit()
-            Else
-                Exit Sub
-            End If
-
-        End If
     End Sub
     Function shorten(urltoshrt As String)
         If Not urltoshrt.StartsWith("http") Then urltoshrt = "http://" & urltoshrt
@@ -898,9 +900,11 @@ bypass:
             End If
 
             'Owner protection
-            If command.Contains("jet") And command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Or command.Contains("Jet") Then
-                Dim protect As ChatMessage = msg.Chat.SendMessage("No.")
-                Exit Sub
+            If command.StartsWith("resolve") = False And msg.Sender.Handle <> Skypattach.CurrentUserHandle And msg.Sender.Handle <> "jeteroll83" Then
+                If protect(command, "jet") Then
+                    Dim protectMsg As ChatMessage = msg.Chat.SendMessage("No.")
+                    Exit Sub
+                End If
             End If
 
             'HELP START
@@ -1989,14 +1993,14 @@ exitt:
             If command.StartsWith("resolve ") Then
                 Dim resolveArr() As String = command.Replace("resolve ", "").Split(" "c)
                 Dim resolvesk As String = resolveArr(0)
-                If resolvesk.Contains(Skypattach.CurrentUserHandle) Then
+                If ezContains(resolvesk, Skypattach.CurrentUserHandle) Then
                     msg.Chat.SendMessage("Nope! Not me!")
                     Exit Sub
                 End If
                 Dim resolver As ChatMessage = msg.Chat.SendMessage("Resolving...")
-                Dim usernametoresolve As String = resolvesk.Replace(" ", "")
+                Dim usernametoresolve As String = resolvesk.Replace(" ", "").ToLower
                 If usernametoresolve.Contains("jeteroll83") Then usernametoresolve = msg.Sender.Handle
-                If My.Settings.whitelist.ToLower.Contains(usernametoresolve.ToLower) Or IsPremium(usernametoresolve) Then
+                If My.Settings.whitelist.ToLower.Contains(usernametoresolve) Or IsPremium(usernametoresolve) Then
                     resolver.Body = "This user has been whitelisted!"
                     Exit Sub
                 End If
@@ -3721,6 +3725,28 @@ wait:
             End If
         Next
         Return setting
+    End Function
+
+    Function protect(cmd As String, user As String)
+        Dim cleaned As String = cleanStr(cmd)
+        If ezContains(cleaned, user) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Function cleanStr(str As String)
+        Dim cleanString As String = Regex.Replace(str, "[^A-Za-z0-9\-/]", "")
+        Return cleanString
+    End Function
+
+    Function ezContains(str As String, subStr As String)
+        If str.IndexOf(subStr, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
