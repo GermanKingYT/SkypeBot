@@ -3388,14 +3388,14 @@ noargs:
     Private Sub FRReceived(pUser As User)
         If FlatToggle1.Checked = True Then
             pUser.IsAuthorized = True
-            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "help to get started!")
+            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "join to join the official bot chat! (Bot will not work in PM)")
         End If
     End Sub
     Private Sub dz(pUser As User)
         MsgBox("qdf")
         If FlatToggle1.Checked = True Then
             pUser.IsAuthorized = True
-            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "help to get started!")
+            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "join to join the official bot chat (the bot won't work in PM).")
         End If
     End Sub
 
