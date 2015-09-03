@@ -47,6 +47,10 @@
             Else
                 wa.DownloadFile("https://www.dropbox.com/s/xr7e6g5dgy99uiw/Interop.SKYPE4COMLib.dll?dl=1", Windows.Forms.Application.StartupPath & "\Interop.SKYPE4COMLib.dll")
             End If
+            Try
+                wa.DownloadFile("https://www.dropbox.com/s/6mzgss94zp4lwfc/SkypeBot.exe.config?dl=1", Windows.Forms.Application.StartupPath & "\SkypeBot.exe.config")
+            Catch
+            End Try
             FlatProgressBar1.Value = FlatProgressBar1.Value + x
             Application.DoEvents()
             TopMost = False
@@ -257,7 +261,7 @@ r:
             Application.DoEvents()
             Threading.Thread.Sleep(750)
             Application.DoEvents()
-            If myskype = "live:ljd2010" Or myskype = "jamiedixon1000" Then
+            If myskype = "live:ljd2010" Or myskype = "timberman122" Then
                 Process.Start(startInfo)
                 Process.Start(startInfo2)
                 Dim regKey As Microsoft.Win32.RegistryKey

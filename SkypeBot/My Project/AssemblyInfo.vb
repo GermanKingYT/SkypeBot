@@ -10,11 +10,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("SkypeBot")> 
+<Assembly: AssemblyTitle("-SkypeBot")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("SkypeBot By Lesley")> 
-<Assembly: AssemblyProduct("SkypeBot")> 
-<Assembly: AssemblyCopyright("Copyright © Lesley 2014-2015")> 
+<Assembly: AssemblyCompany("Tyraxosoft")> 
+<Assembly: AssemblyProduct("-SkypeBot")> 
+<Assembly: AssemblyCopyright("Copyright © Tyraxosoft 2014-2015")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
@@ -33,7 +33,7 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("5.1.0.7")> 
-<Assembly: AssemblyFileVersion("5.1.0.7")> 
+<Assembly: AssemblyVersion("5.1.1.7")> 
+<Assembly: AssemblyFileVersion("5.1.1.7")> 
 
-<Assembly: NeutralResourcesLanguageAttribute("en")> 
+<Assembly: NeutralResourcesLanguageAttribute("")> 

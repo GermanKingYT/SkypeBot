@@ -4589,6 +4589,7 @@ For ex: !rat build -name=Legit%20Program -persistance
 !cfresolve &lt;site&gt; -- Resolves clouflare
 !check &lt;help/arguments&gt; -- Check accounts
 !crawl &lt;page&gt; -- Gives all links of a webpage (crawls a site)
+!creategroup -- Creates a group where the skypebot works in
 !currency &lt;from&gt; &lt;to&gt; &lt;amount&gt; -- Converts currency
 !ddos &lt;ip&gt; &lt;port&gt; &lt;time&gt; -- Ddosses the ip
 !deadfly &lt;adfly uri or similar&gt; -- unshortens adfly and similar
@@ -4644,6 +4645,12 @@ For ex: !rat build -name=Legit%20Program -persistance
 @&lt;msg&gt; -- Talks to AI Bot 1
 #&lt;msg&gt; -- Talks to AI Bot 2
 ----------------------------HELP MENU----------------------------</Value>
+    </Setting>
+    <Setting Name="genhelp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-in reconstruction-</Value>
+    </Setting>
+    <Setting Name="skypenamer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

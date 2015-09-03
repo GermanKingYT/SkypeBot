@@ -1504,46 +1504,70 @@ Namespace My
             "on> -- Answers a yes/no question"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!buy -- Buy the bot program/bot source (vb.net"& _ 
             ")"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!calc <help/expression> -- Just do !calc help"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!cfresolve <site> -- Resolves "& _ 
             "clouflare"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!check <help/arguments> -- Check accounts"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!crawl <page> -- Gives all"& _ 
-            " links of a webpage (crawls a site)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!currency <from> <to> <amount> -- Converts "& _ 
-            "currency"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ddos <ip> <port> <time> -- Ddosses the ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!deadfly <adfly uri or sim"& _ 
-            "ilar> -- unshortens adfly and similar"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dice/!rtd -- Rolls the dice and says som"& _ 
-            "ething :D"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dict <word> -- Defines the word given"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dns <site> -- Gets all dns r"& _ 
-            "ecords of a site"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!domain <site> -- Resolves site ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!don <site> -- Says if <si"& _ 
-            "te> is online or not"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dox <name> -- Gives usefull links about name"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!fact -- Wi"& _ 
-            "ll give you a nice fact"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!game <help/arguments> -- Gives help about an inbuild g"& _ 
-            "ame!"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!geo <ip> -- Will give as much info 'bout <ip>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!help -- Shows all availab"& _ 
-            "le cmds"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!help <command> -- Shows help for <command>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!hi <skype name> -- says H"& _ 
-            "i to <skypename>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ip2s <ip> -- let you see from who the ip is"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!iplog help -- G"& _ 
-            "ives the help of the IPLogger"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!join -- Get the link to join the official skypeb"& _ 
-            "ot chat!"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!joke -- Gives you a funny joke"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!leet <1-100 degree (more = more leet"& _ 
-            ")> <msg> -- translate to l33t"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!lmgtfy <text> -- Gives a Let Me Google That For "& _ 
-            "You link"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!mail2ip <mail> -- Gets an ip of an email"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!mail2skype <mail> -- Gets "& _ 
-            "the skype of an email"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!mailbomb <times> <email> <spoof> <msg>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!md5 <fromtext> "& _ 
-            "-- Generates an md5 hash"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!md5crack <hash> -- Tries to convert md5 to text"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!min"& _ 
-            "ecraft -- Generates a minecraft account"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!nameinfo <FirstName> <LastName> -- Giv"& _ 
-            "es jokes about names"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!netflix -- Generates a netflix account"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!notepad <help/ar"& _ 
-            "guments> -- Gives help or whatever you want"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!number <int> -- Gives info about i"& _ 
-            "nt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!paste <text> -- Uploads the text to a website"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ping <ip> <times> -- will p"& _ 
-            "ing to the <ip>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!portopen <ip> <port> -- Checks if TCP Port is open on ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!quo"& _ 
-            "te -- Will give you a famous quote"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!rdns <ip> -- Gives reverse dns' of ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!res"& _ 
-            "olve <skypename> -- gives ip of <skypename>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!reverse <text> -- Reverse the give"& _ 
-            "n text"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!say <msg> -- Returns <msg>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!scan <ip> -- Gives all open ports of the I"& _ 
-            "P"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!shorten <url>-- Will shorten an url"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!sidgrab <steamurl/steamnr> -- gets the"& _ 
-            " steam id out of a steam uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!skype -- Generates a skype account"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!spam <times>"& _ 
-            " <msg> -- will spam your friend"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!translate <from/detect> <to> <message> -- tran"& _ 
-            "slates messages"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!troll <somename> -- Gives a link to a joke, not a screamer"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!t"& _ 
-            "s <name> <times> <msg> -- spams <name>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!unshorten <url> -- Gives the link behin"& _ 
-            "d a shortened uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!whois <url> -- Gives whois info"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!year <int> -- Gives info a"& _ 
-            "bout the year giving"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!vpncheck <ip> -- Checks if ip is vpn/proxy"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!yt2mp3 <url>"& _ 
-            " -- Gives a direct link to download mp3 out of yt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"@<msg> -- Talks to AI Bot 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-            "#<msg> -- Talks to AI Bot 2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"----------------------------HELP MENU--------------"& _ 
-            "--------------")>  _
+            " links of a webpage (crawls a site)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!creategroup -- Creates a group where the s"& _ 
+            "kypebot works in"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!currency <from> <to> <amount> -- Converts currency"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ddos <ip"& _ 
+            "> <port> <time> -- Ddosses the ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!deadfly <adfly uri or similar> -- unshortens"& _ 
+            " adfly and similar"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dice/!rtd -- Rolls the dice and says something :D"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dict <w"& _ 
+            "ord> -- Defines the word given"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dns <site> -- Gets all dns records of a site"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!"& _ 
+            "domain <site> -- Resolves site ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!don <site> -- Says if <site> is online or no"& _ 
+            "t"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!dox <name> -- Gives usefull links about name"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!fact -- Will give you a nice "& _ 
+            "fact"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!game <help/arguments> -- Gives help about an inbuild game!"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!geo <ip> -- "& _ 
+            "Will give as much info 'bout <ip>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!help -- Shows all available cmds"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!help <com"& _ 
+            "mand> -- Shows help for <command>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!hi <skype name> -- says Hi to <skypename>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!"& _ 
+            "ip2s <ip> -- let you see from who the ip is"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!iplog help -- Gives the help of th"& _ 
+            "e IPLogger"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!join -- Get the link to join the official skypebot chat!"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!joke -- "& _ 
+            "Gives you a funny joke"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!leet <1-100 degree (more = more leet)> <msg> -- transla"& _ 
+            "te to l33t"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!lmgtfy <text> -- Gives a Let Me Google That For You link"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!mail2ip "& _ 
+            "<mail> -- Gets an ip of an email"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!mail2skype <mail> -- Gets the skype of an ema"& _ 
+            "il"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!mailbomb <times> <email> <spoof> <msg>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!md5 <fromtext> -- Generates an md5"& _ 
+            " hash"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!md5crack <hash> -- Tries to convert md5 to text"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!minecraft -- Generates"& _ 
+            " a minecraft account"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!nameinfo <FirstName> <LastName> -- Gives jokes about name"& _ 
+            "s"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!netflix -- Generates a netflix account"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!notepad <help/arguments> -- Gives h"& _ 
+            "elp or whatever you want"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!number <int> -- Gives info about int"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!paste <text> -"& _ 
+            "- Uploads the text to a website"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ping <ip> <times> -- will ping to the <ip>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!p"& _ 
+            "ortopen <ip> <port> -- Checks if TCP Port is open on ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!quote -- Will give you"& _ 
+            " a famous quote"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!rdns <ip> -- Gives reverse dns' of ip"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!resolve <skypename> --"& _ 
+            " gives ip of <skypename>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!reverse <text> -- Reverse the given text"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!say <msg> "& _ 
+            "-- Returns <msg>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!scan <ip> -- Gives all open ports of the IP"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!shorten <url>--"& _ 
+            " Will shorten an url"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!sidgrab <steamurl/steamnr> -- gets the steam id out of a "& _ 
+            "steam uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!skype -- Generates a skype account"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!spam <times> <msg> -- will spam"& _ 
+            " your friend"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!translate <from/detect> <to> <message> -- translates messages"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!t"& _ 
+            "roll <somename> -- Gives a link to a joke, not a screamer"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!ts <name> <times> <m"& _ 
+            "sg> -- spams <name>"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!unshorten <url> -- Gives the link behind a shortened uri"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+            "!whois <url> -- Gives whois info"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!year <int> -- Gives info about the year givin"& _ 
+            "g"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!vpncheck <ip> -- Checks if ip is vpn/proxy"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"!yt2mp3 <url> -- Gives a direct "& _ 
+            "link to download mp3 out of yt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"@<msg> -- Talks to AI Bot 1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"#<msg> -- Talks to "& _ 
+            "AI Bot 2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"----------------------------HELP MENU----------------------------")>  _
         Public Property helpmsg() As String
             Get
                 Return CType(Me("helpmsg"),String)
             End Get
             Set
                 Me("helpmsg") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("-in reconstruction-")>  _
+        Public Property genhelp() As String
+            Get
+                Return CType(Me("genhelp"),String)
+            End Get
+            Set
+                Me("genhelp") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property skypenamer() As String
+            Get
+                Return CType(Me("skypenamer"),String)
+            End Get
+            Set
+                Me("skypenamer") = value
             End Set
         End Property
     End Class
