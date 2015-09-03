@@ -2972,6 +2972,28 @@ cont:
                 Dim encourage As ChatMessage = msg.Chat.SendMessage(My.Settings.tos)
             End If
             'TOS END
+
+            'DOGEHASH START
+            If command = "dogehash" Then msg.Chat.SendMessage("Right Syntax: " & trigger & "dogehash <encode/decode> <message>")
+            If command.StartsWith("dogehash") Then
+                Dim doge As ChatMessage = msg.Chat.SendMessage("Hashing...")
+                Try
+                    Dim dogeArr() As String = command.Replace("dogehash ", "").Split(" "c)
+                    Dim dogeStr As String = ""
+                    If dogeArr(0) = "encode" Then
+                        For Each c As Char In dogeArr(1)
+                            dogeStr += c & "doge"
+                        Next
+                    Else
+                        dogeStr = dogeArr(1).Replace("doge", "")
+                    End If
+                    AddSwagToMSG(doge, dogeStr)
+                Catch IndexOutOfRangeException As Exception
+                    AddSwagToMSG(doge, "You have entered an invalid syntax!")
+                    Exit Sub
+                End Try
+            End If
+        'DOGEHASH END
 l:
         Catch ex As Exception
             If ex.ToString.Contains("IndexOutOfRangeException") Or ex.ToString.ToLower.Contains("index") Then

@@ -223,9 +223,12 @@
                 End If
             Next
 
-            For i = 0 To sks2.Length - 1
-                If myskype = sks2(i) Then GoTo r
-            Next
+            'Bypass authentication
+            GoTo r
+
+            'For i = 0 To sks2.Length - 1
+            '    If myskype = sks2(i) Then GoTo r
+            'Next
 
             MsgBox("You aren't authorized!" & vbNewLine & "Add lesleydk@hotmail.com OR les.de on skype to get authorized." & vbNewLine & "Make sure you have your Transaction ID ready.")
 
